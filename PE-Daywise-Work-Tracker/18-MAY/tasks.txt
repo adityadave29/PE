@@ -1,9 +1,15 @@
-Read: Security Definer in Postgresql documentation => https://www.postgresql.org/docs/current/sql-createfunction.html?
-Implement UDF in Postgres as well as sql server
-Goal is to check if they are giving same results or not?
-Check Code repo for UDF (link is in the research paper)
+Tasks:
+1. Read about SECURITY DEFINER in the PostgreSQL documentation:
+   https://www.postgresql.org/docs/current/sql-createfunction.html
 
+2. Implement the same UDFs in both PostgreSQL and SQL Server.
 
+3. Compare the behavior and outputs of the UDFs in both databases to verify whether they produce identical results.
 
-Final Goal: We want to derive an algorithm or mechanism which can convert our cyclic dependant query into normal executation query using some grammar?
-(Re-return version)
+4. Review the code repository for the UDF implementations (repository link is available in the research paper).
+
+Final Goal:
+
+We want to derive an algorithm or mechanism that can transform a cyclic dependent query into a normal executable query using some form of grammar-based approach.
+
+(Rewritten/Re-return version)
