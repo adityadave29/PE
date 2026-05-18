@@ -1,0 +1,9 @@
+Read: Security Definer in Postgresql documentation => https://www.postgresql.org/docs/current/sql-createfunction.html?
+Implement UDF in Postgres as well as sql server
+Goal is to check if they are giving same results or not?
+Check Code repo for UDF (link is in the research paper)
+
+
+
+Final Goal: We want to derive an algorithm or mechanism which can convert our cyclic dependant query into normal executation query using some grammar?
+(Re-return version)
