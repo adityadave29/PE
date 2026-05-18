@@ -1,0 +1,18 @@
+Github: https://github.com/adityadave29/PE
+
+18-May
+
+Tasks:
+
+1. Read about `SECURITY DEFINER` in the PostgreSQL documentation:
+   https://www.postgresql.org/docs/current/sql-createfunction.html status: Pending
+2. Implement the same UDFs in both PostgreSQL and SQL Server.
+	-> Try UDF on small dataset status:Pending
+ 	-> Try UDF on TPC-H dataset status:Pending
+3. Compare the behavior and outputs of the UDFs in both databases to verify whether they produce identical results.
+4. Review the code repository for the UDF implementations (repository link is available in the research paper). status:Pending
+
+Final Goal:
+We want to derive an algorithm or mechanism that can transform a cyclic dependent query into a normal executable query using some form of grammar-based approach.
+(Rewritten/Re-return version)
+
