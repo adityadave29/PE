@@ -1,7 +1,7 @@
 Tasks:
 1. Read about SECURITY DEFINER in the PostgreSQL documentation:
    https://www.postgresql.org/docs/current/sql-createfunction.html
-
+  
 2. Implement the same UDFs in both PostgreSQL and SQL Server.
 
 3. Compare the behavior and outputs of the UDFs in both databases to verify whether they produce identical results.
