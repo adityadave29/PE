@@ -5,14 +5,35 @@ Github: https://github.com/adityadave29/PE
 Tasks:
 
 1. Read about `SECURITY DEFINER` in the PostgreSQL documentation:
-   https://www.postgresql.org/docs/current/sql-createfunction.html status: Pending
+   https://www.postgresql.org/docs/current/sql-createfunction.html
+   Status: Done
+
+   I have attached the Google Docs link where I implemented `SECURITY DEFINER` in PostgreSQL. I compared the results of SQL Server and PostgreSQL, and both produced the same results, which suggests that it is bypassing the RLS policies.
+
+   https://docs.google.com/document/d/1o7iLH2rS7XRSiLLH89syyn_XYhdrPisE7aMT1oXs2AI/edit?usp=sharing
+
+   The main task now is to investigate:
+
+   "HOW IS SECURITY DEFINER ABLE TO BYPASS THE POLICY?"
+
+   I am currently exploring how PostgreSQL internally handles this behavior.
+
 2. Implement the same UDFs in both PostgreSQL and SQL Server.
-	-> Try UDF on small dataset status:Pending
- 	-> Try UDF on TPC-H dataset status:Pending
+
+   * Try UDFs on a small dataset
+     Status: Pending
+
+   * Try UDFs on the TPC-H dataset
+     Status: Pending
+
 3. Compare the behavior and outputs of the UDFs in both databases to verify whether they produce identical results.
-4. Review the code repository for the UDF implementations (repository link is available in the research paper). status:Pending
+
+4. Review the code repository for the UDF implementations (repository link is available in the research paper).
+   Status: Pending
 
 Final Goal:
+
 We want to derive an algorithm or mechanism that can transform a cyclic dependent query into a normal executable query using some form of grammar-based approach.
-(Rewritten/Re-return version)
+
+(Rewritten / Re-return version)
 
