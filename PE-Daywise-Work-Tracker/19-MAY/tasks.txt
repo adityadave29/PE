@@ -2,11 +2,11 @@ Task 1: Analyze how SECURITY DEFINER changes the role from a normal user to a pr
 
 code link: https://github.com/postgres/postgres/blob/master/src/backend/utils/fmgr/fmgr.c
 
-Status: Incomplete (In Progress)
+Status: Done
 
 Task 2: Find the RLS policy code in the PostgreSQL repository and try to implement the same logic there. For this, I need to set up PostgreSQL locally and figure out how to proceed.
 
-Status: Incomplete
+Status: Incomplete (In Progress)
 
 Task 3: After implementing the RESET ROLE logic, test it on multiple cyclic policies to validate the logic.
 

@@ -37,3 +37,28 @@ We want to derive an algorithm or mechanism that can transform a cyclic dependen
 
 (Rewritten / Re-return version)
 
+19-May
+
+Task 1: Analyze how SECURITY DEFINER changes the role from a normal user to a privileged one. Analyze the code and identify the section that implements this logic.
+
+code link: https://github.com/postgres/postgres/blob/master/src/backend/utils/fmgr/fmgr.c
+
+Status: Done
+
+Task 2: Find the RLS policy code in the PostgreSQL repository and try to implement the same logic there. For this, I need to set up PostgreSQL locally and figure out how to proceed.
+
+Status: Incomplete (In Progress)
+
+Task 3: After implementing the RESET ROLE logic, test it on multiple cyclic policies to validate the logic.
+
+Status: Incomplete
+
+Task 4: Implement query numbers 40 and 21 from the report.
+
+Status: Incomplete
+
+Task 5: Explore pg_lab for optimization and check whether it can help with the other tasks as well.
+
+Status: Incomplete
+
+Goal: The main goal is to modify the RLS policy code so that it can internally gain superuser privileges for cyclic policies, successfully execute the query, and produce the desired results.
