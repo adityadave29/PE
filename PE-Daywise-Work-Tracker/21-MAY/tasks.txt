@@ -1,0 +1,20 @@
+In the last 2 days, I understood how SECURITY DEFINER works internally from the official code.
+
+Now, the next task is to figure out how to handle cyclic policies in RLS (when the user has not used SECURITY DEFINER explicitly).
+
+Tasks:
+
+Understand how query execution takes place?
+-> So, I understood this phase: we have parser, analyzer, re-writer, planner, and execution. This is the flow. RLS policies are added as security qualifiers to the query tree before planning, as part of PostgreSQL’s row security processing during query rewrite/planning preparation.
+
+Now, I need to find different approaches to solve this cyclic policy recursion.
+
+For that, I first have to understand the complete RLS implementation from the official PostgreSQL code.
+
+One of the solutions is to check every time whether a policy has a cycle or not. If it does, then elevate privileges and execute the query.
+But the big question is: is this the correct solution from a security perspective?
+
+The second solution is to somehow solve this recursion problem during query execution. Is this something that I can figure out after understanding the RLS implementation from the official code?
+This might not have the security flaw that we have in task one.
+
+So, my next task for the next few days is to understand the complete RLS code, what restrictions it has, and how to tackle this problem.
