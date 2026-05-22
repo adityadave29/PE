@@ -1,0 +1,12 @@
+Tasks:
+
+1. Analyze the Planner code in the official PostgreSQL source code and try to figure out how it detects cycles, and find the place where we can switch the user.
+
+Using the print statement "Error: infinite ..." we can search for it on GitHub.
+
+2. Implement an RLS policy in SQL Server, but this time without using a function — using inline syntax instead.
+
+⇒ Answer: This is not possible. SQL Server is designed in a way that the only option to execute RLS is through a function, so this is not a doable task.
+Link: https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver17
+
+3. Compare VIEW execution time and analyze whether a VIEW can help solve the cyclic policy issue or not. This is the next phase task, to be taken up after finding the answer to at which stage PostgreSQL detects the recursion.
