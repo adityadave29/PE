@@ -1,0 +1,23 @@
+My Complete Understanding of PostgreSQL Rewriter and RLS
+
+When we run a query in PostgreSQL, it first hits postmaster.c which spins up a new backend process and hands control to postgres.c. This file is the main loop that drives all stages of query processing — from parser to executor. After the parser converts raw SQL text into a parse tree and the analyzer enriches it into a fully resolved Query struct (with OIDs, column references, and type information), this Query* pointer is passed to the rewriter.
+
+How the Rewriter Detects Recursion
+
+Inside rewriteHandler.c there is a function static Query* fireRIRules(Query *parsetree, List *activeRIRs). This function receives the parse tree and a list called activeRIRs. As it traverses the query tree and encounters relations that have rules or RLS policies attached, it adds the OID of each relation to the activeRIRs list before processing it. Before adding any OID it checks whether that OID already exists in the list. If it does, that means the same relation is being processed again in the same chain — which is a cycle — and PostgreSQL immediately throws an error. This is the mechanism used to detect infinite recursion during rewriting.
+
+How RLS Flows Through PostgreSQL and Where It Gets Injected
+
+The entry point for all rewriting is QueryRewrite() inside rewriteHandler.c. This calls RewriteQuery() which for SELECT queries calls ApplyRetrieveRule(). Inside ApplyRetrieveRule() the RLS logic is triggered by calling into rowsecurity.c.
+
+Inside rowsecurity.c the main function is get_row_security_policies(). It first calls RelationGetRowLevelSecurity() to check whether RLS is actually enabled on the relation. Then it calls get_policies_for_relation() which fetches the applicable policies from the pg_policy catalog and filters them by command type — SELECT, INSERT, UPDATE, or DELETE. Once the policies are collected, add_security_quals() injects them as WHERE clause conditions into the query using the USING clause of the policy. For INSERT and UPDATE, add_with_check_options() additionally injects WITH CHECK quals. The helper make_ands_explicit() is used to combine multiple policy conditions cleanly.
+
+Back in rewriteHandler.c, ApplyRetrieveRule() takes the quals returned by get_row_security_policies() and merges them directly into the query's jointree, which is where the WHERE clause lives. This is how the RLS policy physically becomes part of the query.
+
+The Exact Order and Why It Matters
+
+The order of operations inside ApplyRetrieveRule() is: first call get_row_security_policies() to inject the RLS quals, and then call fireRIRules() to process the expanded query tree. The recursion check via activeRIRs happens inside fireRIRules() after the injection. This order is intentional — because the RLS policy itself can reference another relation or view, and that relation might loop back. If the cycle check happened before RLS injection, it would miss any recursion introduced by the policy itself.
+
+How RLS Bypasses Are Handled
+
+Inside the RLS code itself, before fetching any policies, PostgreSQL checks whether the current user is a superuser, whether the relation has RLS disabled, or whether the function is running as SECURITY DEFINER. If any of these conditions are true, get_row_security_policies() returns nothing — no policy, no quals injected, no expansion, and therefore no possibility of a cycle. Only when an actual policy exists does the rewriter proceed to expand and check for recursion via fireRIRules().
