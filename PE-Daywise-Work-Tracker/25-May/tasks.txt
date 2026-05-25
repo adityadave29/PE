@@ -1,0 +1,14 @@
+Tasks:
+
+I identified that PostgreSQL is throwing an infinite recursion error during the rewriting phase. My next task is to track the query from the initial phase up to the rewriting phase. In each phase, I will add logging to inspect the input to each function and trace what data is being passed to the next function.
+
+Task Breakdown
+
+Task 1: Set up PostgreSQL locally
+Status: Done
+
+Task 2: Add logging and track query transformations across each phase
+Status: Ongoing
+
+Task 3: Analyze the logs, identify possible solutions to prevent the infinite recursion error, and ensure the query executes successfully with proper results
+Status: Pending
