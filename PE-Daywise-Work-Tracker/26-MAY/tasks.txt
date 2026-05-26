@@ -1,0 +1,9 @@
+Tasks:
+
+1 => Yesterday I did the setup of PostgreSQL locally. After that I figured out the point where PostgreSQL is throwing an infinite recursion error (it is in the rewriting phase).
+
+So I made a complete flow starting from a raw query to a parse tree till the rewriting phase. After parsing and analyzing, it is sending the parse tree in a Query struct to the rewriting phase. In the rewriting phase, first it is calling RLS functions so RLS files are preparing the query which the rewriter will inject into the parse tree. So after checking RLS it will go to fireRIRules where in a loop it will check whether our policy has a cycle or not. For that they have one list called activeRIRs where if they encounter a policy with the same OID they will throw an error of infinite recursion.
+
+Conclusion => So we have a window from the creation of a policy till the rewriting phase. In between this we have to figure out what we can do.
+
+Main Task: Think about all the solutions and see first whether they are possible or not and if possible then analyze the pros and cons.
