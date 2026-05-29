@@ -1,0 +1,2 @@
+Today's task is to read the paper **"Compliance in Databases: A Study of Structural Policies and Query Optimization"**, make important notes, and list all questions to be answered after the experiments.
+
