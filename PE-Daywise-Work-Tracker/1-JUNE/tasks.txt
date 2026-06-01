@@ -1,0 +1,17 @@
+Long-term Goal:
+Pure RLS is the baseline enforcement mechanism. The objective is to build a dynamic algorithm 
+that selectively replaces Pure RLS with Indexed RLS, Secure Views, or Query Rewrite on a per-query basis, 
+minimizing overall execution and planning time while guaranteeing identical query results.
+
+Short-term Goal:
+Construct a labeled benchmark dataset by executing all 22 TPC-H queries under all four enforcement strategies on PostgreSQL. 
+
+Each row captures:
+Query structural features: query_id, num_joins, num_tables, num_predicates, has_subquery, has_aggregation, has_group_by
+Policy interaction features: num_policies_activated, policy_composition_depth, has_cyclic_policy, policy_type, has_indexed_policy_columns
+Performance metrics per method: execution_time, planning_time, timeout flag for each of Pure RLS, Indexed RLS, Secure View, Query Rewrite
+Labels: winner by execution time, winner by planning time
+
+Next step after dataset construction:
+Feature importance analysis to identify which query and policy structural properties are statistically significant predictors of which enforcement method wins
+these become the decision criteria for the dynamic selection algorithm.
