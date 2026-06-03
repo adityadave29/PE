@@ -1,0 +1,10 @@
+From yesterday's work, we now have intermediate outputs for each stage of query processing. We need to compare these outputs stage by stage to identify where RLS and Views begin to take different execution paths.
+
+After this, I want to implement:
+
+* 2–3 queries where RLS and Views take approximately the same execution time,
+* 2–3 queries where RLS performs better than Views, and
+* 2–3 queries similar to Query 4, where Views perform better than RLS.
+
+By analyzing 9–10 queries across these three categories (RLS > Views, RLS = Views, and RLS < Views), we can obtain a comprehensive understanding of the factors that influence the performance of RLS and Views.
+
