@@ -1,0 +1,70 @@
+                                                                                QUERY PLAN                                                                                 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=190048.87..190098.03 rows=5 width=17) (actual time=1326.340..1348.028 rows=5.00 loops=1)
+   Output: orders.o_orderpriority, count(*)
+   Group Key: orders.o_orderpriority
+   Buffers: shared hit=204 read=130540, temp read=20215 written=20528
+   ->  Gather Merge  (cost=190048.87..190097.92 rows=12 width=17) (actual time=1326.015..1348.005 rows=15.00 loops=1)
+         Output: orders.o_orderpriority, (PARTIAL count(*))
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=204 read=130540, temp read=20215 written=20528
+         ->  Partial GroupAggregate  (cost=189048.85..189096.51 rows=5 width=17) (actual time=1317.927..1319.326 rows=5.00 loops=3)
+               Output: orders.o_orderpriority, PARTIAL count(*)
+               Group Key: orders.o_orderpriority
+               Buffers: shared hit=204 read=130540, temp read=20215 written=20528
+               Worker 0:  actual time=1315.164..1316.486 rows=5.00 loops=1
+                 Buffers: shared hit=68 read=43411, temp read=6779 written=6888
+               Worker 1:  actual time=1315.598..1316.861 rows=5.00 loops=1
+                 Buffers: shared hit=87 read=43355, temp read=6679 written=6796
+               ->  Sort  (cost=189048.85..189064.72 rows=6348 width=9) (actual time=1317.605..1318.335 rows=17231.33 loops=3)
+                     Output: orders.o_orderpriority
+                     Sort Key: orders.o_orderpriority
+                     Sort Method: quicksort  Memory: 769kB
+                     Buffers: shared hit=204 read=130540, temp read=20215 written=20528
+                     Worker 0:  actual time=1314.845..1315.462 rows=17656.00 loops=1
+                       Sort Method: quicksort  Memory: 769kB
+                       Buffers: shared hit=68 read=43411, temp read=6779 written=6888
+                     Worker 1:  actual time=1315.268..1315.872 rows=17223.00 loops=1
+                       Sort Method: quicksort  Memory: 769kB
+                       Buffers: shared hit=87 read=43355, temp read=6679 written=6796
+                     ->  Parallel Hash Semi Join  (cost=149649.05..188647.91 rows=6348 width=9) (actual time=1182.262..1312.934 rows=17231.33 loops=3)
+                           Output: orders.o_orderpriority
+                           Hash Cond: (orders.o_orderkey = lineitem.l_orderkey)
+                           Buffers: shared hit=188 read=130540, temp read=20215 written=20528
+                           Worker 0:  actual time=1170.052..1309.902 rows=17656.00 loops=1
+                             Buffers: shared hit=60 read=43411, temp read=6779 written=6888
+                           Worker 1:  actual time=1183.725..1309.705 rows=17223.00 loops=1
+                             Buffers: shared hit=79 read=43355, temp read=6679 written=6796
+                           ->  Parallel Seq Scan on public.orders  (cost=0.00..35383.00 rows=22585 width=13) (actual time=0.987..172.509 rows=18783.00 loops=3)
+                                 Output: orders.o_orderpriority, orders.o_orderkey
+                                 Filter: ((orders.o_orderdate >= '1994-01-01'::date) AND (orders.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))
+                                 Rows Removed by Filter: 481217
+                                 Buffers: shared hit=94 read=25914
+                                 Worker 0:  actual time=0.987..172.720 rows=18471.00 loops=1
+                                   Buffers: shared hit=37 read=8532
+                                 Worker 1:  actual time=1.037..172.166 rows=18964.00 loops=1
+                                   Buffers: shared hit=31 read=8666
+                           ->  Parallel Hash  (cost=135974.79..135974.79 rows=833461 width=4) (actual time=987.608..987.611 rows=1264432.00 loops=3)
+                                 Output: lineitem.l_orderkey
+                                 Buckets: 262144 (originally 262144)  Batches: 32 (originally 16)  Memory Usage: 6752kB
+                                 Buffers: shared hit=94 read=104626, temp read=9111 written=20144
+                                 Worker 0:  actual time=985.055..985.060 rows=1264051.00 loops=1
+                                   Buffers: shared hit=23 read=34879, temp read=3093 written=6760
+                                 Worker 1:  actual time=984.768..984.772 rows=1258458.00 loops=1
+                                   Buffers: shared hit=48 read=34689, temp read=2986 written=6668
+                                 ->  Parallel Seq Scan on public.lineitem  (cost=0.00..135974.79 rows=833461 width=4) (actual time=0.487..581.593 rows=1264432.00 loops=3)
+                                       Output: lineitem.l_orderkey
+                                       Filter: (lineitem.l_commitdate < lineitem.l_receiptdate)
+                                       Rows Removed by Filter: 735973
+                                       Buffers: shared hit=94 read=104626
+                                       Worker 0:  actual time=0.415..582.380 rows=1264051.00 loops=1
+                                         Buffers: shared hit=23 read=34879
+                                       Worker 1:  actual time=0.424..583.482 rows=1258458.00 loops=1
+                                         Buffers: shared hit=48 read=34689
+ Planning:
+   Buffers: shared hit=189 read=2
+ Planning Time: 5.522 ms
+ Execution Time: 1349.109 ms
+(66 rows)
+

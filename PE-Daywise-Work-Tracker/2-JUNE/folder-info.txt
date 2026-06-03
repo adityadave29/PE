@@ -1,0 +1,6 @@
+In the TPC-H 22 queries, I am experimenting with how RLS and Views execute the same logic in PostgreSQL to understand why Views perform better in some cases.
+
+For this, I am using Query 4. In this query, I observed that RLS takes 2561 ms, whereas the View takes 1495 ms. In the policy_q4 file, we have implemented the RLS policy, and in view_q4, we have implemented the same logic using a View.
+
+We have two files in which we have stored all the parse trees and intermediate outputs so that we can compare each stage of query processing.
+

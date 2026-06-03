@@ -1,0 +1,9 @@
+CREATE INDEX idx_customer_acctbal ON customer(c_acctbal);
+CREATE INDEX idx_customer_nationkey ON customer(c_nationkey);
+CREATE INDEX idx_supplier_acctbal ON supplier(s_acctbal);
+CREATE INDEX idx_supplier_nationkey ON supplier(s_nationkey);
+CREATE INDEX idx_partsupp_availqty ON partsupp(ps_availqty);
+CREATE INDEX idx_partsupp_suppkey ON partsupp(ps_suppkey);
+CREATE INDEX idx_lineitem_orderkey ON lineitem(l_orderkey);
+CREATE INDEX idx_lineitem_suppkey ON lineitem(l_suppkey);
+CREATE INDEX idx_orders_priority ON orders(o_orderpriority);
