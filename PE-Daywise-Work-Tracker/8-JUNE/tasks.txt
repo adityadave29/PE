@@ -1,0 +1,9 @@
+Last week, I completed a detailed analysis of RLS vs. Views. Through debugging, I identified the reasons why Views are faster than RLS in terms of execution time.
+
+After completing this analysis, I have a few questions that I need to investigate further:
+
+1. If we consider the View creation time along with the planning time and execution time, which approach is actually faster overall? When comparing RLS with Views, the source data is different. In the case of Views, we are often working with a relatively smaller dataset, whereas RLS operates on the main table.
+
+2. What are the security trade-offs between the two approaches? If Views are faster, what security guarantees are we potentially sacrificing compared to RLS?
+
+3. In the experiment where I executed 22 queries, Views performed better than RLS for all queries. However, in the Compliance paper, there were cases where RLS outperformed Views. I need to execute those queries and analyze the reasons behind this difference in performance.
