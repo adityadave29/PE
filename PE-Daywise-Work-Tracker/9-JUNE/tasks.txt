@@ -1,0 +1,11 @@
+We have two flags to investigate: security_barrier and parallel_safe.
+
+1 =>Analyze the behavior of these flags in:
+- Pure RLS
+- UDF-based RLS
+- Views
+- Security Barrier Views
+
+2 For the parallel_safe check:
+- What does parallelism mean in this context?
+- How is parallel execution being used in Query 4?
