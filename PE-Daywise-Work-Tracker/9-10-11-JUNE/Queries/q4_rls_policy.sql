@@ -64,7 +64,14 @@ group by
 order by
     o_orderpriority;
 
-
-
 -- Planning Time: 2.684 ms
 -- Execution Time: 2579.793 ms
+
+-- o_orderpriority | order_count 
+-------------------+-------------
+-- 1-URGENT        |        4751
+-- 2-HIGH          |        4737
+-- 3-MEDIUM        |        4661
+-- 4-NOT SPECIFIED |        4591
+-- 5-LOW           |        4577
+-- (5 rows)

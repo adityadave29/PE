@@ -45,9 +45,6 @@ group by
 order by
     o_orderpriority;
 
-
-
-
 -- Planning Time: 8.632 ms
 -- Execution Time: 1489.721 ms
 

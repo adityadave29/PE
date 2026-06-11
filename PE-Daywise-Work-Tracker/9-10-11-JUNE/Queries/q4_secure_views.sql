@@ -5,8 +5,8 @@ ALTER TABLE orders DISABLE ROW LEVEL SECURITY;
 -- Step 2: Drop existing view if any
 DROP VIEW IF EXISTS orders_secure;
 
--- Step 3: Create view with same filter logic as RLS policy
-CREATE VIEW orders_secure AS
+-- Step 3: Create SECURITY BARRIER view with same filter logic as RLS policy
+CREATE VIEW orders_secure WITH (security_barrier = true) AS
 SELECT o.*
 FROM orders o
 WHERE EXISTS (
@@ -23,33 +23,24 @@ SET ROLE alice;
 
 -- Step 5: Run Q4 with timing
 EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
-select
+SELECT
     o_orderpriority,
-    count(*) as order_count
-from
+    COUNT(*) AS order_count
+FROM
     orders_secure
-where
-    o_orderdate >= date '1994-01-01'
-    and o_orderdate < date '1994-01-01' + interval '3' month
-    and exists (
-        select
-            *
-        from
-            lineitem
-        where
-            l_orderkey = o_orderkey
-            and l_commitdate < l_receiptdate
+WHERE
+    o_orderdate >= DATE '1994-01-01'
+    AND o_orderdate < DATE '1994-01-01' + INTERVAL '3' MONTH
+    AND EXISTS (
+        SELECT *
+        FROM lineitem
+        WHERE l_orderkey = o_orderkey
+          AND l_commitdate < l_receiptdate
     )
-group by
+GROUP BY
     o_orderpriority
-order by
+ORDER BY
     o_orderpriority;
-
-
-
-
--- Planning Time: 8.632 ms
--- Execution Time: 1489.721 ms
 
 
 -- o_orderpriority | order_count 
@@ -60,3 +51,8 @@ order by
 -- 4-NOT SPECIFIED |        4591
 -- 5-LOW           |        4577
 -- (5 rows)
+
+
+--  Planning Time: 7.507 ms
+-- Execution Time: 1623.323 ms
+    

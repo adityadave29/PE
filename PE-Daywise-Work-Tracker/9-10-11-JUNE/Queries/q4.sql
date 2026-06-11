@@ -20,3 +20,11 @@ group by
 order by
         o_orderpriority;
 
+
+-- o_orderpriority | order_count 
+-- -----------------+-------------
+-- 1-URGENT        |       10526
+-- 2-HIGH          |       10210
+-- 3-MEDIUM        |       10402
+-- 4-NOT SPECIFIED |       10319
+-- 5-LOW           |       10237
