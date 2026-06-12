@@ -1,0 +1,8 @@
+This time, I first need to create an algorithm that can convert a query tree into a human-readable form so that I can clearly see how the transformations are taking place.
+
+=> Most important task: Determine why Views are faster than RLS in most cases. One possible reason is the parallel_safe flag, but the explanation is not yet solid. I need to investigate why certain operations are parallelizable while others are not.
+
+The second task is to demonstrate that RLS and Views are ultimately combined into a single query. However, the way they are combined is different, not identical. The query-tree-to-human-readable conversion algorithm should help analyze and demonstrate these differences.
+
+After that, I need to run additional queries to verify whether this behavior is consistent across all queries or if it occurs only for specific query patterns.
+
