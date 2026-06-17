@@ -1,0 +1,98 @@
+WARNING:  ===== Converted Join Expression =====:
+DETAIL:     {JOINEXPR 
+   :jointype 4 
+   :isNatural false 
+   :larg <> 
+   :rarg 
+      {RANGETBLREF 
+      :rtindex 3
+      }
+   :usingClause <> 
+   :join_using_alias <> 
+   :quals 
+      {BOOLEXPR 
+      :boolop and 
+      :args (
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 3 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 1 
+            :location 325
+            }
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 338
+            }
+         )
+         :location 336
+         }
+         {OPEXPR 
+         :opno 1095 
+         :opfuncid 1087 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 3 
+            :varattno 12 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 12 
+            :location 365
+            }
+            {VAR 
+            :varno 3 
+            :varattno 13 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 13 
+            :location 380
+            }
+         )
+         :location 378
+         }
+      )
+      :location 361
+      }
+   :alias <> 
+   :rtindex 0
+   }
+
+WARNING:  pull_up_subqueries - File: src/backend/optimizer/prep/prepjointree.c, Relation: N/A, Explanation: Initiating pull-up of subqueries in jointree
+WARNING:  is_simple_subquery - File: src/backend/optimizer/prep/prepjointree.c, Relation: orders_secure, security_barrier: false, Explanation: 

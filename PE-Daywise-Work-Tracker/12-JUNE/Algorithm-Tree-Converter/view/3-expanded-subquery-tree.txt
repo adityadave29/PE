@@ -1,0 +1,497 @@
+WARNING:  ===== Expanded Subquery Tree =====:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs false 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks true 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname o 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname o 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 16561 
+      :inh true 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 16561 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 10 
+      :selectedCols (b 8 9 10 11 12 13 14 15 16)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals 
+         {SUBLINK 
+         :subLinkType 0 
+         :subLinkId 0 
+         :testexpr <> 
+         :operName <> 
+         :subselect 
+            {QUERY 
+            :commandType 1 
+            :querySource 0 
+            :canSetTag true 
+            :utilityStmt <> 
+            :resultRelation 0 
+            :hasAggs false 
+            :hasWindowFuncs false 
+            :hasTargetSRFs false 
+            :hasSubLinks false 
+            :hasDistinctOn false 
+            :hasRecursive false 
+            :hasModifyingCTE false 
+            :hasForUpdate false 
+            :hasRowSecurity false 
+            :hasGroupRTE false 
+            :isReturn false 
+            :cteList <> 
+            :rtable (
+               {RANGETBLENTRY 
+               :alias 
+                  {ALIAS 
+                  :aliasname c 
+                  :colnames <>
+                  }
+               :eref 
+                  {ALIAS 
+                  :aliasname c 
+                  :colnames ("c_custkey" "c_name" "c_address" "c_nationkey" "c
+                  _phone" "c_acctbal" "c_mktsegment" "c_comment")
+                  }
+               :rtekind 0 
+               :relid 16546 
+               :inh true 
+               :relkind r 
+               :rellockmode 1 
+               :perminfoindex 1 
+               :tablesample <> 
+               :lateral false 
+               :inFromCl true 
+               :securityQuals <>
+               }
+            )
+            :rteperminfos (
+               {RTEPERMISSIONINFO 
+               :relid 16546 
+               :inh true 
+               :requiredPerms 2 
+               :checkAsUser 10 
+               :selectedCols (b 8 13)
+               :insertedCols (b)
+               :updatedCols (b)
+               }
+            )
+            :jointree 
+               {FROMEXPR 
+               :fromlist (
+                  {RANGETBLREF 
+                  :rtindex 1
+                  }
+               )
+               :quals 
+                  {BOOLEXPR 
+                  :boolop and 
+                  :args (
+                     {OPEXPR 
+                     :opno 96 
+                     :opfuncid 65 
+                     :opresulttype 16 
+                     :opretset false 
+                     :opcollid 0 
+                     :inputcollid 0 
+                     :args (
+                        {VAR 
+                        :varno 1 
+                        :varattno 1 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 1 
+                        :varattnosyn 1 
+                        :location -1
+                        }
+                        {VAR 
+                        :varno 1 
+                        :varattno 2 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 1 
+                        :varreturningtype 0 
+                        :varnosyn 1 
+                        :varattnosyn 2 
+                        :location -1
+                        }
+                     )
+                     :location -1
+                     }
+                     {OPEXPR 
+                     :opno 674 
+                     :opfuncid 297 
+                     :opresulttype 16 
+                     :opretset false 
+                     :opcollid 0 
+                     :inputcollid 0 
+                     :args (
+                        {VAR 
+                        :varno 1 
+                        :varattno 6 
+                        :vartype 701 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 1 
+                        :varattnosyn 6 
+                        :location -1
+                        }
+                        {FUNCEXPR 
+                        :funcid 316 
+                        :funcresulttype 701 
+                        :funcretset false 
+                        :funcvariadic false 
+                        :funcformat 2 
+                        :funccollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {CONST 
+                           :consttype 23 
+                           :consttypmod -1 
+                           :constcollid 0 
+                           :constlen 4 
+                           :constbyval true 
+                           :constisnull false 
+                           :location -1 
+                           :constvalue 4 [ -120 19 0 0 0 0 0 0 ]
+                           }
+                        )
+                        :location -1
+                        }
+                     )
+                     :location -1
+                     }
+                  )
+                  :location -1
+                  }
+               }
+            :mergeActionList <> 
+            :mergeTargetRelation 0 
+            :mergeJoinCondition <> 
+            :targetList (
+               {TARGETENTRY 
+               :expr 
+                  {CONST 
+                  :consttype 23 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location -1 
+                  :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                  }
+               :resno 1 
+               :resname ?column? 
+               :ressortgroupref 0 
+               :resorigtbl 0 
+               :resorigcol 0 
+               :resjunk false
+               }
+            )
+            :override 0 
+            :onConflict <> 
+            :returningOldAlias <> 
+            :returningNewAlias <> 
+            :returningList <> 
+            :groupClause <> 
+            :groupDistinct false 
+            :groupingSets <> 
+            :havingQual <> 
+            :windowClause <> 
+            :distinctClause <> 
+            :sortClause <> 
+            :limitOffset <> 
+            :limitCount <> 
+            :limitOption 0 
+            :rowMarks <> 
+            :setOperations <> 
+            :constraintDeps <> 
+            :withCheckOptions <> 
+            :stmt_location -1 
+            :stmt_len -1
+            }
+         :location -1
+         }
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 1 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 1 
+         :location -1
+         }
+      :resno 1 
+      :resname o_orderkey 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 1 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 2 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 2 
+         :location -1
+         }
+      :resno 2 
+      :resname o_custkey 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 2 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 3 
+         :vartype 25 
+         :vartypmod -1 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 3 
+         :location -1
+         }
+      :resno 3 
+      :resname o_orderstatus 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 3 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 4 
+         :vartype 701 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 4 
+         :location -1
+         }
+      :resno 4 
+      :resname o_totalprice 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 4 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 5 
+         :vartype 1082 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 5 
+         :location -1
+         }
+      :resno 5 
+      :resname o_orderdate 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 5 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 6 
+         :vartype 25 
+         :vartypmod -1 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 6 
+         :location -1
+         }
+      :resno 6 
+      :resname o_orderpriority 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 6 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 7 
+         :vartype 25 
+         :vartypmod -1 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 7 
+         :location -1
+         }
+      :resno 7 
+      :resname o_clerk 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 7 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 8 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 8 
+         :location -1
+         }
+      :resno 8 
+      :resname o_shippriority 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 8 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 9 
+         :vartype 25 
+         :vartypmod -1 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 9 
+         :location -1
+         }
+      :resno 9 
+      :resname o_comment 
+      :ressortgroupref 0 
+      :resorigtbl 16561 
+      :resorigcol 9 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location -1 
+   :stmt_len -1
+   }
+
+WARNING:  fireRIRrules - File: src/backend/rewrite/rewriteHandler.c, Relation: lineitem, IsView: false, SecurityBarrier: false, Explanation: Checking RIR rules for relation

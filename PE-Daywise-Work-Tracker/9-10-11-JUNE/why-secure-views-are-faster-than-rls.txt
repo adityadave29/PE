@@ -1,0 +1,37 @@
+The single reason: RLS killed parallelism, views didn't
+RLS execution time: 2623 ms
+Secure view execution time: 1547 ms — roughly 1000ms faster
+The difference isn't about when the security qual runs. Both run the same EXISTS (SELECT 1 FROM customer WHERE c_acctbal > 5000) filter. The real difference is how many CPUs were used.
+
+Look at what the plans actually say
+RLS plan — no parallel workers:
+Seq Scan on public.orders
+  Filter: (o_orderdate >= ...) AND (ANY (o_custkey = (hashed SubPlan 2).col1))
+  -- SubPlan 2: seq scan customer
+No Gather node anywhere. 1 CPU. Serial execution.
+Secure view plan — 2 parallel workers:
+Finalize GroupAggregate
+  -> Gather Merge  ← workers merging here
+       Workers Planned: 2
+       Workers Launched: 2
+       -> Parallel Hash Semi Join
+            -> Parallel Seq Scan on orders
+            -> Parallel Seq Scan on customer
+            -> Parallel Seq Scan on lineitem
+3 CPUs working simultaneously (leader + 2 workers).
+
+Why did RLS block parallelism but the view didn't?
+This is exactly what we discussed earlier. When Postgres injects the RLS policy into the query, it becomes a SubLink node in the query tree. And as we know — SubLink is always hardcoded UNSAFE.
+So the max_parallel_hazard_walker hits that SubLink, marks the whole query UNSAFE, and no Gather node ever gets inserted.
+The secure view, on the other hand, goes through the rewriter (not the RLS policy injector). The view's EXISTS subquery gets flattened and merged into the main query as a proper join during planning. The planner sees it as a Hash Semi Join — which is SAFE — so parallelism is allowed.
+RLS path:
+  SubLink injected → max_parallel_hazard sees SubLink → UNSAFE → serial
+
+View path:
+  EXISTS subquery → rewriter flattens it → becomes Hash Semi Join → SAFE → parallel
+
+In one line
+
+Both apply the same security filter, but RLS injects it as a SubLink (always unsafe), while the security barrier view's filter gets flattened into a join (parallel safe) — so the view gets 3 CPUs and RLS gets 1.
+
+The security semantics are identical. The execution path is completely different.

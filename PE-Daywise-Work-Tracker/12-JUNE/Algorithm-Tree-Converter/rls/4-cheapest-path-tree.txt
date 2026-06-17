@@ -1,0 +1,292 @@
+
+WARNING:  ===== Final Cheapest Path Tree =====:
+DETAIL:     {HASHPATH 
+   :jpath.path.pathtype 359 
+   :parent_relids (b 1 3)
+   :required_outer (b)
+   :jpath.path.parallel_aware false 
+   :jpath.path.parallel_safe false 
+   :jpath.path.parallel_workers 0 
+   :jpath.path.rows 40534 
+   :jpath.path.disabled_nodes 0 
+   :jpath.path.startup_cost 212549.3375 
+   :jpath.path.total_cost 8883271313.470623 
+   :jpath.path.pathkeys <> 
+   :jpath.jointype 4 
+   :jpath.inner_unique false 
+   :jpath.outerjoinpath 
+      {PATH 
+      :pathtype 339 
+      :parent_relids (b 1)
+      :required_outer (b)
+      :parallel_aware false 
+      :parallel_safe false 
+      :parallel_workers 0 
+      :rows 144199 
+      :disabled_nodes 0 
+      :startup_cost 0 
+      :total_cost 8883048508 
+      :pathkeys <>
+      }
+   :jpath.innerjoinpath 
+      {PATH 
+      :pathtype 339 
+      :parent_relids (b 3)
+      :required_outer (b)
+      :parallel_aware false 
+      :parallel_safe true 
+      :parallel_workers 0 
+      :rows 2000307 
+      :disabled_nodes 0 
+      :startup_cost 0 
+      :total_cost 179731.5 
+      :pathkeys <>
+      }
+   :jpath.joinrestrictinfo (
+      {RESTRICTINFO 
+      :clause 
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 331
+            }
+            {VAR 
+            :varno 3 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 1 
+            :location 318
+            }
+         )
+         :location -1
+         }
+      :is_pushed_down true 
+      :can_join true 
+      :pseudoconstant false 
+      :has_clone false 
+      :is_clone false 
+      :leakproof true 
+      :has_volatile 2 
+      :security_level 1 
+      :num_base_rels 2 
+      :clause_relids (b 1 3)
+      :required_relids (b 1 3)
+      :incompatible_relids (b)
+      :outer_relids (b)
+      :left_relids (b 1)
+      :right_relids (b 3)
+      :orclause <> 
+      :rinfo_serial 6 
+      :eval_cost.startup 0 
+      :eval_cost.per_tuple 0.0025 
+      :norm_selec 6.666666666666667e-07 
+      :outer_selec 0.28109466666666666 
+      :mergeopfamilies (o 1976)
+      :left_em 
+         {EQUIVALENCEMEMBER 
+         :em_expr 
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 331
+            }
+         :em_relids (b 1)
+         :em_is_const false 
+         :em_is_child false 
+         :em_datatype 23 
+         :em_jdomain 
+            {JOINDOMAIN 
+            :jd_relids (b 1 3)
+            }
+         }
+      :right_em 
+         {EQUIVALENCEMEMBER 
+         :em_expr 
+            {VAR 
+            :varno 3 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 1 
+            :location 318
+            }
+         :em_relids (b 3)
+         :em_is_const false 
+         :em_is_child false 
+         :em_datatype 23 
+         :em_jdomain 
+            {JOINDOMAIN 
+            :jd_relids (b 1 3)
+            }
+         }
+      :outer_is_left false 
+      :hashjoinoperator 96 
+      :left_bucketsize 6.934860852017004e-06 
+      :right_bucketsize 7.115057596391243e-06 
+      :left_mcvfreq 0 
+      :right_mcvfreq 0 
+      :left_hasheqoperator 96 
+      :right_hasheqoperator 96
+      }
+   )
+   :path_hashclauses (
+      {RESTRICTINFO 
+      :clause 
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 331
+            }
+            {VAR 
+            :varno 3 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 1 
+            :location 318
+            }
+         )
+         :location -1
+         }
+      :is_pushed_down true 
+      :can_join true 
+      :pseudoconstant false 
+      :has_clone false 
+      :is_clone false 
+      :leakproof true 
+      :has_volatile 2 
+      :security_level 1 
+      :num_base_rels 2 
+      :clause_relids (b 1 3)
+      :required_relids (b 1 3)
+      :incompatible_relids (b)
+      :outer_relids (b)
+      :left_relids (b 1)
+      :right_relids (b 3)
+      :orclause <> 
+      :rinfo_serial 6 
+      :eval_cost.startup 0 
+      :eval_cost.per_tuple 0.0025 
+      :norm_selec 6.666666666666667e-07 
+      :outer_selec 0.28109466666666666 
+      :mergeopfamilies (o 1976)
+      :left_em 
+         {EQUIVALENCEMEMBER 
+         :em_expr 
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 331
+            }
+         :em_relids (b 1)
+         :em_is_const false 
+         :em_is_child false 
+         :em_datatype 23 
+         :em_jdomain 
+            {JOINDOMAIN 
+            :jd_relids (b 1 3)
+            }
+         }
+      :right_em 
+         {EQUIVALENCEMEMBER 
+         :em_expr 
+            {VAR 
+            :varno 3 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 3 
+            :varattnosyn 1 
+            :location 318
+            }
+         :em_relids (b 3)
+         :em_is_const false 
+         :em_is_child false 
+         :em_datatype 23 
+         :em_jdomain 
+            {JOINDOMAIN 
+            :jd_relids (b 1 3)
+            }
+         }
+      :outer_is_left false 
+      :hashjoinoperator 96 
+      :left_bucketsize 6.934860852017004e-06 
+      :right_bucketsize 7.115057596391243e-06 
+      :left_mcvfreq 0 
+      :right_mcvfreq 0 
+      :left_hasheqoperator 96 
+      :right_hasheqoperator 96
+      }
+   )
+   :num_batches 16 
+   :inner_rows_total 2000307
+   }
+

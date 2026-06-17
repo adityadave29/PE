@@ -1,0 +1,304 @@
+WARNING:  ===== RAW PARSE TREE =====:
+DETAIL:     {RAWSTMT 
+   :stmt 
+      {EXPLAINSTMT 
+      :query 
+         {SELECTSTMT 
+         :distinctClause <> 
+         :intoClause <> 
+         :targetList (
+            {RESTARGET 
+            :name <> 
+            :indirection <> 
+            :val 
+               {COLUMNREF 
+               :fields ("o_orderpriority")
+               :location 47
+               }
+            :location 47
+            }
+            {RESTARGET 
+            :name order_count 
+            :indirection <> 
+            :val 
+               {FUNCCALL 
+               :funcname ("count")
+               :args <> 
+               :agg_order <> 
+               :agg_filter <> 
+               :over <> 
+               :agg_within_group false 
+               :agg_star true 
+               :agg_distinct false 
+               :func_variadic false 
+               :funcformat 0 
+               :location 68
+               }
+            :location 68
+            }
+         )
+         :fromClause (
+            {RANGEVAR 
+            :catalogname <> 
+            :schemaname <> 
+            :relname orders_secure 
+            :inh true 
+            :relpersistence p 
+            :alias <> 
+            :location 101
+            }
+         )
+         :whereClause 
+            {BOOLEXPR 
+            :boolop and 
+            :args (
+               {A_EXPR 
+               :name (">=")
+               :lexpr 
+                  {COLUMNREF 
+                  :fields ("o_orderdate")
+                  :location 125
+                  }
+               :rexpr 
+                  {TYPECAST 
+                  :arg 
+                     {A_CONST 
+                     :val "\1994-01-01" 
+                     :location 145
+                     }
+                  :typeName 
+                     {TYPENAME 
+                     :names ("date")
+                     :typeOid 0 
+                     :setof false 
+                     :pct_type false 
+                     :typmods <> 
+                     :typemod -1 
+                     :arrayBounds <> 
+                     :location 140
+                     }
+                  :location -1
+                  }
+               :rexpr_list_start 0 
+               :rexpr_list_end 0 
+               :location 137
+               }
+               {A_EXPR 
+               :name ("\<")
+               :lexpr 
+                  {COLUMNREF 
+                  :fields ("o_orderdate")
+                  :location 166
+                  }
+               :rexpr 
+                  {A_EXPR 
+                  :name ("+")
+                  :lexpr 
+                     {TYPECAST 
+                     :arg 
+                        {A_CONST 
+                        :val "\1994-01-01" 
+                        :location 185
+                        }
+                     :typeName 
+                        {TYPENAME 
+                        :names ("date")
+                        :typeOid 0 
+                        :setof false 
+                        :pct_type false 
+                        :typmods <> 
+                        :typemod -1 
+                        :arrayBounds <> 
+                        :location 180
+                        }
+                     :location -1
+                     }
+                  :rexpr 
+                     {TYPECAST 
+                     :arg 
+                        {A_CONST 
+                        :val "\3" 
+                        :location 209
+                        }
+                     :typeName 
+                        {TYPENAME 
+                        :names ("pg_catalog" "interval")
+                        :typeOid 0 
+                        :setof false 
+                        :pct_type false 
+                        :typmods (
+                           {A_CONST 
+                           :val 2 
+                           :location 213
+                           }
+                        )
+                        :typemod -1 
+                        :arrayBounds <> 
+                        :location 200
+                        }
+                     :location -1
+                     }
+                  :rexpr_list_start 0 
+                  :rexpr_list_end 0 
+                  :location 198
+                  }
+               :rexpr_list_start 0 
+               :rexpr_list_end 0 
+               :location 178
+               }
+               {SUBLINK 
+               :subLinkType 0 
+               :subLinkId 0 
+               :testexpr <> 
+               :operName <> 
+               :subselect 
+                  {SELECTSTMT 
+                  :distinctClause <> 
+                  :intoClause <> 
+                  :targetList (
+                     {RESTARGET 
+                     :name <> 
+                     :indirection <> 
+                     :val 
+                        {COLUMNREF 
+                        :fields (
+                           {A_STAR
+                           }
+                        )
+                        :location 263
+                        }
+                     :location 263
+                     }
+                  )
+                  :fromClause (
+                     {RANGEVAR 
+                     :catalogname <> 
+                     :schemaname <> 
+                     :relname lineitem 
+                     :inh true 
+                     :relpersistence p 
+                     :alias <> 
+                     :location 290
+                     }
+                  )
+                  :whereClause 
+                     {BOOLEXPR 
+                     :boolop and 
+                     :args (
+                        {A_EXPR 
+                        :name ("=")
+                        :lexpr 
+                           {COLUMNREF 
+                           :fields ("l_orderkey")
+                           :location 325
+                           }
+                        :rexpr 
+                           {COLUMNREF 
+                           :fields ("o_orderkey")
+                           :location 338
+                           }
+                        :rexpr_list_start 0 
+                        :rexpr_list_end 0 
+                        :location 336
+                        }
+                        {A_EXPR 
+                        :name ("\<")
+                        :lexpr 
+                           {COLUMNREF 
+                           :fields ("l_commitdate")
+                           :location 365
+                           }
+                        :rexpr 
+                           {COLUMNREF 
+                           :fields ("l_receiptdate")
+                           :location 380
+                           }
+                        :rexpr_list_start 0 
+                        :rexpr_list_end 0 
+                        :location 378
+                        }
+                     )
+                     :location 361
+                     }
+                  :groupClause <> 
+                  :groupDistinct false 
+                  :havingClause <> 
+                  :windowClause <> 
+                  :valuesLists <> 
+                  :sortClause <> 
+                  :limitOffset <> 
+                  :limitCount <> 
+                  :limitOption 0 
+                  :lockingClause <> 
+                  :withClause <> 
+                  :op 0 
+                  :all false 
+                  :larg <> 
+                  :rarg <>
+                  }
+               :location 227
+               }
+            )
+            :location 162
+            }
+         :groupClause (
+            {COLUMNREF 
+            :fields ("o_orderpriority")
+            :location 413
+            }
+         )
+         :groupDistinct false 
+         :havingClause <> 
+         :windowClause <> 
+         :valuesLists <> 
+         :sortClause (
+            {SORTBY 
+            :node 
+               {COLUMNREF 
+               :fields ("o_orderpriority")
+               :location 442
+               }
+            :sortby_dir 0 
+            :sortby_nulls 0 
+            :useOp <> 
+            :location -1
+            }
+         )
+         :limitOffset <> 
+         :limitCount <> 
+         :limitOption 0 
+         :lockingClause <> 
+         :withClause <> 
+         :op 0 
+         :all false 
+         :larg <> 
+         :rarg <>
+         }
+      :options (
+         {DEFELEM 
+         :defnamespace <> 
+         :defname analyze 
+         :arg <> 
+         :defaction 0 
+         :location 9
+         }
+         {DEFELEM 
+         :defnamespace <> 
+         :defname verbose 
+         :arg <> 
+         :defaction 0 
+         :location 18
+         }
+         {DEFELEM 
+         :defnamespace <> 
+         :defname buffers 
+         :arg <> 
+         :defaction 0 
+         :location 27
+         }
+      )
+      }
+   :stmt_location 0 
+   :stmt_len 457
+   }
+

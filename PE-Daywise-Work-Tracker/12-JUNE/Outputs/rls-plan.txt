@@ -1,0 +1,345 @@
+Last login: Sat Jun 13 12:01:45 on ttys003
+adityadave@Adityas-MacBook-Air-3 ~ % psql -d tpch
+psql (18.4)
+Type "help" for help.
+
+tpch=# SET ROLE alice;
+SET
+tpch=> EXPLAIN (
+  ANALYZE true,
+  VERBOSE true,
+  COSTS true,
+  BUFFERS true,
+  TIMING true,
+  FORMAT JSON
+)
+select
+    o_orderpriority,
+    count(*) as order_count
+from
+    orders
+where
+    o_orderdate >= date '1994-01-01'
+    and o_orderdate < date '1994-01-01' + interval '3' month
+    and exists (
+        select
+            *
+        from
+            lineitem
+        where
+            l_orderkey = o_orderkey
+            and l_commitdate < l_receiptdate
+    )
+group by
+    o_orderpriority
+order by
+    o_orderpriority;
+WARNING:  pull_up_sublinks - File: src/backend/optimizer/prep/prepjointree.c, Relation: N/A, Explanation: Initiating pull-up of sublinks (ANY/EXISTS)
+WARNING:  === PLANNER SUGGESTION ===
+Plan:
+GroupAggregate  (cost=8883274415.71..8883274719.76 rows=5 width=17)
+  Output: orders.o_orderpriority, count(*)
+  Group Key: orders.o_orderpriority
+  ->  Sort  (cost=8883274415.71..8883274517.04 rows=40534 width=9)
+        Output: orders.o_orderpriority
+        Sort Key: orders.o_orderpriority
+        ->  Hash Semi Join  (cost=212549.34..8883271313.47 rows=40534 width=9)
+              Output: orders.o_orderpriority
+              Hash Cond: (orders.o_orderkey = lineitem.l_orderkey)
+              ->  Seq Scan on public.orders  (cost=0.00..8883048508.00 rows=144199 width=13)
+                    Output: orders.o_orderpriority, orders.o_orderkey
+                    Filter: ((orders.o_orderdate >= '1994-01-01'::date) AND (ANY (orders.o_custkey = (hashed SubPlan 2).col1)) AND (orders.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))
+                    SubPlan 2
+                      ->  Seq Scan on public.customer c  (cost=0.00..5547.00 rows=67808 width=4)
+                            Output: c.c_custkey
+                            Filter: (c.c_acctbal > '5000'::double precision)
+              ->  Hash  (cost=179731.50..179731.50 rows=2000307 width=4)
+                    Output: lineitem.l_orderkey
+                    ->  Seq Scan on public.lineitem  (cost=0.00..179731.50 rows=2000307 width=4)
+                          Output: lineitem.l_orderkey
+                          Filter: (lineitem.l_commitdate < lineitem.l_receiptdate)
+==========================
+WARNING:  === EXECUTOR EXECUTION ===
+Rows Processed: 5
+Plan & Stats:
+GroupAggregate  (cost=8883274415.71..8883274719.76 rows=5 width=17) (actual time=2820.262..2822.023 rows=5.00 loops=1)
+  Output: orders.o_orderpriority, count(*)
+  Group Key: orders.o_orderpriority
+  Buffers: shared hit=4803 read=129600, temp read=14748 written=14748
+  ->  Sort  (cost=8883274415.71..8883274517.04 rows=40534 width=9) (actual time=2819.809..2820.637 rows=23317.00 loops=1)
+        Output: orders.o_orderpriority
+        Sort Key: orders.o_orderpriority
+        Sort Method: quicksort  Memory: 769kB
+        Buffers: shared hit=4803 read=129600, temp read=14748 written=14748
+        ->  Hash Semi Join  (cost=212549.34..8883271313.47 rows=40534 width=9) (actual time=1943.572..2812.812 rows=23317.00 loops=1)
+              Output: orders.o_orderpriority
+              Hash Cond: (orders.o_orderkey = lineitem.l_orderkey)
+              Buffers: shared hit=4800 read=129600, temp read=14748 written=14748
+              ->  Seq Scan on public.orders  (cost=0.00..8883048508.00 rows=144199 width=13) (actual time=202.119..615.014 rows=25383.00 loops=1)
+                    Output: orders.o_orderpriority, orders.o_orderkey
+                    Filter: ((orders.o_orderdate >= '1994-01-01'::date) AND (ANY (orders.o_custkey = (hashed SubPlan 2).col1)) AND (orders.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))
+                    Rows Removed by Filter: 1474617
+                    Buffers: shared hit=4236 read=25444
+                    SubPlan 2
+                      ->  Seq Scan on public.customer c  (cost=0.00..5547.00 rows=67808 width=4) (actual time=0.299..183.842 rows=67989.00 loops=1)
+                            Output: c.c_custkey
+                            Filter: (c.c_acctbal > '5000'::double precision)
+                            Rows Removed by Filter: 82011
+                            Buffers: shared hit=3672
+              ->  Hash  (cost=179731.50..179731.50 rows=2000307 width=4) (actual time=1736.597..1736.597 rows=3793296.00 loops=1)
+                    Output: lineitem.l_orderkey
+                    Buckets: 262144 (originally 262144)  Batches: 32 (originally 16)  Memory Usage: 6223kB
+                    Buffers: shared hit=564 read=104156, temp written=10750
+                    ->  Seq Scan on public.lineitem  (cost=0.00..179731.50 rows=2000307 width=4) (actual time=0.513..1141.092 rows=3793296.00 loops=1)
+                          Output: lineitem.l_orderkey
+                          Filter: (lineitem.l_commitdate < lineitem.l_receiptdate)
+                          Rows Removed by Filter: 2207919
+                          Buffers: shared hit=564 read=104156
+==========================
+                                                                                                    QUERY PLAN                                                                                                    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ [                                                                                                                                                                                                               +
+   {                                                                                                                                                                                                             +
+     "Plan": {                                                                                                                                                                                                   +
+       "Node Type": "Aggregate",                                                                                                                                                                                 +
+       "Strategy": "Sorted",                                                                                                                                                                                     +
+       "Partial Mode": "Simple",                                                                                                                                                                                 +
+       "Parallel Aware": false,                                                                                                                                                                                  +
+       "Async Capable": false,                                                                                                                                                                                   +
+       "Startup Cost": 8883274415.71,                                                                                                                                                                            +
+       "Total Cost": 8883274719.76,                                                                                                                                                                              +
+       "Plan Rows": 5,                                                                                                                                                                                           +
+       "Plan Width": 17,                                                                                                                                                                                         +
+       "Actual Startup Time": 2820.262,                                                                                                                                                                          +
+       "Actual Total Time": 2822.023,                                                                                                                                                                            +
+       "Actual Rows": 5.00,                                                                                                                                                                                      +
+       "Actual Loops": 1,                                                                                                                                                                                        +
+       "Disabled": false,                                                                                                                                                                                        +
+       "Output": ["orders.o_orderpriority", "count(*)"],                                                                                                                                                         +
+       "Group Key": ["orders.o_orderpriority"],                                                                                                                                                                  +
+       "Shared Hit Blocks": 4803,                                                                                                                                                                                +
+       "Shared Read Blocks": 129600,                                                                                                                                                                             +
+       "Shared Dirtied Blocks": 0,                                                                                                                                                                               +
+       "Shared Written Blocks": 0,                                                                                                                                                                               +
+       "Local Hit Blocks": 0,                                                                                                                                                                                    +
+       "Local Read Blocks": 0,                                                                                                                                                                                   +
+       "Local Dirtied Blocks": 0,                                                                                                                                                                                +
+       "Local Written Blocks": 0,                                                                                                                                                                                +
+       "Temp Read Blocks": 14748,                                                                                                                                                                                +
+       "Temp Written Blocks": 14748,                                                                                                                                                                             +
+       "Plans": [                                                                                                                                                                                                +
+         {                                                                                                                                                                                                       +
+           "Node Type": "Sort",                                                                                                                                                                                  +
+           "Parent Relationship": "Outer",                                                                                                                                                                       +
+           "Parallel Aware": false,                                                                                                                                                                              +
+           "Async Capable": false,                                                                                                                                                                               +
+           "Startup Cost": 8883274415.71,                                                                                                                                                                        +
+           "Total Cost": 8883274517.04,                                                                                                                                                                          +
+           "Plan Rows": 40534,                                                                                                                                                                                   +
+           "Plan Width": 9,                                                                                                                                                                                      +
+           "Actual Startup Time": 2819.809,                                                                                                                                                                      +
+           "Actual Total Time": 2820.637,                                                                                                                                                                        +
+           "Actual Rows": 23317.00,                                                                                                                                                                              +
+           "Actual Loops": 1,                                                                                                                                                                                    +
+           "Disabled": false,                                                                                                                                                                                    +
+           "Output": ["orders.o_orderpriority"],                                                                                                                                                                 +
+           "Sort Key": ["orders.o_orderpriority"],                                                                                                                                                               +
+           "Sort Method": "quicksort",                                                                                                                                                                           +
+           "Sort Space Used": 769,                                                                                                                                                                               +
+           "Sort Space Type": "Memory",                                                                                                                                                                          +
+           "Shared Hit Blocks": 4803,                                                                                                                                                                            +
+           "Shared Read Blocks": 129600,                                                                                                                                                                         +
+           "Shared Dirtied Blocks": 0,                                                                                                                                                                           +
+           "Shared Written Blocks": 0,                                                                                                                                                                           +
+           "Local Hit Blocks": 0,                                                                                                                                                                                +
+           "Local Read Blocks": 0,                                                                                                                                                                               +
+           "Local Dirtied Blocks": 0,                                                                                                                                                                            +
+           "Local Written Blocks": 0,                                                                                                                                                                            +
+           "Temp Read Blocks": 14748,                                                                                                                                                                            +
+           "Temp Written Blocks": 14748,                                                                                                                                                                         +
+           "Plans": [                                                                                                                                                                                            +
+             {                                                                                                                                                                                                   +
+               "Node Type": "Hash Join",                                                                                                                                                                         +
+               "Parent Relationship": "Outer",                                                                                                                                                                   +
+               "Parallel Aware": false,                                                                                                                                                                          +
+               "Async Capable": false,                                                                                                                                                                           +
+               "Join Type": "Semi",                                                                                                                                                                              +
+               "Startup Cost": 212549.34,                                                                                                                                                                        +
+               "Total Cost": 8883271313.47,                                                                                                                                                                      +
+               "Plan Rows": 40534,                                                                                                                                                                               +
+               "Plan Width": 9,                                                                                                                                                                                  +
+               "Actual Startup Time": 1943.572,                                                                                                                                                                  +
+               "Actual Total Time": 2812.812,                                                                                                                                                                    +
+               "Actual Rows": 23317.00,                                                                                                                                                                          +
+               "Actual Loops": 1,                                                                                                                                                                                +
+               "Disabled": false,                                                                                                                                                                                +
+               "Output": ["orders.o_orderpriority"],                                                                                                                                                             +
+               "Inner Unique": false,                                                                                                                                                                            +
+               "Hash Cond": "(orders.o_orderkey = lineitem.l_orderkey)",                                                                                                                                         +
+               "Shared Hit Blocks": 4800,                                                                                                                                                                        +
+               "Shared Read Blocks": 129600,                                                                                                                                                                     +
+               "Shared Dirtied Blocks": 0,                                                                                                                                                                       +
+               "Shared Written Blocks": 0,                                                                                                                                                                       +
+               "Local Hit Blocks": 0,                                                                                                                                                                            +
+               "Local Read Blocks": 0,                                                                                                                                                                           +
+               "Local Dirtied Blocks": 0,                                                                                                                                                                        +
+               "Local Written Blocks": 0,                                                                                                                                                                        +
+               "Temp Read Blocks": 14748,                                                                                                                                                                        +
+               "Temp Written Blocks": 14748,                                                                                                                                                                     +
+               "Plans": [                                                                                                                                                                                        +
+                 {                                                                                                                                                                                               +
+                   "Node Type": "Seq Scan",                                                                                                                                                                      +
+                   "Parent Relationship": "Outer",                                                                                                                                                               +
+                   "Parallel Aware": false,                                                                                                                                                                      +
+                   "Async Capable": false,                                                                                                                                                                       +
+                   "Relation Name": "orders",                                                                                                                                                                    +
+                   "Schema": "public",                                                                                                                                                                           +
+                   "Alias": "orders",                                                                                                                                                                            +
+                   "Startup Cost": 0.00,                                                                                                                                                                         +
+                   "Total Cost": 8883048508.00,                                                                                                                                                                  +
+                   "Plan Rows": 144199,                                                                                                                                                                          +
+                   "Plan Width": 13,                                                                                                                                                                             +
+                   "Actual Startup Time": 202.119,                                                                                                                                                               +
+                   "Actual Total Time": 615.014,                                                                                                                                                                 +
+                   "Actual Rows": 25383.00,                                                                                                                                                                      +
+                   "Actual Loops": 1,                                                                                                                                                                            +
+                   "Disabled": false,                                                                                                                                                                            +
+                   "Output": ["orders.o_orderpriority", "orders.o_orderkey"],                                                                                                                                    +
+                   "Filter": "((orders.o_orderdate >= '1994-01-01'::date) AND (ANY (orders.o_custkey = (hashed SubPlan 2).col1)) AND (orders.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))",+
+                   "Rows Removed by Filter": 1474617,                                                                                                                                                            +
+                   "Shared Hit Blocks": 4236,                                                                                                                                                                    +
+                   "Shared Read Blocks": 25444,                                                                                                                                                                  +
+                   "Shared Dirtied Blocks": 0,                                                                                                                                                                   +
+                   "Shared Written Blocks": 0,                                                                                                                                                                   +
+                   "Local Hit Blocks": 0,                                                                                                                                                                        +
+                   "Local Read Blocks": 0,                                                                                                                                                                       +
+                   "Local Dirtied Blocks": 0,                                                                                                                                                                    +
+                   "Local Written Blocks": 0,                                                                                                                                                                    +
+                   "Temp Read Blocks": 0,                                                                                                                                                                        +
+                   "Temp Written Blocks": 0,                                                                                                                                                                     +
+                   "Plans": [                                                                                                                                                                                    +
+                     {                                                                                                                                                                                           +
+                       "Node Type": "Seq Scan",                                                                                                                                                                  +
+                       "Parent Relationship": "SubPlan",                                                                                                                                                         +
+                       "Subplan Name": "SubPlan 2",                                                                                                                                                              +
+                       "Parallel Aware": false,                                                                                                                                                                  +
+                       "Async Capable": false,                                                                                                                                                                   +
+                       "Relation Name": "customer",                                                                                                                                                              +
+                       "Schema": "public",                                                                                                                                                                       +
+                       "Alias": "c",                                                                                                                                                                             +
+                       "Startup Cost": 0.00,                                                                                                                                                                     +
+                       "Total Cost": 5547.00,                                                                                                                                                                    +
+                       "Plan Rows": 67808,                                                                                                                                                                       +
+                       "Plan Width": 4,                                                                                                                                                                          +
+                       "Actual Startup Time": 0.299,                                                                                                                                                             +
+                       "Actual Total Time": 183.842,                                                                                                                                                             +
+                       "Actual Rows": 67989.00,                                                                                                                                                                  +
+                       "Actual Loops": 1,                                                                                                                                                                        +
+                       "Disabled": false,                                                                                                                                                                        +
+                       "Output": ["c.c_custkey"],                                                                                                                                                                +
+                       "Filter": "(c.c_acctbal > '5000'::double precision)",                                                                                                                                     +
+                       "Rows Removed by Filter": 82011,                                                                                                                                                          +
+                       "Shared Hit Blocks": 3672,                                                                                                                                                                +
+                       "Shared Read Blocks": 0,                                                                                                                                                                  +
+                       "Shared Dirtied Blocks": 0,                                                                                                                                                               +
+                       "Shared Written Blocks": 0,                                                                                                                                                               +
+                       "Local Hit Blocks": 0,                                                                                                                                                                    +
+                       "Local Read Blocks": 0,                                                                                                                                                                   +
+                       "Local Dirtied Blocks": 0,                                                                                                                                                                +
+                       "Local Written Blocks": 0,                                                                                                                                                                +
+                       "Temp Read Blocks": 0,                                                                                                                                                                    +
+                       "Temp Written Blocks": 0                                                                                                                                                                  +
+                     }                                                                                                                                                                                           +
+                   ]                                                                                                                                                                                             +
+                 },                                                                                                                                                                                              +
+                 {                                                                                                                                                                                               +
+                   "Node Type": "Hash",                                                                                                                                                                          +
+                   "Parent Relationship": "Inner",                                                                                                                                                               +
+                   "Parallel Aware": false,                                                                                                                                                                      +
+                   "Async Capable": false,                                                                                                                                                                       +
+                   "Startup Cost": 179731.50,                                                                                                                                                                    +
+                   "Total Cost": 179731.50,                                                                                                                                                                      +
+                   "Plan Rows": 2000307,                                                                                                                                                                         +
+                   "Plan Width": 4,                                                                                                                                                                              +
+                   "Actual Startup Time": 1736.597,                                                                                                                                                              +
+                   "Actual Total Time": 1736.597,                                                                                                                                                                +
+                   "Actual Rows": 3793296.00,                                                                                                                                                                    +
+                   "Actual Loops": 1,                                                                                                                                                                            +
+                   "Disabled": false,                                                                                                                                                                            +
+                   "Output": ["lineitem.l_orderkey"],                                                                                                                                                            +
+                   "Hash Buckets": 262144,                                                                                                                                                                       +
+                   "Original Hash Buckets": 262144,                                                                                                                                                              +
+                   "Hash Batches": 32,                                                                                                                                                                           +
+                   "Original Hash Batches": 16,                                                                                                                                                                  +
+                   "Peak Memory Usage": 6223,                                                                                                                                                                    +
+                   "Shared Hit Blocks": 564,                                                                                                                                                                     +
+                   "Shared Read Blocks": 104156,                                                                                                                                                                 +
+                   "Shared Dirtied Blocks": 0,                                                                                                                                                                   +
+                   "Shared Written Blocks": 0,                                                                                                                                                                   +
+                   "Local Hit Blocks": 0,                                                                                                                                                                        +
+                   "Local Read Blocks": 0,                                                                                                                                                                       +
+                   "Local Dirtied Blocks": 0,                                                                                                                                                                    +
+                   "Local Written Blocks": 0,                                                                                                                                                                    +
+                   "Temp Read Blocks": 0,                                                                                                                                                                        +
+                   "Temp Written Blocks": 10750,                                                                                                                                                                 +
+                   "Plans": [                                                                                                                                                                                    +
+                     {                                                                                                                                                                                           +
+                       "Node Type": "Seq Scan",                                                                                                                                                                  +
+                       "Parent Relationship": "Outer",                                                                                                                                                           +
+                       "Parallel Aware": false,                                                                                                                                                                  +
+                       "Async Capable": false,                                                                                                                                                                   +
+                       "Relation Name": "lineitem",                                                                                                                                                              +
+                       "Schema": "public",                                                                                                                                                                       +
+                       "Alias": "lineitem",                                                                                                                                                                      +
+                       "Startup Cost": 0.00,                                                                                                                                                                     +
+                       "Total Cost": 179731.50,                                                                                                                                                                  +
+                       "Plan Rows": 2000307,                                                                                                                                                                     +
+                       "Plan Width": 4,                                                                                                                                                                          +
+                       "Actual Startup Time": 0.513,                                                                                                                                                             +
+                       "Actual Total Time": 1141.092,                                                                                                                                                            +
+                       "Actual Rows": 3793296.00,                                                                                                                                                                +
+                       "Actual Loops": 1,                                                                                                                                                                        +
+                       "Disabled": false,                                                                                                                                                                        +
+                       "Output": ["lineitem.l_orderkey"],                                                                                                                                                        +
+                       "Filter": "(lineitem.l_commitdate < lineitem.l_receiptdate)",                                                                                                                             +
+                       "Rows Removed by Filter": 2207919,                                                                                                                                                        +
+                       "Shared Hit Blocks": 564,                                                                                                                                                                 +
+                       "Shared Read Blocks": 104156,                                                                                                                                                             +
+                       "Shared Dirtied Blocks": 0,                                                                                                                                                               +
+                       "Shared Written Blocks": 0,                                                                                                                                                               +
+                       "Local Hit Blocks": 0,                                                                                                                                                                    +
+                       "Local Read Blocks": 0,                                                                                                                                                                   +
+                       "Local Dirtied Blocks": 0,                                                                                                                                                                +
+                       "Local Written Blocks": 0,                                                                                                                                                                +
+                       "Temp Read Blocks": 0,                                                                                                                                                                    +
+                       "Temp Written Blocks": 0                                                                                                                                                                  +
+                     }                                                                                                                                                                                           +
+                   ]                                                                                                                                                                                             +
+                 }                                                                                                                                                                                               +
+               ]                                                                                                                                                                                                 +
+             }                                                                                                                                                                                                   +
+           ]                                                                                                                                                                                                     +
+         }                                                                                                                                                                                                       +
+       ]                                                                                                                                                                                                         +
+     },                                                                                                                                                                                                          +
+     "Planning": {                                                                                                                                                                                               +
+       "Shared Hit Blocks": 218,                                                                                                                                                                                 +
+       "Shared Read Blocks": 1,                                                                                                                                                                                  +
+       "Shared Dirtied Blocks": 0,                                                                                                                                                                               +
+       "Shared Written Blocks": 0,                                                                                                                                                                               +
+       "Local Hit Blocks": 0,                                                                                                                                                                                    +
+       "Local Read Blocks": 0,                                                                                                                                                                                   +
+       "Local Dirtied Blocks": 0,                                                                                                                                                                                +
+       "Local Written Blocks": 0,                                                                                                                                                                                +
+       "Temp Read Blocks": 0,                                                                                                                                                                                    +
+       "Temp Written Blocks": 0                                                                                                                                                                                  +
+     },                                                                                                                                                                                                          +
+     "Planning Time": 5.117,                                                                                                                                                                                     +
+     "Triggers": [                                                                                                                                                                                               +
+     ],                                                                                                                                                                                                          +
+     "Execution Time": 2826.501                                                                                                                                                                                  +
+   }                                                                                                                                                                                                             +
+ ]
+(1 row)
+
+tpch=> 

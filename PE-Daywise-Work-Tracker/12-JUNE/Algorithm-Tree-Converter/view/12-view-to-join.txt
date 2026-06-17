@@ -1,0 +1,109 @@
+
+
+WARNING:  ===== Converted Join Expression =====:
+DETAIL:     {JOINEXPR 
+   :jointype 4 
+   :isNatural false 
+   :larg <> 
+   :rarg 
+      {RANGETBLREF 
+      :rtindex 2
+      }
+   :usingClause <> 
+   :join_using_alias <> 
+   :quals 
+      {BOOLEXPR 
+      :boolop and 
+      :args (
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 1 
+            :location -1
+            }
+            {VAR 
+            :varno 1 
+            :varattno 2 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 2 
+            :location -1
+            }
+         )
+         :location -1
+         }
+         {OPEXPR 
+         :opno 674 
+         :opfuncid 297 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 6 
+            :vartype 701 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 6 
+            :location -1
+            }
+            {FUNCEXPR 
+            :funcid 316 
+            :funcresulttype 701 
+            :funcretset false 
+            :funcvariadic false 
+            :funcformat 2 
+            :funccollid 0 
+            :inputcollid 0 
+            :args (
+               {CONST 
+               :consttype 23 
+               :consttypmod -1 
+               :constcollid 0 
+               :constlen 4 
+               :constbyval true 
+               :constisnull false 
+               :location -1 
+               :constvalue 4 [ -120 19 0 0 0 0 0 0 ]
+               }
+            )
+            :location -1
+            }
+         )
+         :location -1
+         }
+      )
+      :location -1
+      }
+   :alias <> 
+   :rtindex 0
+   }
+
+WARNING:  pull_up_subqueries - File: src/backend/optimizer/prep/prepjointree.c, Relation: N/A, Explanation: Initiating pull-up of subqueries in jointree
+WARNING:  is_simple_subquery - File: src/backend/optimizer/prep/prepjointree.c, Relation: orders_secure, security_barrier: false, Explanation: Subquery accepted for pull-up

@@ -1,0 +1,502 @@
+Last login: Mon Jun 15 10:54:36 on ttys002
+adityadave@Adityas-MacBook-Air-3 ~ % psql -d tpch
+psql (18.4)
+Type "help" for help.
+
+tpch=# SET ROLE alice;
+SET
+tpch=> EXPLAIN (
+  ANALYZE true,
+  VERBOSE true,
+  COSTS true,
+  BUFFERS false,
+  TIMING false,
+  FORMAT JSON
+)
+select
+    o_orderpriority,
+    count(*) as order_count
+from
+    orders_secure
+where
+    o_orderdate >= date '1994-01-01'
+    and o_orderdate < date '1994-01-01' + interval '3' month
+    and exists (
+        select
+            *
+        from
+            lineitem
+        where
+            l_orderkey = o_orderkey
+            and l_commitdate < l_receiptdate
+    )
+group by
+    o_orderpriority
+order by
+    o_orderpriority;
+WARNING:  pull_up_sublinks - File: src/backend/optimizer/prep/prepjointree.c, Relation: N/A, Explanation: Initiating pull-up of sublinks (ANY/EXISTS)
+WARNING:  pull_up_sublinks - File: src/backend/optimizer/prep/prepjointree.c, Relation: N/A, Explanation: Initiating pull-up of sublinks (ANY/EXISTS)
+WARNING:  === PLANNER SUGGESTION ===
+Plan:
+Finalize GroupAggregate  (cost=194594.52..194617.59 rows=5 width=17)
+  Output: o.o_orderpriority, count(*)
+  Group Key: o.o_orderpriority
+  ->  Gather Merge  (cost=194594.52..194617.48 rows=12 width=17)
+        Output: o.o_orderpriority, (PARTIAL count(*))
+        Workers Planned: 2
+        ->  Partial GroupAggregate  (cost=193594.49..193616.07 rows=5 width=17)
+              Output: o.o_orderpriority, PARTIAL count(*)
+              Group Key: o.o_orderpriority
+              ->  Sort  (cost=193594.49..193601.67 rows=2870 width=9)
+                    Output: o.o_orderpriority
+                    Sort Key: o.o_orderpriority
+                    ->  Parallel Hash Semi Join  (cost=154455.47..193429.66 rows=2870 width=9)
+                          Output: o.o_orderpriority
+                          Hash Cond: (o.o_orderkey = lineitem.l_orderkey)
+                          ->  Parallel Hash Semi Join  (cost=4806.41..40362.28 rows=10210 width=13)
+                                Output: o.o_orderpriority, o.o_orderkey
+                                Hash Cond: (o.o_custkey = c.c_custkey)
+                                ->  Parallel Seq Scan on public.orders o  (cost=0.00..35383.00 rows=22585 width=17)
+                                      Output: o.o_orderkey, o.o_custkey, o.o_orderstatus, o.o_totalprice, o.o_orderdate, o.o_orderpriority, o.o_clerk, o.o_shippriority, o.o_comment
+                                      Filter: ((o.o_orderdate >= '1994-01-01'::date) AND (o.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))
+                                ->  Parallel Hash  (cost=4453.25..4453.25 rows=28253 width=4)
+                                      Output: c.c_custkey
+                                      ->  Parallel Seq Scan on public.customer c  (cost=0.00..4453.25 rows=28253 width=4)
+                                            Output: c.c_custkey
+                                            Filter: (c.c_acctbal > '5000'::double precision)
+                          ->  Parallel Hash  (cost=135974.79..135974.79 rows=833461 width=4)
+                                Output: lineitem.l_orderkey
+                                ->  Parallel Seq Scan on public.lineitem  (cost=0.00..135974.79 rows=833461 width=4)
+                                      Output: lineitem.l_orderkey
+                                      Filter: (lineitem.l_commitdate < lineitem.l_receiptdate)
+==========================
+WARNING:  === EXECUTOR EXECUTION ===
+Rows Processed: 5
+Plan & Stats:
+Finalize GroupAggregate  (cost=194594.52..194617.59 rows=5 width=17) (actual time=1261.130..1285.725 rows=5.00 loops=1)
+  Output: o.o_orderpriority, count(*)
+  Group Key: o.o_orderpriority
+  Buffers: shared hit=5004 read=129412, temp read=20143 written=20540
+  ->  Gather Merge  (cost=194594.52..194617.48 rows=12 width=17) (actual time=1260.981..1285.714 rows=15.00 loops=1)
+        Output: o.o_orderpriority, (PARTIAL count(*))
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=5004 read=129412, temp read=20143 written=20540
+        ->  Partial GroupAggregate  (cost=193594.49..193616.07 rows=5 width=17) (actual time=1254.288..1254.904 rows=5.00 loops=3)
+              Output: o.o_orderpriority, PARTIAL count(*)
+              Group Key: o.o_orderpriority
+              Buffers: shared hit=5004 read=129412, temp read=20143 written=20540
+              Worker 0:  actual time=1251.562..1252.208 rows=5.00 loops=1
+                Buffers: shared hit=1676 read=43422, temp read=6746 written=6896
+              Worker 1:  actual time=1251.802..1252.397 rows=5.00 loops=1
+                Buffers: shared hit=1674 read=43446, temp read=6715 written=6876
+              ->  Sort  (cost=193594.49..193601.67 rows=2870 width=9) (actual time=1254.123..1254.407 rows=7772.33 loops=3)
+                    Output: o.o_orderpriority
+                    Sort Key: o.o_orderpriority
+                    Sort Method: quicksort  Memory: 193kB
+                    Buffers: shared hit=5004 read=129412, temp read=20143 written=20540
+                    Worker 0:  actual time=1251.392..1251.696 rows=8314.00 loops=1
+                      Sort Method: quicksort  Memory: 385kB
+                      Buffers: shared hit=1676 read=43422, temp read=6746 written=6896
+                    Worker 1:  actual time=1251.646..1251.922 rows=7707.00 loops=1
+                      Sort Method: quicksort  Memory: 193kB
+                      Buffers: shared hit=1674 read=43446, temp read=6715 written=6876
+                    ->  Parallel Hash Semi Join  (cost=154455.47..193429.66 rows=2870 width=9) (actual time=1122.661..1251.924 rows=7772.33 loops=3)
+                          Output: o.o_orderpriority
+                          Hash Cond: (o.o_orderkey = lineitem.l_orderkey)
+                          Buffers: shared hit=4988 read=129412, temp read=20143 written=20540
+                          Worker 0:  actual time=1111.232..1249.140 rows=8314.00 loops=1
+                            Buffers: shared hit=1668 read=43422, temp read=6746 written=6896
+                          Worker 1:  actual time=1124.688..1249.335 rows=7707.00 loops=1
+                            Buffers: shared hit=1666 read=43446, temp read=6715 written=6876
+                          ->  Parallel Hash Semi Join  (cost=4806.41..40362.28 rows=10210 width=13) (actual time=14.845..154.297 rows=8461.00 loops=3)
+                                Output: o.o_orderpriority, o.o_orderkey
+                                Hash Cond: (o.o_custkey = c.c_custkey)
+                                Buffers: shared hit=4330 read=25350
+                                Worker 0:  actual time=15.138..154.291 rows=8421.00 loops=1
+                                  Buffers: shared hit=1456 read=8432
+                                Worker 1:  actual time=15.146..154.257 rows=8530.00 loops=1
+                                  Buffers: shared hit=1440 read=8454
+                                ->  Parallel Seq Scan on public.orders o  (cost=0.00..35383.00 rows=22585 width=17) (actual time=0.712..133.530 rows=18783.00 loops=3)
+                                      Output: o.o_orderkey, o.o_custkey, o.o_orderstatus, o.o_totalprice, o.o_orderdate, o.o_orderpriority, o.o_clerk, o.o_shippriority, o.o_comment
+                                      Filter: ((o.o_orderdate >= '1994-01-01'::date) AND (o.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))
+                                      Rows Removed by Filter: 481217
+                                      Buffers: shared hit=658 read=25350
+                                      Worker 0:  actual time=0.821..133.591 rows=18754.00 loops=1
+                                        Buffers: shared hit=232 read=8432
+                                      Worker 1:  actual time=1.099..133.562 rows=18665.00 loops=1
+                                        Buffers: shared hit=215 read=8454
+                                ->  Parallel Hash  (cost=4453.25..4453.25 rows=28253 width=4) (actual time=13.930..13.930 rows=22663.00 loops=3)
+                                      Output: c.c_custkey
+                                      Buckets: 131072  Batches: 1  Memory Usage: 3712kB
+                                      Buffers: shared hit=3672
+                                      Worker 0:  actual time=13.809..13.809 rows=22555.00 loops=1
+                                        Buffers: shared hit=1224
+                                      Worker 1:  actual time=14.006..14.006 rows=22813.00 loops=1
+                                        Buffers: shared hit=1225
+                                      ->  Parallel Seq Scan on public.customer c  (cost=0.00..4453.25 rows=28253 width=4) (actual time=0.020..10.806 rows=22663.00 loops=3)
+                                            Output: c.c_custkey
+                                            Filter: (c.c_acctbal > '5000'::double precision)
+                                            Rows Removed by Filter: 27337
+                                            Buffers: shared hit=3672
+                                            Worker 0:  actual time=0.016..10.859 rows=22555.00 loops=1
+                                              Buffers: shared hit=1224
+                                            Worker 1:  actual time=0.025..10.763 rows=22813.00 loops=1
+                                              Buffers: shared hit=1225
+                          ->  Parallel Hash  (cost=135974.79..135974.79 rows=833461 width=4) (actual time=949.561..949.561 rows=1264432.00 loops=3)
+                                Output: lineitem.l_orderkey
+                                Buckets: 262144 (originally 262144)  Batches: 32 (originally 16)  Memory Usage: 6752kB
+                                Buffers: shared hit=658 read=104062, temp read=9139 written=20156
+                                Worker 0:  actual time=947.094..947.094 rows=1276044.00 loops=1
+                                  Buffers: shared hit=212 read=34990, temp read=3069 written=6768
+                                Worker 1:  actual time=947.083..947.084 rows=1275470.00 loops=1
+                                  Buffers: shared hit=226 read=34992, temp read=3039 written=6748
+                                ->  Parallel Seq Scan on public.lineitem  (cost=0.00..135974.79 rows=833461 width=4) (actual time=1.320..541.725 rows=1264432.00 loops=3)
+                                      Output: lineitem.l_orderkey
+                                      Filter: (lineitem.l_commitdate < lineitem.l_receiptdate)
+                                      Rows Removed by Filter: 735973
+                                      Buffers: shared hit=658 read=104062
+                                      Worker 0:  actual time=1.663..543.627 rows=1276044.00 loops=1
+                                        Buffers: shared hit=212 read=34990
+                                      Worker 1:  actual time=1.492..550.191 rows=1275470.00 loops=1
+                                        Buffers: shared hit=226 read=34992
+==========================
+                                                                                             QUERY PLAN                                                                                              
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ [                                                                                                                                                                                                  +
+   {                                                                                                                                                                                                +
+     "Plan": {                                                                                                                                                                                      +
+       "Node Type": "Aggregate",                                                                                                                                                                    +
+       "Strategy": "Sorted",                                                                                                                                                                        +
+       "Partial Mode": "Finalize",                                                                                                                                                                  +
+       "Parallel Aware": false,                                                                                                                                                                     +
+       "Async Capable": false,                                                                                                                                                                      +
+       "Startup Cost": 194594.52,                                                                                                                                                                   +
+       "Total Cost": 194617.59,                                                                                                                                                                     +
+       "Plan Rows": 5,                                                                                                                                                                              +
+       "Plan Width": 17,                                                                                                                                                                            +
+       "Actual Rows": 5.00,                                                                                                                                                                         +
+       "Actual Loops": 1,                                                                                                                                                                           +
+       "Disabled": false,                                                                                                                                                                           +
+       "Output": ["o.o_orderpriority", "count(*)"],                                                                                                                                                 +
+       "Group Key": ["o.o_orderpriority"],                                                                                                                                                          +
+       "Plans": [                                                                                                                                                                                   +
+         {                                                                                                                                                                                          +
+           "Node Type": "Gather Merge",                                                                                                                                                             +
+           "Parent Relationship": "Outer",                                                                                                                                                          +
+           "Parallel Aware": false,                                                                                                                                                                 +
+           "Async Capable": false,                                                                                                                                                                  +
+           "Startup Cost": 194594.52,                                                                                                                                                               +
+           "Total Cost": 194617.48,                                                                                                                                                                 +
+           "Plan Rows": 12,                                                                                                                                                                         +
+           "Plan Width": 17,                                                                                                                                                                        +
+           "Actual Rows": 15.00,                                                                                                                                                                    +
+           "Actual Loops": 1,                                                                                                                                                                       +
+           "Disabled": false,                                                                                                                                                                       +
+           "Output": ["o.o_orderpriority", "(PARTIAL count(*))"],                                                                                                                                   +
+           "Workers Planned": 2,                                                                                                                                                                    +
+           "Workers Launched": 2,                                                                                                                                                                   +
+           "Plans": [                                                                                                                                                                               +
+             {                                                                                                                                                                                      +
+               "Node Type": "Aggregate",                                                                                                                                                            +
+               "Strategy": "Sorted",                                                                                                                                                                +
+               "Partial Mode": "Partial",                                                                                                                                                           +
+               "Parent Relationship": "Outer",                                                                                                                                                      +
+               "Parallel Aware": false,                                                                                                                                                             +
+               "Async Capable": false,                                                                                                                                                              +
+               "Startup Cost": 193594.49,                                                                                                                                                           +
+               "Total Cost": 193616.07,                                                                                                                                                             +
+               "Plan Rows": 5,                                                                                                                                                                      +
+               "Plan Width": 17,                                                                                                                                                                    +
+               "Actual Rows": 5.00,                                                                                                                                                                 +
+               "Actual Loops": 3,                                                                                                                                                                   +
+               "Disabled": false,                                                                                                                                                                   +
+               "Output": ["o.o_orderpriority", "PARTIAL count(*)"],                                                                                                                                 +
+               "Group Key": ["o.o_orderpriority"],                                                                                                                                                  +
+               "Workers": [                                                                                                                                                                         +
+                 {                                                                                                                                                                                  +
+                   "Worker Number": 0,                                                                                                                                                              +
+                   "Actual Rows": 5.00,                                                                                                                                                             +
+                   "Actual Loops": 1                                                                                                                                                                +
+                 },                                                                                                                                                                                 +
+                 {                                                                                                                                                                                  +
+                   "Worker Number": 1,                                                                                                                                                              +
+                   "Actual Rows": 5.00,                                                                                                                                                             +
+                   "Actual Loops": 1                                                                                                                                                                +
+                 }                                                                                                                                                                                  +
+               ],                                                                                                                                                                                   +
+               "Plans": [                                                                                                                                                                           +
+                 {                                                                                                                                                                                  +
+                   "Node Type": "Sort",                                                                                                                                                             +
+                   "Parent Relationship": "Outer",                                                                                                                                                  +
+                   "Parallel Aware": false,                                                                                                                                                         +
+                   "Async Capable": false,                                                                                                                                                          +
+                   "Startup Cost": 193594.49,                                                                                                                                                       +
+                   "Total Cost": 193601.67,                                                                                                                                                         +
+                   "Plan Rows": 2870,                                                                                                                                                               +
+                   "Plan Width": 9,                                                                                                                                                                 +
+                   "Actual Rows": 7772.33,                                                                                                                                                          +
+                   "Actual Loops": 3,                                                                                                                                                               +
+                   "Disabled": false,                                                                                                                                                               +
+                   "Output": ["o.o_orderpriority"],                                                                                                                                                 +
+                   "Sort Key": ["o.o_orderpriority"],                                                                                                                                               +
+                   "Sort Method": "quicksort",                                                                                                                                                      +
+                   "Sort Space Used": 193,                                                                                                                                                          +
+                   "Sort Space Type": "Memory",                                                                                                                                                     +
+                   "Workers": [                                                                                                                                                                     +
+                     {                                                                                                                                                                              +
+                       "Worker Number": 0,                                                                                                                                                          +
+                       "Actual Rows": 8314.00,                                                                                                                                                      +
+                       "Actual Loops": 1,                                                                                                                                                           +
+                       "Sort Method": "quicksort",                                                                                                                                                  +
+                       "Sort Space Used": 385,                                                                                                                                                      +
+                       "Sort Space Type": "Memory"                                                                                                                                                  +
+                     },                                                                                                                                                                             +
+                     {                                                                                                                                                                              +
+                       "Worker Number": 1,                                                                                                                                                          +
+                       "Actual Rows": 7707.00,                                                                                                                                                      +
+                       "Actual Loops": 1,                                                                                                                                                           +
+                       "Sort Method": "quicksort",                                                                                                                                                  +
+                       "Sort Space Used": 193,                                                                                                                                                      +
+                       "Sort Space Type": "Memory"                                                                                                                                                  +
+                     }                                                                                                                                                                              +
+                   ],                                                                                                                                                                               +
+                   "Plans": [                                                                                                                                                                       +
+                     {                                                                                                                                                                              +
+                       "Node Type": "Hash Join",                                                                                                                                                    +
+                       "Parent Relationship": "Outer",                                                                                                                                              +
+                       "Parallel Aware": true,                                                                                                                                                      +
+                       "Async Capable": false,                                                                                                                                                      +
+                       "Join Type": "Semi",                                                                                                                                                         +
+                       "Startup Cost": 154455.47,                                                                                                                                                   +
+                       "Total Cost": 193429.66,                                                                                                                                                     +
+                       "Plan Rows": 2870,                                                                                                                                                           +
+                       "Plan Width": 9,                                                                                                                                                             +
+                       "Actual Rows": 7772.33,                                                                                                                                                      +
+                       "Actual Loops": 3,                                                                                                                                                           +
+                       "Disabled": false,                                                                                                                                                           +
+                       "Output": ["o.o_orderpriority"],                                                                                                                                             +
+                       "Inner Unique": false,                                                                                                                                                       +
+                       "Hash Cond": "(o.o_orderkey = lineitem.l_orderkey)",                                                                                                                         +
+                       "Workers": [                                                                                                                                                                 +
+                         {                                                                                                                                                                          +
+                           "Worker Number": 0,                                                                                                                                                      +
+                           "Actual Rows": 8314.00,                                                                                                                                                  +
+                           "Actual Loops": 1                                                                                                                                                        +
+                         },                                                                                                                                                                         +
+                         {                                                                                                                                                                          +
+                           "Worker Number": 1,                                                                                                                                                      +
+                           "Actual Rows": 7707.00,                                                                                                                                                  +
+                           "Actual Loops": 1                                                                                                                                                        +
+                         }                                                                                                                                                                          +
+                       ],                                                                                                                                                                           +
+                       "Plans": [                                                                                                                                                                   +
+                         {                                                                                                                                                                          +
+                           "Node Type": "Hash Join",                                                                                                                                                +
+                           "Parent Relationship": "Outer",                                                                                                                                          +
+                           "Parallel Aware": true,                                                                                                                                                  +
+                           "Async Capable": false,                                                                                                                                                  +
+                           "Join Type": "Semi",                                                                                                                                                     +
+                           "Startup Cost": 4806.41,                                                                                                                                                 +
+                           "Total Cost": 40362.28,                                                                                                                                                  +
+                           "Plan Rows": 10210,                                                                                                                                                      +
+                           "Plan Width": 13,                                                                                                                                                        +
+                           "Actual Rows": 8461.00,                                                                                                                                                  +
+                           "Actual Loops": 3,                                                                                                                                                       +
+                           "Disabled": false,                                                                                                                                                       +
+                           "Output": ["o.o_orderpriority", "o.o_orderkey"],                                                                                                                         +
+                           "Inner Unique": false,                                                                                                                                                   +
+                           "Hash Cond": "(o.o_custkey = c.c_custkey)",                                                                                                                              +
+                           "Workers": [                                                                                                                                                             +
+                             {                                                                                                                                                                      +
+                               "Worker Number": 0,                                                                                                                                                  +
+                               "Actual Rows": 8421.00,                                                                                                                                              +
+                               "Actual Loops": 1                                                                                                                                                    +
+                             },                                                                                                                                                                     +
+                             {                                                                                                                                                                      +
+                               "Worker Number": 1,                                                                                                                                                  +
+                               "Actual Rows": 8530.00,                                                                                                                                              +
+                               "Actual Loops": 1                                                                                                                                                    +
+                             }                                                                                                                                                                      +
+                           ],                                                                                                                                                                       +
+                           "Plans": [                                                                                                                                                               +
+                             {                                                                                                                                                                      +
+                               "Node Type": "Seq Scan",                                                                                                                                             +
+                               "Parent Relationship": "Outer",                                                                                                                                      +
+                               "Parallel Aware": true,                                                                                                                                              +
+                               "Async Capable": false,                                                                                                                                              +
+                               "Relation Name": "orders",                                                                                                                                           +
+                               "Schema": "public",                                                                                                                                                  +
+                               "Alias": "o",                                                                                                                                                        +
+                               "Startup Cost": 0.00,                                                                                                                                                +
+                               "Total Cost": 35383.00,                                                                                                                                              +
+                               "Plan Rows": 22585,                                                                                                                                                  +
+                               "Plan Width": 17,                                                                                                                                                    +
+                               "Actual Rows": 18783.00,                                                                                                                                             +
+                               "Actual Loops": 3,                                                                                                                                                   +
+                               "Disabled": false,                                                                                                                                                   +
+                               "Output": ["o.o_orderkey", "o.o_custkey", "o.o_orderstatus", "o.o_totalprice", "o.o_orderdate", "o.o_orderpriority", "o.o_clerk", "o.o_shippriority", "o.o_comment"],+
+                               "Filter": "((o.o_orderdate >= '1994-01-01'::date) AND (o.o_orderdate < '1994-04-01 00:00:00'::timestamp without time zone))",                                        +
+                               "Rows Removed by Filter": 481217,                                                                                                                                    +
+                               "Workers": [                                                                                                                                                         +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 0,                                                                                                                                              +
+                                   "Actual Rows": 18754.00,                                                                                                                                         +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 },                                                                                                                                                                 +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 1,                                                                                                                                              +
+                                   "Actual Rows": 18665.00,                                                                                                                                         +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 }                                                                                                                                                                  +
+                               ]                                                                                                                                                                    +
+                             },                                                                                                                                                                     +
+                             {                                                                                                                                                                      +
+                               "Node Type": "Hash",                                                                                                                                                 +
+                               "Parent Relationship": "Inner",                                                                                                                                      +
+                               "Parallel Aware": true,                                                                                                                                              +
+                               "Async Capable": false,                                                                                                                                              +
+                               "Startup Cost": 4453.25,                                                                                                                                             +
+                               "Total Cost": 4453.25,                                                                                                                                               +
+                               "Plan Rows": 28253,                                                                                                                                                  +
+                               "Plan Width": 4,                                                                                                                                                     +
+                               "Actual Rows": 22663.00,                                                                                                                                             +
+                               "Actual Loops": 3,                                                                                                                                                   +
+                               "Disabled": false,                                                                                                                                                   +
+                               "Output": ["c.c_custkey"],                                                                                                                                           +
+                               "Hash Buckets": 131072,                                                                                                                                              +
+                               "Original Hash Buckets": 131072,                                                                                                                                     +
+                               "Hash Batches": 1,                                                                                                                                                   +
+                               "Original Hash Batches": 1,                                                                                                                                          +
+                               "Peak Memory Usage": 3712,                                                                                                                                           +
+                               "Workers": [                                                                                                                                                         +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 0,                                                                                                                                              +
+                                   "Actual Rows": 22555.00,                                                                                                                                         +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 },                                                                                                                                                                 +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 1,                                                                                                                                              +
+                                   "Actual Rows": 22813.00,                                                                                                                                         +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 }                                                                                                                                                                  +
+                               ],                                                                                                                                                                   +
+                               "Plans": [                                                                                                                                                           +
+                                 {                                                                                                                                                                  +
+                                   "Node Type": "Seq Scan",                                                                                                                                         +
+                                   "Parent Relationship": "Outer",                                                                                                                                  +
+                                   "Parallel Aware": true,                                                                                                                                          +
+                                   "Async Capable": false,                                                                                                                                          +
+                                   "Relation Name": "customer",                                                                                                                                     +
+                                   "Schema": "public",                                                                                                                                              +
+                                   "Alias": "c",                                                                                                                                                    +
+                                   "Startup Cost": 0.00,                                                                                                                                            +
+                                   "Total Cost": 4453.25,                                                                                                                                           +
+                                   "Plan Rows": 28253,                                                                                                                                              +
+                                   "Plan Width": 4,                                                                                                                                                 +
+                                   "Actual Rows": 22663.00,                                                                                                                                         +
+                                   "Actual Loops": 3,                                                                                                                                               +
+                                   "Disabled": false,                                                                                                                                               +
+                                   "Output": ["c.c_custkey"],                                                                                                                                       +
+                                   "Filter": "(c.c_acctbal > '5000'::double precision)",                                                                                                            +
+                                   "Rows Removed by Filter": 27337,                                                                                                                                 +
+                                   "Workers": [                                                                                                                                                     +
+                                     {                                                                                                                                                              +
+                                       "Worker Number": 0,                                                                                                                                          +
+                                       "Actual Rows": 22555.00,                                                                                                                                     +
+                                       "Actual Loops": 1                                                                                                                                            +
+                                     },                                                                                                                                                             +
+                                     {                                                                                                                                                              +
+                                       "Worker Number": 1,                                                                                                                                          +
+                                       "Actual Rows": 22813.00,                                                                                                                                     +
+                                       "Actual Loops": 1                                                                                                                                            +
+                                     }                                                                                                                                                              +
+                                   ]                                                                                                                                                                +
+                                 }                                                                                                                                                                  +
+                               ]                                                                                                                                                                    +
+                             }                                                                                                                                                                      +
+                           ]                                                                                                                                                                        +
+                         },                                                                                                                                                                         +
+                         {                                                                                                                                                                          +
+                           "Node Type": "Hash",                                                                                                                                                     +
+                           "Parent Relationship": "Inner",                                                                                                                                          +
+                           "Parallel Aware": true,                                                                                                                                                  +
+                           "Async Capable": false,                                                                                                                                                  +
+                           "Startup Cost": 135974.79,                                                                                                                                               +
+                           "Total Cost": 135974.79,                                                                                                                                                 +
+                           "Plan Rows": 833461,                                                                                                                                                     +
+                           "Plan Width": 4,                                                                                                                                                         +
+                           "Actual Rows": 1264432.00,                                                                                                                                               +
+                           "Actual Loops": 3,                                                                                                                                                       +
+                           "Disabled": false,                                                                                                                                                       +
+                           "Output": ["lineitem.l_orderkey"],                                                                                                                                       +
+                           "Hash Buckets": 262144,                                                                                                                                                  +
+                           "Original Hash Buckets": 262144,                                                                                                                                         +
+                           "Hash Batches": 32,                                                                                                                                                      +
+                           "Original Hash Batches": 16,                                                                                                                                             +
+                           "Peak Memory Usage": 6752,                                                                                                                                               +
+                           "Workers": [                                                                                                                                                             +
+                             {                                                                                                                                                                      +
+                               "Worker Number": 0,                                                                                                                                                  +
+                               "Actual Rows": 1276044.00,                                                                                                                                           +
+                               "Actual Loops": 1                                                                                                                                                    +
+                             },                                                                                                                                                                     +
+                             {                                                                                                                                                                      +
+                               "Worker Number": 1,                                                                                                                                                  +
+                               "Actual Rows": 1275470.00,                                                                                                                                           +
+                               "Actual Loops": 1                                                                                                                                                    +
+                             }                                                                                                                                                                      +
+                           ],                                                                                                                                                                       +
+                           "Plans": [                                                                                                                                                               +
+                             {                                                                                                                                                                      +
+                               "Node Type": "Seq Scan",                                                                                                                                             +
+                               "Parent Relationship": "Outer",                                                                                                                                      +
+                               "Parallel Aware": true,                                                                                                                                              +
+                               "Async Capable": false,                                                                                                                                              +
+                               "Relation Name": "lineitem",                                                                                                                                         +
+                               "Schema": "public",                                                                                                                                                  +
+                               "Alias": "lineitem",                                                                                                                                                 +
+                               "Startup Cost": 0.00,                                                                                                                                                +
+                               "Total Cost": 135974.79,                                                                                                                                             +
+                               "Plan Rows": 833461,                                                                                                                                                 +
+                               "Plan Width": 4,                                                                                                                                                     +
+                               "Actual Rows": 1264432.00,                                                                                                                                           +
+                               "Actual Loops": 3,                                                                                                                                                   +
+                               "Disabled": false,                                                                                                                                                   +
+                               "Output": ["lineitem.l_orderkey"],                                                                                                                                   +
+                               "Filter": "(lineitem.l_commitdate < lineitem.l_receiptdate)",                                                                                                        +
+                               "Rows Removed by Filter": 735973,                                                                                                                                    +
+                               "Workers": [                                                                                                                                                         +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 0,                                                                                                                                              +
+                                   "Actual Rows": 1276044.00,                                                                                                                                       +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 },                                                                                                                                                                 +
+                                 {                                                                                                                                                                  +
+                                   "Worker Number": 1,                                                                                                                                              +
+                                   "Actual Rows": 1275470.00,                                                                                                                                       +
+                                   "Actual Loops": 1                                                                                                                                                +
+                                 }                                                                                                                                                                  +
+                               ]                                                                                                                                                                    +
+                             }                                                                                                                                                                      +
+                           ]                                                                                                                                                                        +
+                         }                                                                                                                                                                          +
+                       ]                                                                                                                                                                            +
+                     }                                                                                                                                                                              +
+                   ]                                                                                                                                                                                +
+                 }                                                                                                                                                                                  +
+               ]                                                                                                                                                                                    +
+             }                                                                                                                                                                                      +
+           ]                                                                                                                                                                                        +
+         }                                                                                                                                                                                          +
+       ]                                                                                                                                                                                            +
+     },                                                                                                                                                                                             +
+     "Planning Time": 5.151,                                                                                                                                                                        +
+     "Triggers": [                                                                                                                                                                                  +
+     ],                                                                                                                                                                                             +
+     "Execution Time": 1288.676                                                                                                                                                                     +
+   }                                                                                                                                                                                                +
+ ]
+(1 row)
+
+tpch=> 

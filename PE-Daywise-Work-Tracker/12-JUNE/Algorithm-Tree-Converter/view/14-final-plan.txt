@@ -1,0 +1,1094 @@
+
+WARNING:  ===== FINAL PLAN =====:
+DETAIL:     {AGG 
+   :plan.disabled_nodes 0 
+   :plan.startup_cost 194594.51589866364 
+   :plan.total_cost 194617.5859964136 
+   :plan.plan_rows 5 
+   :plan.plan_width 17 
+   :plan.parallel_aware false 
+   :plan.parallel_safe false 
+   :plan.async_capable false 
+   :plan.plan_node_id 0 
+   :plan.targetlist (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno -2 
+         :varattno 1 
+         :vartype 25 
+         :vartypmod -1 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 0 
+         :varattnosyn 0 
+         :location -1
+         }
+      :resno 1 
+      :resname o_orderpriority 
+      :ressortgroupref 1 
+      :resorigtbl 16924 
+      :resorigcol 6 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2803 
+         :aggtype 20 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 20 
+         :aggargtypes <> 
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno -2 
+               :varattno 2 
+               :vartype 20 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 0 
+               :varattnosyn 0 
+               :location -1
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar true 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 9 
+         :aggno 0 
+         :aggtransno 0 
+         :location 68
+         }
+      :resno 2 
+      :resname order_count 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :plan.qual <> 
+   :plan.lefttree 
+      {GATHERMERGE 
+      :plan.disabled_nodes 0 
+      :plan.startup_cost 194594.51589866364 
+      :plan.total_cost 194617.47599641362 
+      :plan.plan_rows 12 
+      :plan.plan_width 17 
+      :plan.parallel_aware false 
+      :plan.parallel_safe false 
+      :plan.async_capable false 
+      :plan.plan_node_id 1 
+      :plan.targetlist (
+         {TARGETENTRY 
+         :expr 
+            {VAR 
+            :varno -2 
+            :varattno 1 
+            :vartype 25 
+            :vartypmod -1 
+            :varcollid 100 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 0 
+            :varattnosyn 0 
+            :location -1
+            }
+         :resno 1 
+         :resname <> 
+         :ressortgroupref 1 
+         :resorigtbl 0 
+         :resorigcol 0 
+         :resjunk false
+         }
+         {TARGETENTRY 
+         :expr 
+            {VAR 
+            :varno -2 
+            :varattno 2 
+            :vartype 20 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 0 
+            :varattnosyn 0 
+            :location -1
+            }
+         :resno 2 
+         :resname <> 
+         :ressortgroupref 0 
+         :resorigtbl 0 
+         :resorigcol 0 
+         :resjunk false
+         }
+      )
+      :plan.qual <> 
+      :plan.lefttree 
+         {AGG 
+         :plan.disabled_nodes 0 
+         :plan.startup_cost 193594.49212422612 
+         :plan.total_cost 193616.06712422607 
+         :plan.plan_rows 5 
+         :plan.plan_width 17 
+         :plan.parallel_aware false 
+         :plan.parallel_safe true 
+         :plan.async_capable false 
+         :plan.plan_node_id 2 
+         :plan.targetlist (
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno -2 
+               :varattno 1 
+               :vartype 25 
+               :vartypmod -1 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 0 
+               :varattnosyn 0 
+               :location -1
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 1 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {AGGREF 
+               :aggfnoid 2803 
+               :aggtype 20 
+               :aggcollid 0 
+               :inputcollid 0 
+               :aggtranstype 20 
+               :aggargtypes <> 
+               :aggdirectargs <> 
+               :args <> 
+               :aggorder <> 
+               :aggdistinct <> 
+               :aggfilter <> 
+               :aggstar true 
+               :aggvariadic false 
+               :aggkind n 
+               :aggpresorted false 
+               :agglevelsup 0 
+               :aggsplit 6 
+               :aggno 0 
+               :aggtransno 0 
+               :location 68
+               }
+            :resno 2 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :plan.qual <> 
+         :plan.lefttree 
+            {SORT 
+            :plan.disabled_nodes 0 
+            :plan.startup_cost 193594.49212422612 
+            :plan.total_cost 193601.6671242261 
+            :plan.plan_rows 2870 
+            :plan.plan_width 9 
+            :plan.parallel_aware false 
+            :plan.parallel_safe true 
+            :plan.async_capable false 
+            :plan.plan_node_id 3 
+            :plan.targetlist (
+               {TARGETENTRY 
+               :expr 
+                  {VAR 
+                  :varno -2 
+                  :varattno 1 
+                  :vartype 25 
+                  :vartypmod -1 
+                  :varcollid 100 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 4 
+                  :varattnosyn 6 
+                  :location -1
+                  }
+               :resno 1 
+               :resname <> 
+               :ressortgroupref 1 
+               :resorigtbl 0 
+               :resorigcol 0 
+               :resjunk false
+               }
+            )
+            :plan.qual <> 
+            :plan.lefttree 
+               {HASHJOIN 
+               :join.plan.disabled_nodes 0 
+               :join.plan.startup_cost 154455.46666666667 
+               :join.plan.total_cost 193429.6560416667 
+               :join.plan.plan_rows 2870 
+               :join.plan.plan_width 9 
+               :join.plan.parallel_aware true 
+               :join.plan.parallel_safe true 
+               :join.plan.async_capable false 
+               :join.plan.plan_node_id 4 
+               :join.plan.targetlist (
+                  {TARGETENTRY 
+                  :expr 
+                     {VAR 
+                     :varno -2 
+                     :varattno 1 
+                     :vartype 25 
+                     :vartypmod -1 
+                     :varcollid 100 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 4 
+                     :varattnosyn 6 
+                     :location -1
+                     }
+                  :resno 1 
+                  :resname <> 
+                  :ressortgroupref 1 
+                  :resorigtbl 0 
+                  :resorigcol 0 
+                  :resjunk false
+                  }
+               )
+               :join.plan.qual <> 
+               :join.plan.lefttree 
+                  {HASHJOIN 
+                  :join.plan.disabled_nodes 0 
+                  :join.plan.startup_cost 4806.4125 
+                  :join.plan.total_cost 40362.284374999996 
+                  :join.plan.plan_rows 10210 
+                  :join.plan.plan_width 13 
+                  :join.plan.parallel_aware true 
+                  :join.plan.parallel_safe true 
+                  :join.plan.async_capable false 
+                  :join.plan.plan_node_id 5 
+                  :join.plan.targetlist (
+                     {TARGETENTRY 
+                     :expr 
+                        {VAR 
+                        :varno -2 
+                        :varattno 6 
+                        :vartype 25 
+                        :vartypmod -1 
+                        :varcollid 100 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 4 
+                        :varattnosyn 6 
+                        :location -1
+                        }
+                     :resno 1 
+                     :resname <> 
+                     :ressortgroupref 0 
+                     :resorigtbl 0 
+                     :resorigcol 0 
+                     :resjunk false
+                     }
+                     {TARGETENTRY 
+                     :expr 
+                        {VAR 
+                        :varno -2 
+                        :varattno 1 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 4 
+                        :varattnosyn 1 
+                        :location -1
+                        }
+                     :resno 2 
+                     :resname <> 
+                     :ressortgroupref 0 
+                     :resorigtbl 0 
+                     :resorigcol 0 
+                     :resjunk false
+                     }
+                  )
+                  :join.plan.qual <> 
+                  :join.plan.lefttree 
+                     {SEQSCAN 
+                     :scan.plan.disabled_nodes 0 
+                     :scan.plan.startup_cost 0 
+                     :scan.plan.total_cost 35383 
+                     :scan.plan.plan_rows 22585 
+                     :scan.plan.plan_width 17 
+                     :scan.plan.parallel_aware true 
+                     :scan.plan.parallel_safe true 
+                     :scan.plan.async_capable false 
+                     :scan.plan.plan_node_id 6 
+                     :scan.plan.targetlist (
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 1 
+                           :location -1
+                           }
+                        :resno 1 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 2 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 2 
+                           :location -1
+                           }
+                        :resno 2 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 3 
+                           :vartype 25 
+                           :vartypmod -1 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 3 
+                           :location -1
+                           }
+                        :resno 3 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 4 
+                           :vartype 701 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 4 
+                           :location -1
+                           }
+                        :resno 4 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 5 
+                           :vartype 1082 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 5 
+                           :location -1
+                           }
+                        :resno 5 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 6 
+                           :vartype 25 
+                           :vartypmod -1 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 6 
+                           :location -1
+                           }
+                        :resno 6 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 7 
+                           :vartype 25 
+                           :vartypmod -1 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 7 
+                           :location -1
+                           }
+                        :resno 7 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 8 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 8 
+                           :location -1
+                           }
+                        :resno 8 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 4 
+                           :varattno 9 
+                           :vartype 25 
+                           :vartypmod -1 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 9 
+                           :location -1
+                           }
+                        :resno 9 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                     )
+                     :scan.plan.qual (
+                        {OPEXPR 
+                        :opno 1098 
+                        :opfuncid 1090 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 4 
+                           :varattno 5 
+                           :vartype 1082 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 5 
+                           :location -1
+                           }
+                           {CONST 
+                           :consttype 1082 
+                           :consttypmod -1 
+                           :constcollid 0 
+                           :constlen 4 
+                           :constbyval true 
+                           :constisnull false 
+                           :location 145 
+                           :constvalue 4 [ 113 -9 -1 -1 -1 -1 -1 -1 ]
+                           }
+                        )
+                        :location 137
+                        }
+                        {OPEXPR 
+                        :opno 2345 
+                        :opfuncid 2338 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 4 
+                           :varattno 5 
+                           :vartype 1082 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 4 
+                           :varattnosyn 5 
+                           :location -1
+                           }
+                           {CONST 
+                           :consttype 1114 
+                           :consttypmod -1 
+                           :constcollid 0 
+                           :constlen 8 
+                           :constbyval true 
+                           :constisnull false 
+                           :location -1 
+                           :constvalue 8 [ 0 32 105 23 -25 90 -1 -1 ]
+                           }
+                        )
+                        :location 178
+                        }
+                     )
+                     :scan.plan.lefttree <> 
+                     :scan.plan.righttree <> 
+                     :scan.plan.initPlan <> 
+                     :scan.plan.extParam (b 0)
+                     :scan.plan.allParam (b 0)
+                     :scan.scanrelid 4
+                     }
+                  :join.plan.righttree 
+                     {HASH 
+                     :plan.disabled_nodes 0 
+                     :plan.startup_cost 4453.25 
+                     :plan.total_cost 4453.25 
+                     :plan.plan_rows 28253 
+                     :plan.plan_width 4 
+                     :plan.parallel_aware true 
+                     :plan.parallel_safe true 
+                     :plan.async_capable false 
+                     :plan.plan_node_id 7 
+                     :plan.targetlist (
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno -2 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 5 
+                           :varattnosyn 1 
+                           :location -1
+                           }
+                        :resno 1 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                     )
+                     :plan.qual <> 
+                     :plan.lefttree 
+                        {SEQSCAN 
+                        :scan.plan.disabled_nodes 0 
+                        :scan.plan.startup_cost 0 
+                        :scan.plan.total_cost 4453.25 
+                        :scan.plan.plan_rows 28253 
+                        :scan.plan.plan_width 4 
+                        :scan.plan.parallel_aware true 
+                        :scan.plan.parallel_safe true 
+                        :scan.plan.async_capable false 
+                        :scan.plan.plan_node_id 8 
+                        :scan.plan.targetlist (
+                           {TARGETENTRY 
+                           :expr 
+                              {VAR 
+                              :varno 5 
+                              :varattno 1 
+                              :vartype 23 
+                              :vartypmod -1 
+                              :varcollid 0 
+                              :varnullingrels (b)
+                              :varlevelsup 0 
+                              :varreturningtype 0 
+                              :varnosyn 5 
+                              :varattnosyn 1 
+                              :location -1
+                              }
+                           :resno 1 
+                           :resname <> 
+                           :ressortgroupref 0 
+                           :resorigtbl 0 
+                           :resorigcol 0 
+                           :resjunk false
+                           }
+                        )
+                        :scan.plan.qual (
+                           {OPEXPR 
+                           :opno 674 
+                           :opfuncid 297 
+                           :opresulttype 16 
+                           :opretset false 
+                           :opcollid 0 
+                           :inputcollid 0 
+                           :args (
+                              {VAR 
+                              :varno 5 
+                              :varattno 6 
+                              :vartype 701 
+                              :vartypmod -1 
+                              :varcollid 0 
+                              :varnullingrels (b)
+                              :varlevelsup 0 
+                              :varreturningtype 0 
+                              :varnosyn 5 
+                              :varattnosyn 6 
+                              :location -1
+                              }
+                              {CONST 
+                              :consttype 701 
+                              :consttypmod -1 
+                              :constcollid 0 
+                              :constlen 8 
+                              :constbyval true 
+                              :constisnull false 
+                              :location -1 
+                              :constvalue 8 [ 0 0 0 0 0 -120 -77 64 ]
+                              }
+                           )
+                           :location -1
+                           }
+                        )
+                        :scan.plan.lefttree <> 
+                        :scan.plan.righttree <> 
+                        :scan.plan.initPlan <> 
+                        :scan.plan.extParam (b 0)
+                        :scan.plan.allParam (b 0)
+                        :scan.scanrelid 5
+                        }
+                     :plan.righttree <> 
+                     :plan.initPlan <> 
+                     :plan.extParam (b 0)
+                     :plan.allParam (b 0)
+                     :hashkeys (
+                        {VAR 
+                        :varno -2 
+                        :varattno 1 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 5 
+                        :varattnosyn 1 
+                        :location -1
+                        }
+                     )
+                     :skewTable 16561 
+                     :skewColumn 2 
+                     :skewInherit false 
+                     :rows_total 67807.2
+                     }
+                  :join.plan.initPlan <> 
+                  :join.plan.extParam (b 0)
+                  :join.plan.allParam (b 0)
+                  :join.jointype 4 
+                  :join.inner_unique false 
+                  :join.joinqual <> 
+                  :hashclauses (
+                     {OPEXPR 
+                     :opno 96 
+                     :opfuncid 65 
+                     :opresulttype 16 
+                     :opretset false 
+                     :opcollid 0 
+                     :inputcollid 0 
+                     :args (
+                        {VAR 
+                        :varno -2 
+                        :varattno 2 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 4 
+                        :varattnosyn 2 
+                        :location -1
+                        }
+                        {VAR 
+                        :varno -1 
+                        :varattno 1 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 5 
+                        :varattnosyn 1 
+                        :location -1
+                        }
+                     )
+                     :location -1
+                     }
+                  )
+                  :hashoperators (o 96)
+                  :hashcollations (o 0)
+                  :hashkeys (
+                     {VAR 
+                     :varno -2 
+                     :varattno 2 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 4 
+                     :varattnosyn 2 
+                     :location -1
+                     }
+                  )
+                  }
+               :join.plan.righttree 
+                  {HASH 
+                  :plan.disabled_nodes 0 
+                  :plan.startup_cost 135974.79166666666 
+                  :plan.total_cost 135974.79166666666 
+                  :plan.plan_rows 833461 
+                  :plan.plan_width 4 
+                  :plan.parallel_aware true 
+                  :plan.parallel_safe true 
+                  :plan.async_capable false 
+                  :plan.plan_node_id 9 
+                  :plan.targetlist (
+                     {TARGETENTRY 
+                     :expr 
+                        {VAR 
+                        :varno -2 
+                        :varattno 1 
+                        :vartype 23 
+                        :vartypmod -1 
+                        :varcollid 0 
+                        :varnullingrels (b)
+                        :varlevelsup 0 
+                        :varreturningtype 0 
+                        :varnosyn 3 
+                        :varattnosyn 1 
+                        :location -1
+                        }
+                     :resno 1 
+                     :resname <> 
+                     :ressortgroupref 0 
+                     :resorigtbl 0 
+                     :resorigcol 0 
+                     :resjunk false
+                     }
+                  )
+                  :plan.qual <> 
+                  :plan.lefttree 
+                     {SEQSCAN 
+                     :scan.plan.disabled_nodes 0 
+                     :scan.plan.startup_cost 0 
+                     :scan.plan.total_cost 135974.79166666666 
+                     :scan.plan.plan_rows 833461 
+                     :scan.plan.plan_width 4 
+                     :scan.plan.parallel_aware true 
+                     :scan.plan.parallel_safe true 
+                     :scan.plan.async_capable false 
+                     :scan.plan.plan_node_id 10 
+                     :scan.plan.targetlist (
+                        {TARGETENTRY 
+                        :expr 
+                           {VAR 
+                           :varno 3 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 3 
+                           :varattnosyn 1 
+                           :location 325
+                           }
+                        :resno 1 
+                        :resname <> 
+                        :ressortgroupref 0 
+                        :resorigtbl 0 
+                        :resorigcol 0 
+                        :resjunk false
+                        }
+                     )
+                     :scan.plan.qual (
+                        {OPEXPR 
+                        :opno 1095 
+                        :opfuncid 1087 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 3 
+                           :varattno 12 
+                           :vartype 1082 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 3 
+                           :varattnosyn 12 
+                           :location 365
+                           }
+                           {VAR 
+                           :varno 3 
+                           :varattno 13 
+                           :vartype 1082 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 3 
+                           :varattnosyn 13 
+                           :location 380
+                           }
+                        )
+                        :location 378
+                        }
+                     )
+                     :scan.plan.lefttree <> 
+                     :scan.plan.righttree <> 
+                     :scan.plan.initPlan <> 
+                     :scan.plan.extParam (b 0)
+                     :scan.plan.allParam (b 0)
+                     :scan.scanrelid 3
+                     }
+                  :plan.righttree <> 
+                  :plan.initPlan <> 
+                  :plan.extParam (b 0)
+                  :plan.allParam (b 0)
+                  :hashkeys (
+                     {VAR 
+                     :varno -2 
+                     :varattno 1 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 3 
+                     :varattnosyn 1 
+                     :location 325
+                     }
+                  )
+                  :skewTable 16561 
+                  :skewColumn 1 
+                  :skewInherit false 
+                  :rows_total 2000306.4
+                  }
+               :join.plan.initPlan <> 
+               :join.plan.extParam (b 0)
+               :join.plan.allParam (b 0)
+               :join.jointype 4 
+               :join.inner_unique false 
+               :join.joinqual <> 
+               :hashclauses (
+                  {OPEXPR 
+                  :opno 96 
+                  :opfuncid 65 
+                  :opresulttype 16 
+                  :opretset false 
+                  :opcollid 0 
+                  :inputcollid 0 
+                  :args (
+                     {VAR 
+                     :varno -2 
+                     :varattno 2 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 4 
+                     :varattnosyn 1 
+                     :location -1
+                     }
+                     {VAR 
+                     :varno -1 
+                     :varattno 1 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 3 
+                     :varattnosyn 1 
+                     :location 325
+                     }
+                  )
+                  :location -1
+                  }
+               )
+               :hashoperators (o 96)
+               :hashcollations (o 0)
+               :hashkeys (
+                  {VAR 
+                  :varno -2 
+                  :varattno 2 
+                  :vartype 23 
+                  :vartypmod -1 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 4 
+                  :varattnosyn 1 
+                  :location -1
+                  }
+               )
+               }
+            :plan.righttree <> 
+            :plan.initPlan <> 
+            :plan.extParam (b 0)
+            :plan.allParam (b 0)
+            :numCols 1 
+            :sortColIdx ( 1)
+            :sortOperators ( 664)
+            :collations ( 100)
+            :nullsFirst ( false)
+            }
+         :plan.righttree <> 
+         :plan.initPlan <> 
+         :plan.extParam (b 0)
+         :plan.allParam (b 0)
+         :aggstrategy 1 
+         :aggsplit 6 
+         :numCols 1 
+         :grpColIdx ( 1)
+         :grpOperators ( 98)
+         :grpCollations ( 100)
+         :numGroups 5 
+         :transitionSpace 0 
+         :aggParams (b)
+         :groupingSets <> 
+         :chain <>
+         }
+      :plan.righttree <> 
+      :plan.initPlan <> 
+      :plan.extParam (b)
+      :plan.allParam (b)
+      :num_workers 2 
+      :rescan_param 0 
+      :numCols 1 
+      :sortColIdx ( 1)
+      :sortOperators ( 664)
+      :collations ( 100)
+      :nullsFirst ( false)
+      :initParam (b)
+      }
+   :plan.righttree <> 
+   :plan.initPlan <> 
+   :plan.extParam (b)
+   :plan.allParam (b)
+   :aggstrategy 1 
+   :aggsplit 9 
+   :numCols 1 
+   :grpColIdx ( 1)
+   :grpOperators ( 98)
+   :grpCollations ( 100)
+   :numGroups 5 
+   :transitionSpace 0 
+   :aggParams (b)
+   :groupingSets <> 
+   :chain <>
+   }
