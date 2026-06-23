@@ -1,0 +1,7 @@
+Task 1: Analyze why Q21 and Q2 are timing out when executed through views. The corresponding policies are available in the GitHub repository. Use those policies to reproduce the issue and analyze the planner/execution logs to identify the root cause.
+
+Task 2: Analyze SQL Server queries that use RLS policies and compare them with equivalent view-based implementations using XML execution plans. This will help us understand how SQL Server handles RLS and views internally. Additionally, perform a MAXDOP analysis with policy predicates injected to determine their impact on parallelism and query execution.
+
+Task 3: There appears to be an inconsistency in the cost estimation for RLS queries. Do something with the view definitions so that they mimic RLS execution as closely as possible. This will allow us to measure the actual execution cost and perform a fair comparison between RLS and view-based approaches.
+
+Data Generation Steps: https://chatgpt.com/s/t_6a38b94177e881919d42d5d0b755dfe3

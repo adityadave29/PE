@@ -22,7 +22,7 @@ GRANT SELECT ON lineitem TO alice;
 SET ROLE alice;
 
 -- Step 5: Run Q4 with timing
-EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
+EXPLAIN
 select
     o_orderpriority,
     count(*) as order_count

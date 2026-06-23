@@ -1,0 +1,7 @@
+0. SQL server behaviour --> does it resonate with Postgres?
+1. Why view plan execution times out when RLS does not (Q21)
+2. Why view plan is much costly for Q2.
+3. Can de-correlation be disabled in view to get accurate costs of RLS through view implementation?
+4. RLS cost.
+5. Correlated sampling.
+6. Can sampled execution act as a reliable cost model?
