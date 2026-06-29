@@ -1,0 +1,3 @@
+Runs: 10
+Average Planning Time: 2.298 ms
+Average Execution Time: 792.713 ms

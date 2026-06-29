@@ -3,42 +3,38 @@ import re
 from statistics import mean
 
 
-DB_NAME = "tpch-500mb"
-OUTPUT_NAME = "rls"
+DB_NAME = "tpch-300mb"
+OUTPUT_NAME = "sv-300"
 
 QUERY = r"""
 SET ROLE alice;
 
 EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
 select
-    l_returnflag,
-    l_linestatus,
-    sum(l_quantity) as sum_qty,
-    sum(l_extendedprice) as sum_base_price,
-    sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-    sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-    avg(l_quantity) as avg_qty,
-    avg(l_extendedprice) as avg_price,
-    avg(l_discount) as avg_disc,
-    count(*) as count_order
+        sum(l_extendedprice) / 7.0 as avg_yearly
 from
-    lineitem
+        lineitem_secure,
+        part
 where
-    l_shipdate <= date '1998-12-01' - interval '3' day
-group by
-    l_returnflag,
-    l_linestatus
-order by
-    l_returnflag,
-    l_linestatus;
+        p_partkey = l_partkey
+        and p_brand = 'Brand#53'
+        and p_container = 'MED BAG'
+        and l_quantity < (
+                select
+                        0.7 * avg(l_quantity)
+                from
+                        lineitem_secure
+                where
+                        l_partkey = p_partkey
+        );
 """
 
 planning_times = []
 execution_times = []
 last_output = ""
 
-for i in range(10):
-    print(f"Running {i + 1}/10...")
+for i in range(20):
+    print(f"Running {i + 1}/20...")
 
     proc = subprocess.Popen(
         ["psql", "-d", DB_NAME, "-X"],
@@ -50,9 +46,9 @@ for i in range(10):
 
     output, _ = proc.communicate(QUERY)
 
-    if i == 9:
+    if i == 19:
         print("\n" + "=" * 100)
-        print("10TH RUN OUTPUT")
+        print("20TH RUN OUTPUT")
         print("=" * 100)
         print(output)
 

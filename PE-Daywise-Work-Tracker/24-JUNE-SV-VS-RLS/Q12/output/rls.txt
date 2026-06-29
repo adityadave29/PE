@@ -1,0 +1,2860 @@
+SET
+WARNING:  Log 1: Planner Input:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs true 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks true 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity true 
+   :hasGroupRTE true 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname orders 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 17428 
+      :inh true 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname lineitem 
+         :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" "l_qua
+         ntity" "l_extendedprice" "l_discount" "l_tax" "l_returnflag" "l_lines
+         tatus" "l_shipdate" "l_commitdate" "l_receiptdate" "l_shipinstruct" "
+         l_shipmode" "l_comment")
+         }
+      :rtekind 0 
+      :relid 17440 
+      :inh true 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 2 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals (
+         {BOOLEXPR 
+         :boolop and 
+         :args (
+            {SUBLINK 
+            :subLinkType 0 
+            :subLinkId 0 
+            :testexpr <> 
+            :operName <> 
+            :subselect 
+               {QUERY 
+               :commandType 1 
+               :querySource 0 
+               :canSetTag true 
+               :utilityStmt <> 
+               :resultRelation 0 
+               :hasAggs false 
+               :hasWindowFuncs false 
+               :hasTargetSRFs false 
+               :hasSubLinks false 
+               :hasDistinctOn false 
+               :hasRecursive false 
+               :hasModifyingCTE false 
+               :hasForUpdate false 
+               :hasRowSecurity false 
+               :hasGroupRTE false 
+               :isReturn false 
+               :cteList <> 
+               :rtable (
+                  {RANGETBLENTRY 
+                  :alias 
+                     {ALIAS 
+                     :aliasname o 
+                     :colnames <>
+                     }
+                  :eref 
+                     {ALIAS 
+                     :aliasname o 
+                     :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_to
+                     talprice" "o_orderdate" "o_orderpriority" "o_clerk" "o_sh
+                     ippriority" "o_comment")
+                     }
+                  :rtekind 0 
+                  :relid 17428 
+                  :inh true 
+                  :relkind r 
+                  :rellockmode 1 
+                  :perminfoindex 1 
+                  :tablesample <> 
+                  :lateral false 
+                  :inFromCl true 
+                  :securityQuals <>
+                  }
+               )
+               :rteperminfos (
+                  {RTEPERMISSIONINFO 
+                  :relid 17428 
+                  :inh true 
+                  :requiredPerms 2 
+                  :checkAsUser 0 
+                  :selectedCols (b 8 13)
+                  :insertedCols (b)
+                  :updatedCols (b)
+                  }
+               )
+               :jointree 
+                  {FROMEXPR 
+                  :fromlist (
+                     {RANGETBLREF 
+                     :rtindex 1
+                     }
+                  )
+                  :quals 
+                     {BOOLEXPR 
+                     :boolop and 
+                     :args (
+                        {OPEXPR 
+                        :opno 96 
+                        :opfuncid 65 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 1 
+                           :location -1
+                           }
+                           {VAR 
+                           :varno 2 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 1 
+                           :varreturningtype 0 
+                           :varnosyn 2 
+                           :varattnosyn 1 
+                           :location -1
+                           }
+                        )
+                        :location -1
+                        }
+                        {SCALARARRAYOPEXPR 
+                        :opno 1054 
+                        :opfuncid 1048 
+                        :hashfuncid 0 
+                        :negfuncid 0 
+                        :useOr true 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location -1
+                           }
+                           {ARRAYEXPR 
+                           :array_typeid 1014 
+                           :array_collid 100 
+                           :element_typeid 1042 
+                           :elements (
+                              {CONST 
+                              :consttype 1042 
+                              :consttypmod -1 
+                              :constcollid 100 
+                              :constlen -1 
+                              :constbyval false 
+                              :constisnull false 
+                              :location -1 
+                              :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 8
+                              4 ]
+                              }
+                              {CONST 
+                              :consttype 1042 
+                              :consttypmod -1 
+                              :constcollid 100 
+                              :constlen -1 
+                              :constbyval false 
+                              :constisnull false 
+                              :location -1 
+                              :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                              }
+                           )
+                           :multidims false 
+                           :list_start -1 
+                           :list_end -1 
+                           :location -1
+                           }
+                        )
+                        :location -1
+                        }
+                     )
+                     :location -1
+                     }
+                  }
+               :mergeActionList <> 
+               :mergeTargetRelation 0 
+               :mergeJoinCondition <> 
+               :targetList (
+                  {TARGETENTRY 
+                  :expr 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location -1 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :resno 1 
+                  :resname ?column? 
+                  :ressortgroupref 0 
+                  :resorigtbl 0 
+                  :resorigcol 0 
+                  :resjunk false
+                  }
+               )
+               :override 0 
+               :onConflict <> 
+               :returningOldAlias <> 
+               :returningNewAlias <> 
+               :returningList <> 
+               :groupClause <> 
+               :groupDistinct false 
+               :groupingSets <> 
+               :havingQual <> 
+               :windowClause <> 
+               :distinctClause <> 
+               :sortClause <> 
+               :limitOffset <> 
+               :limitCount <> 
+               :limitOption 0 
+               :rowMarks <> 
+               :setOperations <> 
+               :constraintDeps <> 
+               :withCheckOptions <> 
+               :stmt_location -1 
+               :stmt_len -1
+               }
+            :location -1
+            }
+            {SUBLINK 
+            :subLinkType 0 
+            :subLinkId 0 
+            :testexpr <> 
+            :operName <> 
+            :subselect 
+               {QUERY 
+               :commandType 1 
+               :querySource 0 
+               :canSetTag true 
+               :utilityStmt <> 
+               :resultRelation 0 
+               :hasAggs false 
+               :hasWindowFuncs false 
+               :hasTargetSRFs false 
+               :hasSubLinks false 
+               :hasDistinctOn false 
+               :hasRecursive false 
+               :hasModifyingCTE false 
+               :hasForUpdate false 
+               :hasRowSecurity false 
+               :hasGroupRTE false 
+               :isReturn false 
+               :cteList <> 
+               :rtable (
+                  {RANGETBLENTRY 
+                  :alias 
+                     {ALIAS 
+                     :aliasname ps 
+                     :colnames <>
+                     }
+                  :eref 
+                     {ALIAS 
+                     :aliasname ps 
+                     :colnames ("ps_partkey" "ps_suppkey" "ps_availqty" "ps_su
+                     pplycost" "ps_comment")
+                     }
+                  :rtekind 0 
+                  :relid 17409 
+                  :inh true 
+                  :relkind r 
+                  :rellockmode 1 
+                  :perminfoindex 1 
+                  :tablesample <> 
+                  :lateral false 
+                  :inFromCl true 
+                  :securityQuals <>
+                  }
+               )
+               :rteperminfos (
+                  {RTEPERMISSIONINFO 
+                  :relid 17409 
+                  :inh true 
+                  :requiredPerms 2 
+                  :checkAsUser 0 
+                  :selectedCols (b 8 9 10)
+                  :insertedCols (b)
+                  :updatedCols (b)
+                  }
+               )
+               :jointree 
+                  {FROMEXPR 
+                  :fromlist (
+                     {RANGETBLREF 
+                     :rtindex 1
+                     }
+                  )
+                  :quals 
+                     {BOOLEXPR 
+                     :boolop and 
+                     :args (
+                        {OPEXPR 
+                        :opno 96 
+                        :opfuncid 65 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 1 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 1 
+                           :location -1
+                           }
+                           {VAR 
+                           :varno 2 
+                           :varattno 2 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 1 
+                           :varreturningtype 0 
+                           :varnosyn 2 
+                           :varattnosyn 2 
+                           :location -1
+                           }
+                        )
+                        :location -1
+                        }
+                        {OPEXPR 
+                        :opno 96 
+                        :opfuncid 65 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 2 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 2 
+                           :location -1
+                           }
+                           {VAR 
+                           :varno 2 
+                           :varattno 3 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 1 
+                           :varreturningtype 0 
+                           :varnosyn 2 
+                           :varattnosyn 3 
+                           :location -1
+                           }
+                        )
+                        :location -1
+                        }
+                        {OPEXPR 
+                        :opno 521 
+                        :opfuncid 147 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 0 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 3 
+                           :vartype 23 
+                           :vartypmod -1 
+                           :varcollid 0 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 3 
+                           :location -1
+                           }
+                           {CONST 
+                           :consttype 23 
+                           :consttypmod -1 
+                           :constcollid 0 
+                           :constlen 4 
+                           :constbyval true 
+                           :constisnull false 
+                           :location -1 
+                           :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+                           }
+                        )
+                        :location -1
+                        }
+                     )
+                     :location -1
+                     }
+                  }
+               :mergeActionList <> 
+               :mergeTargetRelation 0 
+               :mergeJoinCondition <> 
+               :targetList (
+                  {TARGETENTRY 
+                  :expr 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location -1 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :resno 1 
+                  :resname ?column? 
+                  :ressortgroupref 0 
+                  :resorigtbl 0 
+                  :resorigcol 0 
+                  :resjunk false
+                  }
+               )
+               :override 0 
+               :onConflict <> 
+               :returningOldAlias <> 
+               :returningNewAlias <> 
+               :returningList <> 
+               :groupClause <> 
+               :groupDistinct false 
+               :groupingSets <> 
+               :havingQual <> 
+               :windowClause <> 
+               :distinctClause <> 
+               :sortClause <> 
+               :limitOffset <> 
+               :limitCount <> 
+               :limitOption 0 
+               :rowMarks <> 
+               :setOperations <> 
+               :constraintDeps <> 
+               :withCheckOptions <> 
+               :stmt_location -1 
+               :stmt_len -1
+               }
+            :location -1
+            }
+         )
+         :location -1
+         }
+      )
+      }
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname *GROUP* 
+         :colnames ("l_shipmode")
+         }
+      :rtekind 9 
+      :groupexprs (
+         {VAR 
+         :varno 2 
+         :varattno 15 
+         :vartype 1042 
+         :vartypmod 14 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 2 
+         :varattnosyn 15 
+         :location 51
+         }
+      )
+      :lateral false 
+      :inFromCl false 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17428 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 13)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+      {RTEPERMISSIONINFO 
+      :relid 17440 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 18 19 20 22)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+         {RANGETBLREF 
+         :rtindex 2
+         }
+      )
+      :quals 
+         {BOOLEXPR 
+         :boolop and 
+         :args (
+            {OPEXPR 
+            :opno 96 
+            :opfuncid 65 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 1 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 1 
+               :location 532
+               }
+               {VAR 
+               :varno 2 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 1 
+               :location 545
+               }
+            )
+            :location 543
+            }
+            {OPEXPR 
+            :opno 1054 
+            :opfuncid 1048 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 100 
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 15 
+               :vartype 1042 
+               :vartypmod 14 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 15 
+               :location 568
+               }
+               {CONST 
+               :consttype 1042 
+               :consttypmod -1 
+               :constcollid 100 
+               :constlen -1 
+               :constbyval false 
+               :constisnull false 
+               :location 581 
+               :constvalue 8 [ 32 0 0 0 83 72 73 80 ]
+               }
+            )
+            :location 579
+            }
+            {OPEXPR 
+            :opno 1095 
+            :opfuncid 1087 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 12 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 12 
+               :location 600
+               }
+               {VAR 
+               :varno 2 
+               :varattno 13 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 13 
+               :location 615
+               }
+            )
+            :location 613
+            }
+            {OPEXPR 
+            :opno 1095 
+            :opfuncid 1087 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 11 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 11 
+               :location 641
+               }
+               {VAR 
+               :varno 2 
+               :varattno 12 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 12 
+               :location 654
+               }
+            )
+            :location 652
+            }
+            {OPEXPR 
+            :opno 1098 
+            :opfuncid 1090 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 13 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 13 
+               :location 679
+               }
+               {CONST 
+               :consttype 1082 
+               :consttypmod -1 
+               :constcollid 0 
+               :constlen 4 
+               :constbyval true 
+               :constisnull false 
+               :location 701 
+               :constvalue 4 [ -34 -8 -1 -1 -1 -1 -1 -1 ]
+               }
+            )
+            :location 693
+            }
+            {OPEXPR 
+            :opno 2345 
+            :opfuncid 2338 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 13 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 13 
+               :location 726
+               }
+               {OPEXPR 
+               :opno 1076 
+               :opfuncid 2071 
+               :opresulttype 1114 
+               :opretset false 
+               :opcollid 0 
+               :inputcollid 0 
+               :args (
+                  {CONST 
+                  :consttype 1082 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location 747 
+                  :constvalue 4 [ -34 -8 -1 -1 -1 -1 -1 -1 ]
+                  }
+                  {CONST 
+                  :consttype 1186 
+                  :consttypmod 327679 
+                  :constcollid 0 
+                  :constlen 16 
+                  :constbyval false 
+                  :constisnull false 
+                  :location 771 
+                  :constvalue 16 [ 0 0 0 0 0 0 0 0 0 0 0 0 12 0 0 0 ]
+                  }
+               )
+               :location 760
+               }
+            )
+            :location 740
+            }
+         )
+         :location 564
+         }
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 3 
+         :varattno 1 
+         :vartype 1042 
+         :vartypmod 14 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 3 
+         :varattnosyn 1 
+         :location -1
+         }
+      :resno 1 
+      :resname l_shipmode 
+      :ressortgroupref 1 
+      :resorigtbl 17440 
+      :resorigcol 15 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2108 
+         :aggtype 20 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 23)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {CASEEXPR 
+               :casetype 23 
+               :casecollid 0 
+               :arg <> 
+               :args (
+                  {CASEWHEN 
+                  :expr 
+                     {BOOLEXPR 
+                     :boolop or 
+                     :args (
+                        {OPEXPR 
+                        :opno 1054 
+                        :opfuncid 1048 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 101
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 119 
+                           :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]
+                           }
+                        )
+                        :location 117
+                        }
+                        {OPEXPR 
+                        :opno 1054 
+                        :opfuncid 1048 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 157
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 175 
+                           :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                           }
+                        )
+                        :location 173
+                        }
+                     )
+                     :location 154
+                     }
+                  :result 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location 213 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :location 96
+                  }
+               )
+               :defresult 
+                  {CONST 
+                  :consttype 23 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location 236 
+                  :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+                  }
+               :location 75
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 71
+         }
+      :resno 2 
+      :resname high_line_count 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2108 
+         :aggtype 20 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 23)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {CASEEXPR 
+               :casetype 23 
+               :casecollid 0 
+               :arg <> 
+               :args (
+                  {CASEWHEN 
+                  :expr 
+                     {BOOLEXPR 
+                     :boolop and 
+                     :args (
+                        {OPEXPR 
+                        :opno 1057 
+                        :opfuncid 1053 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 309
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 328 
+                           :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]
+                           }
+                        )
+                        :location 325
+                        }
+                        {OPEXPR 
+                        :opno 1057 
+                        :opfuncid 1053 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 367
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 386 
+                           :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                           }
+                        )
+                        :location 383
+                        }
+                     )
+                     :location 363
+                     }
+                  :result 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location 424 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :location 304
+                  }
+               )
+               :defresult 
+                  {CONST 
+                  :consttype 23 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location 447 
+                  :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+                  }
+               :location 283
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 279
+         }
+      :resno 3 
+      :resname low_line_count 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause (
+      {SORTGROUPCLAUSE 
+      :tleSortGroupRef 1 
+      :eqop 1054 
+      :sortop 1058 
+      :reverse_sort false 
+      :nulls_first false 
+      :hashable true
+      }
+   )
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause (
+      {SORTGROUPCLAUSE 
+      :tleSortGroupRef 1 
+      :eqop 1054 
+      :sortop 1058 
+      :reverse_sort false 
+      :nulls_first false 
+      :hashable true
+      }
+   )
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location 0 
+   :stmt_len 0
+   }
+
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs false 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks false 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname o 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname o 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 17428 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17428 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 13)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals (
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location -1
+            }
+            {PARAM 
+            :paramkind 1 
+            :paramid 0 
+            :paramtype 23 
+            :paramtypmod -1 
+            :paramcollid 0 
+            :location -1
+            }
+         )
+         :location -1
+         }
+         {SCALARARRAYOPEXPR 
+         :opno 1054 
+         :opfuncid 1048 
+         :hashfuncid 0 
+         :negfuncid 0 
+         :useOr true 
+         :inputcollid 100 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 6 
+            :vartype 1042 
+            :vartypmod 19 
+            :varcollid 100 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 6 
+            :location -1
+            }
+            {CONST 
+            :consttype 1014 
+            :consttypmod -1 
+            :constcollid 100 
+            :constlen -1 
+            :constbyval false 
+            :constisnull false 
+            :location -1 
+            :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 
+            0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 
+            ]
+            }
+         )
+         :location -1
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList <> 
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location -1 
+   :stmt_len -1
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = ({RESTRICTINFO :clause {SCALARARRAYOPEXPR :opno 1054 :opfuncid 1048 :hashfuncid 0 :negfuncid 0 :useOr true :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1014 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 0 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 0 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0})
+WARNING:  max_parallel_hazard_walker: Param paramid=0 in_safe_list=0 → reason=outer_reference
+WARNING:  is_parallel_safe: OUTPUT qual = ({RESTRICTINFO :clause {SCALARARRAYOPEXPR :opno 1054 :opfuncid 1048 :hashfuncid 0 :negfuncid 0 :useOr true :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1014 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 0 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 0 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0}) | parallel_safe = false | reason = PROPARALLEL_RESTRICTED
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs false 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks false 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname o 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname o 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 17428 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17428 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 13)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals (
+         {SCALARARRAYOPEXPR 
+         :opno 1054 
+         :opfuncid 1048 
+         :hashfuncid 0 
+         :negfuncid 0 
+         :useOr true 
+         :inputcollid 100 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 6 
+            :vartype 1042 
+            :vartypmod 19 
+            :varcollid 100 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 6 
+            :location -1
+            }
+            {CONST 
+            :consttype 1014 
+            :consttypmod -1 
+            :constcollid 100 
+            :constlen -1 
+            :constbyval false 
+            :constisnull false 
+            :location -1 
+            :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 
+            0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 
+            ]
+            }
+         )
+         :location -1
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 1 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 1 
+         :location -1
+         }
+      :resno 1 
+      :resname <> 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location -1 
+   :stmt_len -1
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = ({RESTRICTINFO :clause {SCALARARRAYOPEXPR :opno 1054 :opfuncid 1048 :hashfuncid 0 :negfuncid 0 :useOr true :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1014 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0})
+WARNING:  is_parallel_safe: OUTPUT qual = ({RESTRICTINFO :clause {SCALARARRAYOPEXPR :opno 1054 :opfuncid 1048 :hashfuncid 0 :negfuncid 0 :useOr true :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1014 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0 0 0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 72 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs false 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks false 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname ps 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname ps 
+         :colnames ("ps_partkey" "ps_suppkey" "ps_availqty" "ps_supplycost" "p
+         s_comment")
+         }
+      :rtekind 0 
+      :relid 17409 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17409 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 9 10)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals (
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location -1
+            }
+            {PARAM 
+            :paramkind 1 
+            :paramid 2 
+            :paramtype 23 
+            :paramtypmod -1 
+            :paramcollid 0 
+            :location -1
+            }
+         )
+         :location -1
+         }
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 2 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 2 
+            :location -1
+            }
+            {PARAM 
+            :paramkind 1 
+            :paramid 3 
+            :paramtype 23 
+            :paramtypmod -1 
+            :paramcollid 0 
+            :location -1
+            }
+         )
+         :location -1
+         }
+         {OPEXPR 
+         :opno 521 
+         :opfuncid 147 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 3 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 3 
+            :location -1
+            }
+            {CONST 
+            :consttype 23 
+            :consttypmod -1 
+            :constcollid 0 
+            :constlen 4 
+            :constbyval true 
+            :constisnull false 
+            :location -1 
+            :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+            }
+         )
+         :location -1
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList <> 
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location -1 
+   :stmt_len -1
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = ({RESTRICTINFO :clause {OPEXPR :opno 521 :opfuncid 147 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 3 :location -1} {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 3 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 2 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 2 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1} {PARAM :paramkind 1 :paramid 3 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 3 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0})
+WARNING:  max_parallel_hazard_walker: Param paramid=2 in_safe_list=0 → reason=outer_reference
+WARNING:  is_parallel_safe: OUTPUT qual = ({RESTRICTINFO :clause {OPEXPR :opno 521 :opfuncid 147 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 3 :location -1} {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 3 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 2 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 2 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1} {PARAM :paramkind 1 :paramid 3 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 2 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 1976) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1} :em_relids (b 1) :em_is_const false :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :right_em {EQUIVALENCEMEMBER :em_expr {PARAM :paramkind 1 :paramid 3 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 23 :em_jdomain {JOINDOMAIN :jd_relids (b 1)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0}) | parallel_safe = false | reason = PROPARALLEL_RESTRICTED
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs false 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks false 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname ps 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname ps 
+         :colnames ("ps_partkey" "ps_suppkey" "ps_availqty" "ps_supplycost" "p
+         s_comment")
+         }
+      :rtekind 0 
+      :relid 17409 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17409 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 9 10)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals (
+         {OPEXPR 
+         :opno 521 
+         :opfuncid 147 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 3 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 3 
+            :location -1
+            }
+            {CONST 
+            :consttype 23 
+            :consttypmod -1 
+            :constcollid 0 
+            :constlen 4 
+            :constbyval true 
+            :constisnull false 
+            :location -1 
+            :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+            }
+         )
+         :location -1
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 1 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 1 
+         :location -1
+         }
+      :resno 1 
+      :resname <> 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 1 
+         :varattno 2 
+         :vartype 23 
+         :vartypmod -1 
+         :varcollid 0 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 1 
+         :varattnosyn 2 
+         :location -1
+         }
+      :resno 2 
+      :resname <> 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location -1 
+   :stmt_len -1
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = ({RESTRICTINFO :clause {OPEXPR :opno 521 :opfuncid 147 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 3 :location -1} {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0})
+WARNING:  is_parallel_safe: OUTPUT qual = ({RESTRICTINFO :clause {OPEXPR :opno 521 :opfuncid 147 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 1 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 3 :location -1} {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 1) :required_relids (b 1) :incompatible_relids (b) :outer_relids (b) :left_relids (b 1) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1} {VAR :varno 1 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 2 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs true 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks true 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity true 
+   :hasGroupRTE true 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname orders 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 17428 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname lineitem 
+         :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" "l_qua
+         ntity" "l_extendedprice" "l_discount" "l_tax" "l_returnflag" "l_lines
+         tatus" "l_shipdate" "l_commitdate" "l_receiptdate" "l_shipinstruct" "
+         l_shipmode" "l_comment")
+         }
+      :rtekind 0 
+      :relid 17440 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 2 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals ((
+         {ALTERNATIVESUBPLAN 
+         :subplans (
+            {SUBPLAN 
+            :subLinkType 0 
+            :testexpr <> 
+            :paramIds <> 
+            :plan_id 1 
+            :plan_name SubPlan\ 1 
+            :firstColType 2278 
+            :firstColTypmod -1 
+            :firstColCollation 0 
+            :useHashTable false 
+            :unknownEqFalse true 
+            :parallel_safe false 
+            :setParam <> 
+            :parParam (i 0)
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 1 
+               :location -1
+               }
+            )
+            :startup_cost 0 
+            :per_call_cost 9772
+            }
+            {SUBPLAN 
+            :subLinkType 2 
+            :testexpr 
+               {OPEXPR 
+               :opno 96 
+               :opfuncid 65 
+               :opresulttype 16 
+               :opretset false 
+               :opcollid 0 
+               :inputcollid 0 
+               :args (
+                  {VAR 
+                  :varno 2 
+                  :varattno 1 
+                  :vartype 23 
+                  :vartypmod -1 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 2 
+                  :varattnosyn 1 
+                  :location -1
+                  }
+                  {PARAM 
+                  :paramkind 1 
+                  :paramid 1 
+                  :paramtype 23 
+                  :paramtypmod -1 
+                  :paramcollid 0 
+                  :location -1
+                  }
+               )
+               :location -1
+               }
+            :paramIds (i 1)
+            :plan_id 2 
+            :plan_name SubPlan\ 2 
+            :firstColType 23 
+            :firstColTypmod -1 
+            :firstColCollation 0 
+            :useHashTable true 
+            :unknownEqFalse true 
+            :parallel_safe true 
+            :setParam <> 
+            :parParam <> 
+            :args <> 
+            :startup_cost 9323.65 
+            :per_call_cost 0.0025
+            }
+         )
+         }
+         {ALTERNATIVESUBPLAN 
+         :subplans (
+            {SUBPLAN 
+            :subLinkType 0 
+            :testexpr <> 
+            :paramIds <> 
+            :plan_id 3 
+            :plan_name SubPlan\ 3 
+            :firstColType 2278 
+            :firstColTypmod -1 
+            :firstColCollation 0 
+            :useHashTable false 
+            :unknownEqFalse true 
+            :parallel_safe false 
+            :setParam <> 
+            :parParam (i 2 3)
+            :args (
+               {VAR 
+               :varno 2 
+               :varattno 2 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 2 
+               :location -1
+               }
+               {VAR 
+               :varno 2 
+               :varattno 3 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 3 
+               :location -1
+               }
+            )
+            :startup_cost 0 
+            :per_call_cost 6344
+            }
+            {SUBPLAN 
+            :subLinkType 2 
+            :testexpr 
+               {BOOLEXPR 
+               :boolop and 
+               :args (
+                  {OPEXPR 
+                  :opno 96 
+                  :opfuncid 65 
+                  :opresulttype 16 
+                  :opretset false 
+                  :opcollid 0 
+                  :inputcollid 0 
+                  :args (
+                     {VAR 
+                     :varno 2 
+                     :varattno 2 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 2 
+                     :varattnosyn 2 
+                     :location -1
+                     }
+                     {PARAM 
+                     :paramkind 1 
+                     :paramid 4 
+                     :paramtype 23 
+                     :paramtypmod -1 
+                     :paramcollid 0 
+                     :location -1
+                     }
+                  )
+                  :location -1
+                  }
+                  {OPEXPR 
+                  :opno 96 
+                  :opfuncid 65 
+                  :opresulttype 16 
+                  :opretset false 
+                  :opcollid 0 
+                  :inputcollid 0 
+                  :args (
+                     {VAR 
+                     :varno 2 
+                     :varattno 3 
+                     :vartype 23 
+                     :vartypmod -1 
+                     :varcollid 0 
+                     :varnullingrels (b)
+                     :varlevelsup 0 
+                     :varreturningtype 0 
+                     :varnosyn 2 
+                     :varattnosyn 3 
+                     :location -1
+                     }
+                     {PARAM 
+                     :paramkind 1 
+                     :paramid 5 
+                     :paramtype 23 
+                     :paramtypmod -1 
+                     :paramcollid 0 
+                     :location -1
+                     }
+                  )
+                  :location -1
+                  }
+               )
+               :location -1
+               }
+            :paramIds (i 4 5)
+            :plan_id 4 
+            :plan_name SubPlan\ 4 
+            :firstColType 23 
+            :firstColTypmod -1 
+            :firstColCollation 0 
+            :useHashTable true 
+            :unknownEqFalse true 
+            :parallel_safe true 
+            :setParam <> 
+            :parParam <> 
+            :args <> 
+            :startup_cost 5943.96 
+            :per_call_cost 0.005
+            }
+         )
+         }
+      ))
+      }
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname *GROUP* 
+         :colnames ("l_shipmode")
+         }
+      :rtekind 9 
+      :groupexprs (
+         {VAR 
+         :varno 2 
+         :varattno 15 
+         :vartype 1042 
+         :vartypmod 14 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 2 
+         :varattnosyn 15 
+         :location 51
+         }
+      )
+      :lateral false 
+      :inFromCl false 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 17428 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 13)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+      {RTEPERMISSIONINFO 
+      :relid 17440 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 8 18 19 20 22)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+         {RANGETBLREF 
+         :rtindex 2
+         }
+      )
+      :quals (
+         {OPEXPR 
+         :opno 96 
+         :opfuncid 65 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 1 
+            :location 532
+            }
+            {VAR 
+            :varno 2 
+            :varattno 1 
+            :vartype 23 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 1 
+            :location 545
+            }
+         )
+         :location 543
+         }
+         {OPEXPR 
+         :opno 1054 
+         :opfuncid 1048 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 100 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 15 
+            :vartype 1042 
+            :vartypmod 14 
+            :varcollid 100 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 15 
+            :location 568
+            }
+            {CONST 
+            :consttype 1042 
+            :consttypmod -1 
+            :constcollid 100 
+            :constlen -1 
+            :constbyval false 
+            :constisnull false 
+            :location 581 
+            :constvalue 8 [ 32 0 0 0 83 72 73 80 ]
+            }
+         )
+         :location 579
+         }
+         {OPEXPR 
+         :opno 1095 
+         :opfuncid 1087 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 12 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 12 
+            :location 600
+            }
+            {VAR 
+            :varno 2 
+            :varattno 13 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 13 
+            :location 615
+            }
+         )
+         :location 613
+         }
+         {OPEXPR 
+         :opno 1095 
+         :opfuncid 1087 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 11 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 11 
+            :location 641
+            }
+            {VAR 
+            :varno 2 
+            :varattno 12 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 12 
+            :location 654
+            }
+         )
+         :location 652
+         }
+         {OPEXPR 
+         :opno 1098 
+         :opfuncid 1090 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 13 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 13 
+            :location 679
+            }
+            {CONST 
+            :consttype 1082 
+            :consttypmod -1 
+            :constcollid 0 
+            :constlen 4 
+            :constbyval true 
+            :constisnull false 
+            :location 701 
+            :constvalue 4 [ -34 -8 -1 -1 -1 -1 -1 -1 ]
+            }
+         )
+         :location 693
+         }
+         {OPEXPR 
+         :opno 2345 
+         :opfuncid 2338 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 13 
+            :vartype 1082 
+            :vartypmod -1 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 13 
+            :location 726
+            }
+            {CONST 
+            :consttype 1114 
+            :consttypmod -1 
+            :constcollid 0 
+            :constlen 8 
+            :constbyval true 
+            :constisnull false 
+            :location -1 
+            :constvalue 8 [ 0 32 -39 -79 49 -115 -1 -1 ]
+            }
+         )
+         :location 740
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {VAR 
+         :varno 2 
+         :varattno 15 
+         :vartype 1042 
+         :vartypmod 14 
+         :varcollid 100 
+         :varnullingrels (b)
+         :varlevelsup 0 
+         :varreturningtype 0 
+         :varnosyn 2 
+         :varattnosyn 15 
+         :location -1
+         }
+      :resno 1 
+      :resname l_shipmode 
+      :ressortgroupref 1 
+      :resorigtbl 17440 
+      :resorigcol 15 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2108 
+         :aggtype 20 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 23)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {CASEEXPR 
+               :casetype 23 
+               :casecollid 0 
+               :arg <> 
+               :args (
+                  {CASEWHEN 
+                  :expr 
+                     {BOOLEXPR 
+                     :boolop or 
+                     :args (
+                        {OPEXPR 
+                        :opno 1054 
+                        :opfuncid 1048 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 101
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 119 
+                           :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]
+                           }
+                        )
+                        :location 117
+                        }
+                        {OPEXPR 
+                        :opno 1054 
+                        :opfuncid 1048 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 157
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 175 
+                           :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                           }
+                        )
+                        :location 173
+                        }
+                     )
+                     :location -1
+                     }
+                  :result 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location 213 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :location 96
+                  }
+               )
+               :defresult 
+                  {CONST 
+                  :consttype 23 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location 236 
+                  :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+                  }
+               :location 75
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 71
+         }
+      :resno 2 
+      :resname high_line_count 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2108 
+         :aggtype 20 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 23)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {CASEEXPR 
+               :casetype 23 
+               :casecollid 0 
+               :arg <> 
+               :args (
+                  {CASEWHEN 
+                  :expr 
+                     {BOOLEXPR 
+                     :boolop and 
+                     :args (
+                        {OPEXPR 
+                        :opno 1057 
+                        :opfuncid 1053 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 309
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 328 
+                           :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]
+                           }
+                        )
+                        :location 325
+                        }
+                        {OPEXPR 
+                        :opno 1057 
+                        :opfuncid 1053 
+                        :opresulttype 16 
+                        :opretset false 
+                        :opcollid 0 
+                        :inputcollid 100 
+                        :args (
+                           {VAR 
+                           :varno 1 
+                           :varattno 6 
+                           :vartype 1042 
+                           :vartypmod 19 
+                           :varcollid 100 
+                           :varnullingrels (b)
+                           :varlevelsup 0 
+                           :varreturningtype 0 
+                           :varnosyn 1 
+                           :varattnosyn 6 
+                           :location 367
+                           }
+                           {CONST 
+                           :consttype 1042 
+                           :consttypmod -1 
+                           :constcollid 100 
+                           :constlen -1 
+                           :constbyval false 
+                           :constisnull false 
+                           :location 386 
+                           :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                           }
+                        )
+                        :location 383
+                        }
+                     )
+                     :location -1
+                     }
+                  :result 
+                     {CONST 
+                     :consttype 23 
+                     :consttypmod -1 
+                     :constcollid 0 
+                     :constlen 4 
+                     :constbyval true 
+                     :constisnull false 
+                     :location 424 
+                     :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                     }
+                  :location 304
+                  }
+               )
+               :defresult 
+                  {CONST 
+                  :consttype 23 
+                  :consttypmod -1 
+                  :constcollid 0 
+                  :constlen 4 
+                  :constbyval true 
+                  :constisnull false 
+                  :location 447 
+                  :constvalue 4 [ 0 0 0 0 0 0 0 0 ]
+                  }
+               :location 283
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 279
+         }
+      :resno 3 
+      :resname low_line_count 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause (
+      {SORTGROUPCLAUSE 
+      :tleSortGroupRef 1 
+      :eqop 1054 
+      :sortop 1058 
+      :reverse_sort false 
+      :nulls_first false 
+      :hashable true
+      }
+   )
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause (
+      {SORTGROUPCLAUSE 
+      :tleSortGroupRef 1 
+      :eqop 1054 
+      :sortop 1058 
+      :reverse_sort false 
+      :nulls_first false 
+      :hashable true
+      }
+   )
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location 0 
+   :stmt_len 0
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = <>
+WARNING:  is_parallel_safe: OUTPUT qual = <> | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {VAR :varno 1 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 1 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({RESTRICTINFO :clause {ALTERNATIVESUBPLAN :subplans ({SUBPLAN :subLinkType 0 :testexpr <> :paramIds <> :plan_id 1 :plan_name SubPlan\ 1 :firstColType 2278 :firstColTypmod -1 :firstColCollation 0 :useHashTable false :unknownEqFalse true :parallel_safe false :setParam <> :parParam (i 0) :args ({VAR :varno 2 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 1 :location -1}) :startup_cost 0 :per_call_cost 9772} {SUBPLAN :subLinkType 2 :testexpr {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 1 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :paramIds (i 1) :plan_id 2 :plan_name SubPlan\ 2 :firstColType 23 :firstColTypmod -1 :firstColCollation 0 :useHashTable true :unknownEqFalse true :parallel_safe true :setParam <> :parParam <> :args <> :startup_cost 9323.65 :per_call_cost 0.0025})} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {ALTERNATIVESUBPLAN :subplans ({SUBPLAN :subLinkType 0 :testexpr <> :paramIds <> :plan_id 3 :plan_name SubPlan\ 3 :firstColType 2278 :firstColTypmod -1 :firstColCollation 0 :useHashTable false :unknownEqFalse true :parallel_safe false :setParam <> :parParam (i 2 3) :args ({VAR :varno 2 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 2 :location -1} {VAR :varno 2 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 3 :location -1}) :startup_cost 0 :per_call_cost 6344} {SUBPLAN :subLinkType 2 :testexpr {BOOLEXPR :boolop and :args ({OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 2 :location -1} {PARAM :paramkind 1 :paramid 4 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 3 :location -1} {PARAM :paramkind 1 :paramid 5 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1}) :location -1} :paramIds (i 4 5) :plan_id 4 :plan_name SubPlan\ 4 :firstColType 23 :firstColTypmod -1 :firstColCollation 0 :useHashTable true :unknownEqFalse true :parallel_safe true :setParam <> :parParam <> :args <> :startup_cost 5943.96 :per_call_cost 0.005})} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1095 :opfuncid 1087 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 12 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 12 :location -1} {VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b 2) :orclause <> :rinfo_serial 5 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1095 :opfuncid 1087 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 11 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 11 :location -1} {VAR :varno 2 :varattno 12 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 12 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b 2) :orclause <> :rinfo_serial 6 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1098 :opfuncid 1090 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1} {CONST :consttype 1082 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ -34 -8 -1 -1 -1 -1 -1 -1 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 7 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 2345 :opfuncid 2338 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1} {CONST :consttype 1114 :consttypmod -1 :constcollid 0 :constlen 8 :constbyval true :constisnull false :location -1 :constvalue 8 [ 0 32 -39 -79 49 -115 -1 -1 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 8 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 8 [ 32 0 0 0 83 72 73 80 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 2 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 4 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 426 2097) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} :em_relids (b 2) :em_is_const false :em_is_child false :em_datatype 1042 :em_jdomain {JOINDOMAIN :jd_relids (b 1 2)}} :right_em {EQUIVALENCEMEMBER :em_expr {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 8 [ 32 0 0 0 83 72 73 80 ]} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 1042 :em_jdomain {JOINDOMAIN :jd_relids (b 1 2)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0})
+WARNING:  max_parallel_hazard_walker: SubPlan plan_id=1 parallel_safe=0 → reason=correlated_subplan
+WARNING:  is_parallel_safe: OUTPUT qual = ({RESTRICTINFO :clause {ALTERNATIVESUBPLAN :subplans ({SUBPLAN :subLinkType 0 :testexpr <> :paramIds <> :plan_id 1 :plan_name SubPlan\ 1 :firstColType 2278 :firstColTypmod -1 :firstColCollation 0 :useHashTable false :unknownEqFalse true :parallel_safe false :setParam <> :parParam (i 0) :args ({VAR :varno 2 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 1 :location -1}) :startup_cost 0 :per_call_cost 9772} {SUBPLAN :subLinkType 2 :testexpr {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 1 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 1 :location -1} {PARAM :paramkind 1 :paramid 1 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} :paramIds (i 1) :plan_id 2 :plan_name SubPlan\ 2 :firstColType 23 :firstColTypmod -1 :firstColCollation 0 :useHashTable true :unknownEqFalse true :parallel_safe true :setParam <> :parParam <> :args <> :startup_cost 9323.65 :per_call_cost 0.0025})} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 1 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {ALTERNATIVESUBPLAN :subplans ({SUBPLAN :subLinkType 0 :testexpr <> :paramIds <> :plan_id 3 :plan_name SubPlan\ 3 :firstColType 2278 :firstColTypmod -1 :firstColCollation 0 :useHashTable false :unknownEqFalse true :parallel_safe false :setParam <> :parParam (i 2 3) :args ({VAR :varno 2 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 2 :location -1} {VAR :varno 2 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 3 :location -1}) :startup_cost 0 :per_call_cost 6344} {SUBPLAN :subLinkType 2 :testexpr {BOOLEXPR :boolop and :args ({OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 2 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 2 :location -1} {PARAM :paramkind 1 :paramid 4 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1} {OPEXPR :opno 96 :opfuncid 65 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 3 :vartype 23 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 3 :location -1} {PARAM :paramkind 1 :paramid 5 :paramtype 23 :paramtypmod -1 :paramcollid 0 :location -1}) :location -1}) :location -1} :paramIds (i 4 5) :plan_id 4 :plan_name SubPlan\ 4 :firstColType 23 :firstColTypmod -1 :firstColCollation 0 :useHashTable true :unknownEqFalse true :parallel_safe true :setParam <> :parParam <> :args <> :startup_cost 5943.96 :per_call_cost 0.005})} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 0 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b) :right_relids (b) :orclause <> :rinfo_serial 2 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1095 :opfuncid 1087 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 12 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 12 :location -1} {VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b 2) :orclause <> :rinfo_serial 5 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1095 :opfuncid 1087 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 11 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 11 :location -1} {VAR :varno 2 :varattno 12 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 12 :location -1}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b 2) :orclause <> :rinfo_serial 6 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1098 :opfuncid 1090 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1} {CONST :consttype 1082 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ -34 -8 -1 -1 -1 -1 -1 -1 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 7 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 2345 :opfuncid 2338 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 13 :vartype 1082 :vartypmod -1 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 13 :location -1} {CONST :consttype 1114 :consttypmod -1 :constcollid 0 :constlen 8 :constbyval true :constisnull false :location -1 :constvalue 8 [ 0 32 -39 -79 49 -115 -1 -1 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof false :has_volatile 0 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 8 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies <> :left_em <> :right_em <> :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0} {RESTRICTINFO :clause {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 8 [ 32 0 0 0 83 72 73 80 ]}) :location -1} :is_pushed_down true :can_join false :pseudoconstant false :has_clone false :is_clone false :leakproof true :has_volatile 2 :security_level 1 :num_base_rels 1 :clause_relids (b 2) :required_relids (b 2) :incompatible_relids (b) :outer_relids (b) :left_relids (b 2) :right_relids (b) :orclause <> :rinfo_serial 4 :eval_cost.startup -1 :eval_cost.per_tuple 0 :norm_selec -1 :outer_selec -1 :mergeopfamilies (o 426 2097) :left_em {EQUIVALENCEMEMBER :em_expr {VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} :em_relids (b 2) :em_is_const false :em_is_child false :em_datatype 1042 :em_jdomain {JOINDOMAIN :jd_relids (b 1 2)}} :right_em {EQUIVALENCEMEMBER :em_expr {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 8 [ 32 0 0 0 83 72 73 80 ]} :em_relids (b) :em_is_const true :em_is_child false :em_datatype 1042 :em_jdomain {JOINDOMAIN :jd_relids (b 1 2)}} :outer_is_left false :hashjoinoperator 0 :left_bucketsize -1 :right_bucketsize -1 :left_mcvfreq -1 :right_mcvfreq -1 :left_hasheqoperator 0 :right_hasheqoperator 0}) | parallel_safe = false | reason = PROPARALLEL_RESTRICTED
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop or :args ({OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop and :args ({OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 1 :aggtransno 1 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop or :args ({OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop and :args ({OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 1 :aggtransno 1 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop or :args ({OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop and :args ({OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 1 :aggtransno 1 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop or :args ({OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1054 :opfuncid 1048 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1} {AGGREF :aggfnoid 2108 :aggtype 20 :aggcollid 0 :inputcollid 0 :aggtranstype 20 :aggargtypes (o 23) :aggdirectargs <> :args ({TARGETENTRY :expr {CASEEXPR :casetype 23 :casecollid 0 :arg <> :args ({CASEWHEN :expr {BOOLEXPR :boolop and :args ({OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 78 84 ]}) :location -1} {OPEXPR :opno 1057 :opfuncid 1053 :opresulttype 16 :opretset false :opcollid 0 :inputcollid 100 :args ({VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1} {CONST :consttype 1042 :consttypmod -1 :constcollid 100 :constlen -1 :constbyval false :constisnull false :location -1 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]}) :location -1}) :location -1} :result {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 1 0 0 0 0 0 0 0 ]} :location -1}) :defresult {CONST :consttype 23 :consttypmod -1 :constcollid 0 :constlen 4 :constbyval true :constisnull false :location -1 :constvalue 4 [ 0 0 0 0 0 0 0 0 ]} :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 1 :aggtransno 1 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 2 :varattno 15 :vartype 1042 :vartypmod 14 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 15 :location -1} {VAR :varno 1 :varattno 6 :vartype 1042 :vartypmod 19 :varcollid 100 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 1 :varattnosyn 6 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+                                                                                                                                                                                                                                        QUERY PLAN                                                                                                                                                                                                                                        
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=0.00..19340472733.98 rows=1 width=27) (actual time=34603.953..34603.967 rows=1.00 loops=1)
+   Output: lineitem.l_shipmode, sum(CASE WHEN ((orders.o_orderpriority = '1-URGENT'::bpchar) OR (orders.o_orderpriority = '2-HIGH'::bpchar)) THEN 1 ELSE 0 END), sum(CASE WHEN ((orders.o_orderpriority <> '1-URGENT'::bpchar) AND (orders.o_orderpriority <> '2-HIGH'::bpchar)) THEN 1 ELSE 0 END)
+   Buffers: shared hit=20763 read=15877
+   ->  Nested Loop  (cost=0.00..19340472728.26 rows=381 width=27) (actual time=425.448..34603.340 rows=1254.00 loops=1)
+         Output: lineitem.l_shipmode, orders.o_orderpriority
+         Join Filter: (orders.o_orderkey = lineitem.l_orderkey)
+         Rows Removed by Join Filter: 376198746
+         Buffers: shared hit=20763 read=15877
+         ->  Seq Scan on public.orders  (cost=0.00..8272.00 rows=300000 width=20) (actual time=0.018..87.023 rows=300000.00 loops=1)
+               Output: orders.o_orderkey, orders.o_custkey, orders.o_orderstatus, orders.o_totalprice, orders.o_orderdate, orders.o_orderpriority, orders.o_clerk, orders.o_shippriority, orders.o_comment
+               Buffers: shared hit=5272
+         ->  Materialize  (cost=0.00..19338749957.21 rows=381 width=15) (actual time=0.000..0.045 rows=1254.00 loops=300000)
+               Output: lineitem.l_shipmode, lineitem.l_orderkey
+               Storage: Memory  Maximum Storage: 85kB
+               Buffers: shared hit=15491 read=15877
+               ->  Seq Scan on public.lineitem  (cost=0.00..19338749955.30 rows=381 width=15) (actual time=129.461..418.593 rows=1254.00 loops=1)
+                     Output: lineitem.l_shipmode, lineitem.l_orderkey
+                     Filter: ((lineitem.l_commitdate < lineitem.l_receiptdate) AND (lineitem.l_shipdate < lineitem.l_commitdate) AND (lineitem.l_receiptdate >= '1995-01-01'::date) AND (lineitem.l_shipmode = 'SHIP'::bpchar) AND (ANY ((lineitem.l_partkey = (hashed SubPlan 4).col1) AND (lineitem.l_suppkey = (hashed SubPlan 4).col2))) AND (ANY (lineitem.l_orderkey = (hashed SubPlan 2).col1)) AND (lineitem.l_receiptdate < '1996-01-01 00:00:00'::timestamp without time zone))
+                     Rows Removed by Filter: 1198715
+                     Buffers: shared hit=15491 read=15877
+                     SubPlan 4
+                       ->  Seq Scan on public.partsupp ps  (cost=0.00..5544.00 rows=159984 width=8) (actual time=0.008..21.556 rows=160000.00 loops=1)
+                             Output: ps.ps_partkey, ps.ps_suppkey
+                             Filter: (ps.ps_availqty > 0)
+                             Buffers: shared hit=3544
+                     SubPlan 2
+                       ->  Seq Scan on public.orders o  (cost=0.00..9022.00 rows=120660 width=4) (actual time=0.013..57.544 rows=120144.00 loops=1)
+                             Output: o.o_orderkey
+                             Filter: (o.o_orderpriority = ANY ('{1-URGENT,2-HIGH}'::bpchar[]))
+                             Rows Removed by Filter: 179856
+                             Buffers: shared hit=5272
+ Planning:
+   Buffers: shared hit=194
+ Planning Time: 2.403 ms
+ Execution Time: 34608.937 ms
+(35 rows)
+
