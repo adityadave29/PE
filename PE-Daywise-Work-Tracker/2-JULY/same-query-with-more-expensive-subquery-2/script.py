@@ -3,50 +3,31 @@ import re
 from statistics import mean
 
 
-DB_NAME = "tpch-200mb"
-OUTPUT_NAME = "v-i"
+DB_NAME = "tpch"
+OUTPUT_NAME = "sv-1gb"
 
 QUERY = r"""
 SET ROLE alice;
 
 EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
-select
-        s_name,
-        s_address
-from
-        supplier_secure,
-        nation
-where
-        s_suppkey in (
-                select
-                        ps_suppkey
-                from
-                        partsupp_secure
-                where
-                        ps_partkey in (
-                                select
-                                        p_partkey
-                                from
-                                        part
-                                where
-                                        p_name like '%ivory%'
-                        )
-                        and ps_availqty > (
-                                select
-                                        0.5 * sum(l_quantity)
-                                from
-                                        lineitem_secure
-                                where
-                                        l_partkey = ps_partkey
-                                        and l_suppkey = ps_suppkey
-                                        and l_shipdate >= date '1995-01-01'
-                                        and l_shipdate < date '1995-01-01' + interval '1' year
-                        )
+SELECT
+    s_name
+FROM supplier
+WHERE EXISTS (
+    SELECT 1
+    FROM partsupp_secure
+    WHERE
+        ps_suppkey = supplier.s_suppkey
+        AND ps_availqty > 100
+        AND ps_supplycost > 500
+        AND EXISTS (
+            SELECT 1
+            FROM part
+            WHERE
+                p_partkey = ps_partkey
+                AND p_size BETWEEN 5 AND 35
         )
-        and s_nationkey = n_nationkey
-        and n_name = 'FRANCE'
-order by
-        s_name;
+);
 """
 
 planning_times = []

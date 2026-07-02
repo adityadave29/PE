@@ -4,57 +4,24 @@ from statistics import mean
 
 
 DB_NAME = "tpch-200mb"
-OUTPUT_NAME = "v-i"
+OUTPUT_NAME = "sv-200"
 
 QUERY = r"""
 SET ROLE alice;
 
 EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
-select
-        s_name,
-        s_address
-from
-        supplier_secure,
-        nation
-where
-        s_suppkey in (
-                select
-                        ps_suppkey
-                from
-                        partsupp_secure
-                where
-                        ps_partkey in (
-                                select
-                                        p_partkey
-                                from
-                                        part
-                                where
-                                        p_name like '%ivory%'
-                        )
-                        and ps_availqty > (
-                                select
-                                        0.5 * sum(l_quantity)
-                                from
-                                        lineitem_secure
-                                where
-                                        l_partkey = ps_partkey
-                                        and l_suppkey = ps_suppkey
-                                        and l_shipdate >= date '1995-01-01'
-                                        and l_shipdate < date '1995-01-01' + interval '1' year
-                        )
-        )
-        and s_nationkey = n_nationkey
-        and n_name = 'FRANCE'
-order by
-        s_name;
+SELECT sum(l_extendedprice * l_discount) AS revenue
+FROM lineitem_secure
+WHERE leaky_lt(l_quantity, 10);
+
 """
 
 planning_times = []
 execution_times = []
 last_output = ""
 
-for i in range(20):
-    print(f"Running {i + 1}/20...")
+for i in range(100):
+    print(f"Running {i + 1}/100...")
 
     proc = subprocess.Popen(
         ["psql", "-d", DB_NAME, "-X"],
@@ -66,9 +33,9 @@ for i in range(20):
 
     output, _ = proc.communicate(QUERY)
 
-    if i == 19:
+    if i == 99:
         print("\n" + "=" * 100)
-        print("20TH RUN OUTPUT")
+        print("100TH RUN OUTPUT")
         print("=" * 100)
         print(output)
 

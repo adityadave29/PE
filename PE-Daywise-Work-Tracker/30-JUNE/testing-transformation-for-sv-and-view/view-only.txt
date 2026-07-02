@@ -1,0 +1,1267 @@
+SET
+WARNING:  Log 1: Planner Input:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs true 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks false 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname lineitem_view 
+         :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" "l_qua
+         ntity" "l_extendedprice" "l_discount" "l_tax" "l_returnflag" "l_lines
+         tatus" "l_shipdate" "l_commitdate" "l_receiptdate" "l_shipinstruct" "
+         l_shipmode" "l_comment")
+         }
+      :rtekind 1 
+      :subquery 
+         {QUERY 
+         :commandType 1 
+         :querySource 0 
+         :canSetTag true 
+         :utilityStmt <> 
+         :resultRelation 0 
+         :hasAggs false 
+         :hasWindowFuncs false 
+         :hasTargetSRFs false 
+         :hasSubLinks true 
+         :hasDistinctOn false 
+         :hasRecursive false 
+         :hasModifyingCTE false 
+         :hasForUpdate false 
+         :hasRowSecurity false 
+         :hasGroupRTE false 
+         :isReturn false 
+         :cteList <> 
+         :rtable (
+            {RANGETBLENTRY 
+            :alias 
+               {ALIAS 
+               :aliasname l 
+               :colnames <>
+               }
+            :eref 
+               {ALIAS 
+               :aliasname l 
+               :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" 
+               "l_quantity" "l_extendedprice" "l_discount" "l_tax" "l_returnfl
+               ag" "l_linestatus" "l_shipdate" "l_commitdate" "l_receiptdate" 
+               "l_shipinstruct" "l_shipmode" "l_comment")
+               }
+            :rtekind 0 
+            :relid 17104 
+            :inh true 
+            :relkind r 
+            :rellockmode 1 
+            :perminfoindex 1 
+            :tablesample <> 
+            :lateral false 
+            :inFromCl true 
+            :securityQuals <>
+            }
+         )
+         :rteperminfos (
+            {RTEPERMISSIONINFO 
+            :relid 17104 
+            :inh true 
+            :requiredPerms 2 
+            :checkAsUser 10 
+            :selectedCols (b 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23)
+            :insertedCols (b)
+            :updatedCols (b)
+            }
+         )
+         :jointree 
+            {FROMEXPR 
+            :fromlist (
+               {RANGETBLREF 
+               :rtindex 1
+               }
+            )
+            :quals 
+               {SUBLINK 
+               :subLinkType 0 
+               :subLinkId 0 
+               :testexpr <> 
+               :operName <> 
+               :subselect 
+                  {QUERY 
+                  :commandType 1 
+                  :querySource 0 
+                  :canSetTag true 
+                  :utilityStmt <> 
+                  :resultRelation 0 
+                  :hasAggs false 
+                  :hasWindowFuncs false 
+                  :hasTargetSRFs false 
+                  :hasSubLinks false 
+                  :hasDistinctOn false 
+                  :hasRecursive false 
+                  :hasModifyingCTE false 
+                  :hasForUpdate false 
+                  :hasRowSecurity false 
+                  :hasGroupRTE false 
+                  :isReturn false 
+                  :cteList <> 
+                  :rtable (
+                     {RANGETBLENTRY 
+                     :alias 
+                        {ALIAS 
+                        :aliasname o 
+                        :colnames <>
+                        }
+                     :eref 
+                        {ALIAS 
+                        :aliasname o 
+                        :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o
+                        _totalprice" "o_orderdate" "o_orderpriority" "o_clerk"
+                         "o_shippriority" "o_comment")
+                        }
+                     :rtekind 0 
+                     :relid 17092 
+                     :inh true 
+                     :relkind r 
+                     :rellockmode 1 
+                     :perminfoindex 1 
+                     :tablesample <> 
+                     :lateral false 
+                     :inFromCl true 
+                     :securityQuals <>
+                     }
+                  )
+                  :rteperminfos (
+                     {RTEPERMISSIONINFO 
+                     :relid 17092 
+                     :inh true 
+                     :requiredPerms 2 
+                     :checkAsUser 10 
+                     :selectedCols (b 8 13)
+                     :insertedCols (b)
+                     :updatedCols (b)
+                     }
+                  )
+                  :jointree 
+                     {FROMEXPR 
+                     :fromlist (
+                        {RANGETBLREF 
+                        :rtindex 1
+                        }
+                     )
+                     :quals 
+                        {BOOLEXPR 
+                        :boolop and 
+                        :args (
+                           {OPEXPR 
+                           :opno 96 
+                           :opfuncid 65 
+                           :opresulttype 16 
+                           :opretset false 
+                           :opcollid 0 
+                           :inputcollid 0 
+                           :args (
+                              {VAR 
+                              :varno 1 
+                              :varattno 1 
+                              :vartype 23 
+                              :vartypmod -1 
+                              :varcollid 0 
+                              :varnullingrels (b)
+                              :varlevelsup 0 
+                              :varreturningtype 0 
+                              :varnosyn 1 
+                              :varattnosyn 1 
+                              :location -1
+                              }
+                              {VAR 
+                              :varno 1 
+                              :varattno 1 
+                              :vartype 23 
+                              :vartypmod -1 
+                              :varcollid 0 
+                              :varnullingrels (b)
+                              :varlevelsup 1 
+                              :varreturningtype 0 
+                              :varnosyn 1 
+                              :varattnosyn 1 
+                              :location -1
+                              }
+                           )
+                           :location -1
+                           }
+                           {SCALARARRAYOPEXPR 
+                           :opno 1054 
+                           :opfuncid 1048 
+                           :hashfuncid 0 
+                           :negfuncid 0 
+                           :useOr true 
+                           :inputcollid 100 
+                           :args (
+                              {VAR 
+                              :varno 1 
+                              :varattno 6 
+                              :vartype 1042 
+                              :vartypmod 19 
+                              :varcollid 100 
+                              :varnullingrels (b)
+                              :varlevelsup 0 
+                              :varreturningtype 0 
+                              :varnosyn 1 
+                              :varattnosyn 6 
+                              :location -1
+                              }
+                              {ARRAYEXPR 
+                              :array_typeid 1014 
+                              :array_collid 100 
+                              :element_typeid 1042 
+                              :elements (
+                                 {CONST 
+                                 :consttype 1042 
+                                 :consttypmod -1 
+                                 :constcollid 100 
+                                 :constlen -1 
+                                 :constbyval false 
+                                 :constisnull false 
+                                 :location -1 
+                                 :constvalue 12 [ 48 0 0 0 49 45 85 82 71 69 7
+                                 8 84 ]
+                                 }
+                                 {CONST 
+                                 :consttype 1042 
+                                 :consttypmod -1 
+                                 :constcollid 100 
+                                 :constlen -1 
+                                 :constbyval false 
+                                 :constisnull false 
+                                 :location -1 
+                                 :constvalue 10 [ 40 0 0 0 50 45 72 73 71 72 ]
+                                 }
+                              )
+                              :multidims false 
+                              :list_start -1 
+                              :list_end -1 
+                              :location -1
+                              }
+                           )
+                           :location -1
+                           }
+                        )
+                        :location -1
+                        }
+                     }
+                  :mergeActionList <> 
+                  :mergeTargetRelation 0 
+                  :mergeJoinCondition <> 
+                  :targetList (
+                     {TARGETENTRY 
+                     :expr 
+                        {CONST 
+                        :consttype 23 
+                        :consttypmod -1 
+                        :constcollid 0 
+                        :constlen 4 
+                        :constbyval true 
+                        :constisnull false 
+                        :location -1 
+                        :constvalue 4 [ 1 0 0 0 0 0 0 0 ]
+                        }
+                     :resno 1 
+                     :resname ?column? 
+                     :ressortgroupref 0 
+                     :resorigtbl 0 
+                     :resorigcol 0 
+                     :resjunk false
+                     }
+                  )
+                  :override 0 
+                  :onConflict <> 
+                  :returningOldAlias <> 
+                  :returningNewAlias <> 
+                  :returningList <> 
+                  :groupClause <> 
+                  :groupDistinct false 
+                  :groupingSets <> 
+                  :havingQual <> 
+                  :windowClause <> 
+                  :distinctClause <> 
+                  :sortClause <> 
+                  :limitOffset <> 
+                  :limitCount <> 
+                  :limitOption 0 
+                  :rowMarks <> 
+                  :setOperations <> 
+                  :constraintDeps <> 
+                  :withCheckOptions <> 
+                  :stmt_location -1 
+                  :stmt_len -1
+                  }
+               :location -1
+               }
+            }
+         :mergeActionList <> 
+         :mergeTargetRelation 0 
+         :mergeJoinCondition <> 
+         :targetList (
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 1 
+               :location -1
+               }
+            :resno 1 
+            :resname l_orderkey 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 1 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 2 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 2 
+               :location -1
+               }
+            :resno 2 
+            :resname l_partkey 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 2 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 3 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 3 
+               :location -1
+               }
+            :resno 3 
+            :resname l_suppkey 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 3 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 4 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 4 
+               :location -1
+               }
+            :resno 4 
+            :resname l_linenumber 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 4 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 5 
+               :vartype 1700 
+               :vartypmod 983046 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 5 
+               :location -1
+               }
+            :resno 5 
+            :resname l_quantity 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 5 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 6 
+               :vartype 1700 
+               :vartypmod 983046 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 6 
+               :location -1
+               }
+            :resno 6 
+            :resname l_extendedprice 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 6 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 7 
+               :vartype 1700 
+               :vartypmod 983046 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 7 
+               :location -1
+               }
+            :resno 7 
+            :resname l_discount 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 7 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 8 
+               :vartype 1700 
+               :vartypmod 983046 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 8 
+               :location -1
+               }
+            :resno 8 
+            :resname l_tax 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 8 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 9 
+               :vartype 1042 
+               :vartypmod 5 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 9 
+               :location -1
+               }
+            :resno 9 
+            :resname l_returnflag 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 9 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 10 
+               :vartype 1042 
+               :vartypmod 5 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 10 
+               :location -1
+               }
+            :resno 10 
+            :resname l_linestatus 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 10 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 11 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 11 
+               :location -1
+               }
+            :resno 11 
+            :resname l_shipdate 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 11 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 12 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 12 
+               :location -1
+               }
+            :resno 12 
+            :resname l_commitdate 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 12 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 13 
+               :vartype 1082 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 13 
+               :location -1
+               }
+            :resno 13 
+            :resname l_receiptdate 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 13 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 14 
+               :vartype 1042 
+               :vartypmod 29 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 14 
+               :location -1
+               }
+            :resno 14 
+            :resname l_shipinstruct 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 14 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 15 
+               :vartype 1042 
+               :vartypmod 14 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 15 
+               :location -1
+               }
+            :resno 15 
+            :resname l_shipmode 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 15 
+            :resjunk false
+            }
+            {TARGETENTRY 
+            :expr 
+               {VAR 
+               :varno 1 
+               :varattno 16 
+               :vartype 1043 
+               :vartypmod 48 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 1 
+               :varattnosyn 16 
+               :location -1
+               }
+            :resno 16 
+            :resname l_comment 
+            :ressortgroupref 0 
+            :resorigtbl 17104 
+            :resorigcol 16 
+            :resjunk false
+            }
+         )
+         :override 0 
+         :onConflict <> 
+         :returningOldAlias <> 
+         :returningNewAlias <> 
+         :returningList <> 
+         :groupClause <> 
+         :groupDistinct false 
+         :groupingSets <> 
+         :havingQual <> 
+         :windowClause <> 
+         :distinctClause <> 
+         :sortClause <> 
+         :limitOffset <> 
+         :limitCount <> 
+         :limitOption 0 
+         :rowMarks <> 
+         :setOperations <> 
+         :constraintDeps <> 
+         :withCheckOptions <> 
+         :stmt_location -1 
+         :stmt_len -1
+         }
+      :security_barrier false 
+      :relid 18492 
+      :inh false 
+      :relkind v 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 18492 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 12 13 14)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {RANGETBLREF 
+         :rtindex 1
+         }
+      )
+      :quals 
+         {FUNCEXPR 
+         :funcid 18491 
+         :funcresulttype 16 
+         :funcretset false 
+         :funcvariadic false 
+         :funcformat 0 
+         :funccollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 1 
+            :varattno 5 
+            :vartype 1700 
+            :vartypmod 983046 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 1 
+            :varattnosyn 5 
+            :location 122
+            }
+            {FUNCEXPR 
+            :funcid 1740 
+            :funcresulttype 1700 
+            :funcretset false 
+            :funcvariadic false 
+            :funcformat 2 
+            :funccollid 0 
+            :inputcollid 0 
+            :args (
+               {CONST 
+               :consttype 23 
+               :consttypmod -1 
+               :constcollid 0 
+               :constlen 4 
+               :constbyval true 
+               :constisnull false 
+               :location 134 
+               :constvalue 4 [ 10 0 0 0 0 0 0 0 ]
+               }
+            )
+            :location -1
+            }
+         )
+         :location 113
+         }
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2114 
+         :aggtype 1700 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 1700)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {OPEXPR 
+               :opno 1760 
+               :opfuncid 1726 
+               :opresulttype 1700 
+               :opretset false 
+               :opcollid 0 
+               :inputcollid 0 
+               :args (
+                  {VAR 
+                  :varno 1 
+                  :varattno 6 
+                  :vartype 1700 
+                  :vartypmod 983046 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 1 
+                  :varattnosyn 6 
+                  :location 47
+                  }
+                  {VAR 
+                  :varno 1 
+                  :varattno 7 
+                  :vartype 1700 
+                  :vartypmod 983046 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 1 
+                  :varattnosyn 7 
+                  :location 65
+                  }
+               )
+               :location 63
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 43
+         }
+      :resno 1 
+      :resname revenue 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location 0 
+   :stmt_len 0
+   }
+
+WARNING:  max_parallel_hazard_walker: FuncExpr funcid=18491 proparallel=u (s=safe r=restricted u=unsafe)
+WARNING:  Log 2 : After pull up At starting of Path Generation:
+DETAIL:     {QUERY 
+   :commandType 1 
+   :querySource 0 
+   :canSetTag true 
+   :utilityStmt <> 
+   :resultRelation 0 
+   :hasAggs true 
+   :hasWindowFuncs false 
+   :hasTargetSRFs false 
+   :hasSubLinks true 
+   :hasDistinctOn false 
+   :hasRecursive false 
+   :hasModifyingCTE false 
+   :hasForUpdate false 
+   :hasRowSecurity false 
+   :hasGroupRTE false 
+   :isReturn false 
+   :cteList <> 
+   :rtable (
+      {RANGETBLENTRY 
+      :alias <> 
+      :eref 
+         {ALIAS 
+         :aliasname lineitem_view 
+         :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" "l_qua
+         ntity" "l_extendedprice" "l_discount" "l_tax" "l_returnflag" "l_lines
+         tatus" "l_shipdate" "l_commitdate" "l_receiptdate" "l_shipinstruct" "
+         l_shipmode" "l_comment")
+         }
+      :rtekind 1 
+      :subquery <> 
+      :security_barrier false 
+      :relid 18492 
+      :inh false 
+      :relkind v 
+      :rellockmode 1 
+      :perminfoindex 1 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname l 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname l 
+         :colnames ("l_orderkey" "l_partkey" "l_suppkey" "l_linenumber" "l_qua
+         ntity" "l_extendedprice" "l_discount" "l_tax" "l_returnflag" "l_lines
+         tatus" "l_shipdate" "l_commitdate" "l_receiptdate" "l_shipinstruct" "
+         l_shipmode" "l_comment")
+         }
+      :rtekind 0 
+      :relid 17104 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 2 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+      {RANGETBLENTRY 
+      :alias 
+         {ALIAS 
+         :aliasname o 
+         :colnames <>
+         }
+      :eref 
+         {ALIAS 
+         :aliasname o 
+         :colnames ("o_orderkey" "o_custkey" "o_orderstatus" "o_totalprice" "o
+         _orderdate" "o_orderpriority" "o_clerk" "o_shippriority" "o_comment")
+         }
+      :rtekind 0 
+      :relid 17092 
+      :inh false 
+      :relkind r 
+      :rellockmode 1 
+      :perminfoindex 3 
+      :tablesample <> 
+      :lateral false 
+      :inFromCl true 
+      :securityQuals <>
+      }
+   )
+   :rteperminfos (
+      {RTEPERMISSIONINFO 
+      :relid 18492 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 0 
+      :selectedCols (b 12 13 14)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+      {RTEPERMISSIONINFO 
+      :relid 17104 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 10 
+      :selectedCols (b 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+      {RTEPERMISSIONINFO 
+      :relid 17092 
+      :inh true 
+      :requiredPerms 2 
+      :checkAsUser 10 
+      :selectedCols (b 8 13)
+      :insertedCols (b)
+      :updatedCols (b)
+      }
+   )
+   :jointree 
+      {FROMEXPR 
+      :fromlist (
+         {JOINEXPR 
+         :jointype 4 
+         :isNatural false 
+         :larg 
+            {FROMEXPR 
+            :fromlist (
+               {RANGETBLREF 
+               :rtindex 2
+               }
+            )
+            :quals <>
+            }
+         :rarg 
+            {RANGETBLREF 
+            :rtindex 3
+            }
+         :usingClause <> 
+         :join_using_alias <> 
+         :quals (
+            {OPEXPR 
+            :opno 96 
+            :opfuncid 65 
+            :opresulttype 16 
+            :opretset false 
+            :opcollid 0 
+            :inputcollid 0 
+            :args (
+               {VAR 
+               :varno 3 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 3 
+               :varattnosyn 1 
+               :location -1
+               }
+               {VAR 
+               :varno 2 
+               :varattno 1 
+               :vartype 23 
+               :vartypmod -1 
+               :varcollid 0 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 2 
+               :varattnosyn 1 
+               :location -1
+               }
+            )
+            :location -1
+            }
+            {SCALARARRAYOPEXPR 
+            :opno 1054 
+            :opfuncid 1048 
+            :hashfuncid 0 
+            :negfuncid 0 
+            :useOr true 
+            :inputcollid 100 
+            :args (
+               {VAR 
+               :varno 3 
+               :varattno 6 
+               :vartype 1042 
+               :vartypmod 19 
+               :varcollid 100 
+               :varnullingrels (b)
+               :varlevelsup 0 
+               :varreturningtype 0 
+               :varnosyn 3 
+               :varattnosyn 6 
+               :location -1
+               }
+               {CONST 
+               :consttype 1014 
+               :consttypmod -1 
+               :constcollid 100 
+               :constlen -1 
+               :constbyval false 
+               :constisnull false 
+               :location -1 
+               :constvalue 48 [ -64 0 0 0 1 0 0 0 0 0 0 0 18 4 0 0 2 0 0 0 1 0
+                0 0 48 0 0 0 49 45 85 82 71 69 78 84 40 0 0 0 50 45 72 73 71 7
+               2 0 0 ]
+               }
+            )
+            :location -1
+            }
+         )
+         :alias <> 
+         :rtindex 0
+         }
+      )
+      :quals (
+         {OPEXPR 
+         :opno 1754 
+         :opfuncid 1722 
+         :opresulttype 16 
+         :opretset false 
+         :opcollid 0 
+         :inputcollid 0 
+         :args (
+            {VAR 
+            :varno 2 
+            :varattno 5 
+            :vartype 1700 
+            :vartypmod 983046 
+            :varcollid 0 
+            :varnullingrels (b)
+            :varlevelsup 0 
+            :varreturningtype 0 
+            :varnosyn 2 
+            :varattnosyn 5 
+            :location -1
+            }
+            {CONST 
+            :consttype 1700 
+            :consttypmod -1 
+            :constcollid 0 
+            :constlen -1 
+            :constbyval false 
+            :constisnull false 
+            :location -1 
+            :constvalue 8 [ 32 0 0 0 0 -128 10 0 ]
+            }
+         )
+         :location 12
+         }
+      )
+      }
+   :mergeActionList <> 
+   :mergeTargetRelation 0 
+   :mergeJoinCondition <> 
+   :targetList (
+      {TARGETENTRY 
+      :expr 
+         {AGGREF 
+         :aggfnoid 2114 
+         :aggtype 1700 
+         :aggcollid 0 
+         :inputcollid 0 
+         :aggtranstype 0 
+         :aggargtypes (o 1700)
+         :aggdirectargs <> 
+         :args (
+            {TARGETENTRY 
+            :expr 
+               {OPEXPR 
+               :opno 1760 
+               :opfuncid 1726 
+               :opresulttype 1700 
+               :opretset false 
+               :opcollid 0 
+               :inputcollid 0 
+               :args (
+                  {VAR 
+                  :varno 2 
+                  :varattno 6 
+                  :vartype 1700 
+                  :vartypmod 983046 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 2 
+                  :varattnosyn 6 
+                  :location -1
+                  }
+                  {VAR 
+                  :varno 2 
+                  :varattno 7 
+                  :vartype 1700 
+                  :vartypmod 983046 
+                  :varcollid 0 
+                  :varnullingrels (b)
+                  :varlevelsup 0 
+                  :varreturningtype 0 
+                  :varnosyn 2 
+                  :varattnosyn 7 
+                  :location -1
+                  }
+               )
+               :location 63
+               }
+            :resno 1 
+            :resname <> 
+            :ressortgroupref 0 
+            :resorigtbl 0 
+            :resorigcol 0 
+            :resjunk false
+            }
+         )
+         :aggorder <> 
+         :aggdistinct <> 
+         :aggfilter <> 
+         :aggstar false 
+         :aggvariadic false 
+         :aggkind n 
+         :aggpresorted false 
+         :agglevelsup 0 
+         :aggsplit 0 
+         :aggno -1 
+         :aggtransno -1 
+         :location 43
+         }
+      :resno 1 
+      :resname revenue 
+      :ressortgroupref 0 
+      :resorigtbl 0 
+      :resorigcol 0 
+      :resjunk false
+      }
+   )
+   :override 0 
+   :onConflict <> 
+   :returningOldAlias <> 
+   :returningNewAlias <> 
+   :returningList <> 
+   :groupClause <> 
+   :groupDistinct false 
+   :groupingSets <> 
+   :havingQual <> 
+   :windowClause <> 
+   :distinctClause <> 
+   :sortClause <> 
+   :limitOffset <> 
+   :limitCount <> 
+   :limitOption 0 
+   :rowMarks <> 
+   :setOperations <> 
+   :constraintDeps <> 
+   :withCheckOptions <> 
+   :stmt_location 0 
+   :stmt_len 0
+   }
+
+WARNING:  is_parallel_safe: INPUT qual = ({AGGREF :aggfnoid 2114 :aggtype 1700 :aggcollid 0 :inputcollid 0 :aggtranstype 2281 :aggargtypes (o 1700) :aggdirectargs <> :args ({TARGETENTRY :expr {OPEXPR :opno 1760 :opfuncid 1726 :opresulttype 1700 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 6 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 6 :location -1} {VAR :varno 2 :varattno 7 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 7 :location -1}) :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({AGGREF :aggfnoid 2114 :aggtype 1700 :aggcollid 0 :inputcollid 0 :aggtranstype 2281 :aggargtypes (o 1700) :aggdirectargs <> :args ({TARGETENTRY :expr {OPEXPR :opno 1760 :opfuncid 1726 :opresulttype 1700 :opretset false :opcollid 0 :inputcollid 0 :args ({VAR :varno 2 :varattno 6 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 6 :location -1} {VAR :varno 2 :varattno 7 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 7 :location -1}) :location -1} :resno 1 :resname <> :ressortgroupref 0 :resorigtbl 0 :resorigcol 0 :resjunk false}) :aggorder <> :aggdistinct <> :aggfilter <> :aggstar false :aggvariadic false :aggkind n :aggpresorted false :agglevelsup 0 :aggsplit 0 :aggno 0 :aggtransno 0 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+WARNING:  is_parallel_safe: INPUT qual = ({VAR :varno 2 :varattno 6 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 6 :location -1} {VAR :varno 2 :varattno 7 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 7 :location -1})
+WARNING:  is_parallel_safe: OUTPUT qual = ({VAR :varno 2 :varattno 6 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 6 :location -1} {VAR :varno 2 :varattno 7 :vartype 1700 :vartypmod 983046 :varcollid 0 :varnullingrels (b) :varlevelsup 0 :varreturningtype 0 :varnosyn 2 :varattnosyn 7 :location -1}) | parallel_safe = true | reason = PROPARALLEL_SAFE
+                                                                                                                            QUERY PLAN                                                                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=25.34..25.35 rows=1 width=32) (actual time=0.008..0.009 rows=1.00 loops=1)
+   Output: sum((l.l_extendedprice * l.l_discount))
+   ->  Hash Semi Join  (cost=12.65..25.34 rows=1 width=36) (actual time=0.006..0.006 rows=0.00 loops=1)
+         Output: l.l_extendedprice, l.l_discount
+         Hash Cond: (l.l_orderkey = o.o_orderkey)
+         ->  Seq Scan on public.lineitem l  (cost=0.00..12.50 rows=67 width=40) (actual time=0.005..0.005 rows=0.00 loops=1)
+               Output: l.l_orderkey, l.l_partkey, l.l_suppkey, l.l_linenumber, l.l_quantity, l.l_extendedprice, l.l_discount, l.l_tax, l.l_returnflag, l.l_linestatus, l.l_shipdate, l.l_commitdate, l.l_receiptdate, l.l_shipinstruct, l.l_shipmode, l.l_comment
+               Filter: (l.l_quantity < '10'::numeric)
+         ->  Hash  (cost=12.62..12.62 rows=2 width=4) (never executed)
+               Output: o.o_orderkey
+               ->  Seq Scan on public.orders o  (cost=0.00..12.62 rows=2 width=4) (never executed)
+                     Output: o.o_orderkey
+                     Filter: (o.o_orderpriority = ANY ('{1-URGENT,2-HIGH}'::bpchar[]))
+ Planning:
+   Buffers: shared hit=239
+ Planning Time: 1.151 ms
+ Execution Time: 0.050 ms
+(17 rows)
+

@@ -1,0 +1,1 @@
+On 1gb dataset rls is faster than secure view without any indexing

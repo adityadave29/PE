@@ -1,0 +1,101 @@
+QUERY PLAN                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Hash Right Semi Join  (cost=2380.30..8151.30 rows=5000 width=26) (actual time=3.643..14.242 rows=3950.00 loops=1)
+   Output: supplier.s_name
+   Hash Cond: (partsupp.ps_suppkey = supplier.s_suppkey)
+   Buffers: shared hit=7230
+   ->  Nested Loop  (cost=2155.80..7826.83 rows=7273 width=4) (actual time=2.140..11.613 rows=7665.00 loops=1)
+         Output: partsupp.ps_suppkey
+         Buffers: shared hit=7118
+         ->  HashAggregate  (cost=2155.37..2173.74 rows=1837 width=4) (actual time=2.098..2.296 rows=1936.00 loops=1)
+               Output: part.p_partkey
+               Group Key: part.p_partkey
+               Batches: 1  Memory Usage: 217kB
+               Buffers: shared hit=1272
+               ->  Bitmap Heap Scan on public.part  (cost=22.53..2150.78 rows=1837 width=4) (actual time=0.486..1.498 rows=1936.00 loops=1)
+                     Output: part.p_partkey, part.p_name, part.p_mfgr, part.p_brand, part.p_type, part.p_size, part.p_container, part.p_retailprice, part.p_comment
+                     Recheck Cond: (part.p_size = 15)
+                     Heap Blocks: exact=1268
+                     Buffers: shared hit=1272
+                     ->  Bitmap Index Scan on idx_part_size  (cost=0.00..22.07 rows=1837 width=0) (actual time=0.345..0.345 rows=1936.00 loops=1)
+                           Index Cond: (part.p_size = 15)
+                           Index Searches: 1
+                           Buffers: shared hit=4
+         ->  Index Only Scan using idx_partsupp_partkey_suppkey_availqty on public.partsupp  (cost=0.42..3.04 rows=4 width=8) (actual time=0.004..0.004 rows=3.96 loops=1936)
+               Output: partsupp.ps_partkey, partsupp.ps_suppkey, partsupp.ps_availqty
+               Index Cond: ((partsupp.ps_partkey = part.p_partkey) AND (partsupp.ps_availqty > 100))
+               Heap Fetches: 0
+               Index Searches: 1936
+               Buffers: shared hit=5846
+   ->  Hash  (cost=162.00..162.00 rows=5000 width=30) (actual time=1.498..1.499 rows=5000.00 loops=1)
+         Output: supplier.s_name, supplier.s_suppkey
+         Buckets: 8192  Batches: 1  Memory Usage: 377kB
+         Buffers: shared hit=112
+         ->  Seq Scan on public.supplier  (cost=0.00..162.00 rows=5000 width=30) (actual time=0.244..0.793 rows=5000.00 loops=1)
+               Output: supplier.s_name, supplier.s_suppkey
+               Buffers: shared hit=112
+ Planning:
+   Buffers: shared hit=55
+ Planning Time: 5.178 ms
+ Execution Time: 14.803 ms
+
+
+
+
+QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Hash Right Semi Join  (cost=4054.92..16321.21 rows=4997 width=26) (actual time=31.753..67.861 rows=3950.00 loops=1)
+   Output: supplier.s_name
+   Hash Cond: (partsupp.ps_suppkey = supplier.s_suppkey)
+   Buffers: shared hit=10707 read=277
+   ->  Gather  (cost=3830.42..15985.43 rows=8093 width=4) (actual time=28.789..63.027 rows=7665.00 loops=1)
+         Output: partsupp.ps_suppkey
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=10595 read=277
+         ->  Parallel Hash Semi Join  (cost=2830.42..14176.13 rows=3372 width=4) (actual time=12.911..46.580 rows=2555.00 loops=3)
+               Output: partsupp.ps_suppkey
+               Hash Cond: (partsupp.ps_partkey = part.p_partkey)
+               Buffers: shared hit=10595 read=277
+               Worker 0:  actual time=5.201..39.506 rows=2615.00 loops=1
+                 Buffers: shared hit=3281
+               Worker 1:  actual time=5.156..39.526 rows=2479.00 loops=1
+                 Buffers: shared hit=3325
+               ->  Parallel Seq Scan on public.partsupp  (cost=0.00..10875.33 rows=164901 width=8) (actual time=0.019..24.695 rows=131975.33 loops=3)
+                     Output: partsupp.ps_partkey, partsupp.ps_suppkey, partsupp.ps_availqty, partsupp.ps_supplycost, partsupp.ps_comment
+                     Filter: (partsupp.ps_availqty > 100)
+                     Rows Removed by Filter: 1358
+                     Buffers: shared hit=8792
+                     Worker 0:  actual time=0.022..25.313 rows=133563.00 loops=1
+                       Buffers: shared hit=2962
+                     Worker 1:  actual time=0.020..25.233 rows=135550.00 loops=1
+                       Buffers: shared hit=3009
+               ->  Parallel Hash  (cost=2815.29..2815.29 rows=1210 width=4) (actual time=12.675..12.675 rows=645.33 loops=3)
+                     Output: part.p_partkey
+                     Buckets: 4096  Batches: 1  Memory Usage: 160kB
+                     Buffers: shared hit=1803 read=277
+                     Worker 0:  actual time=5.073..5.073 rows=292.00 loops=1
+                       Buffers: shared hit=319
+                     Worker 1:  actual time=5.068..5.068 rows=270.00 loops=1
+                       Buffers: shared hit=316
+                     ->  Parallel Seq Scan on public.part  (cost=0.00..2815.29 rows=1210 width=4) (actual time=0.058..12.374 rows=645.33 loops=3)
+                           Output: part.p_partkey
+                           Filter: (part.p_size = 15)
+                           Rows Removed by Filter: 32688
+                           Buffers: shared hit=1803 read=277
+                           Worker 0:  actual time=0.030..4.905 rows=292.00 loops=1
+                             Buffers: shared hit=319
+                           Worker 1:  actual time=0.029..4.913 rows=270.00 loops=1
+                             Buffers: shared hit=316
+   ->  Hash  (cost=162.00..162.00 rows=5000 width=30) (actual time=2.913..2.914 rows=5000.00 loops=1)
+         Output: supplier.s_name, supplier.s_suppkey
+         Buckets: 8192  Batches: 1  Memory Usage: 377kB
+         Buffers: shared hit=112
+         ->  Seq Scan on public.supplier  (cost=0.00..162.00 rows=5000 width=30) (actual time=0.043..1.510 rows=5000.00 loops=1)
+               Output: supplier.s_name, supplier.s_suppkey
+               Buffers: shared hit=112
+ Planning:
+   Buffers: shared hit=25 dirtied=1
+ Planning Time: 4.262 ms
+ Execution Time: 68.195 ms
+(54 rows)

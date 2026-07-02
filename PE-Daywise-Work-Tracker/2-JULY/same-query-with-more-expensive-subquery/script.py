@@ -3,50 +3,47 @@ import re
 from statistics import mean
 
 
-DB_NAME = "tpch-200mb"
-OUTPUT_NAME = "v-i"
+DB_NAME = "tpch"
+OUTPUT_NAME = "sv-1gb"
 
 QUERY = r"""
 SET ROLE alice;
 
 EXPLAIN (ANALYZE, VERBOSE, BUFFERS)
-select
-        s_name,
-        s_address
-from
-        supplier_secure,
-        nation
-where
-        s_suppkey in (
-                select
-                        ps_suppkey
-                from
-                        partsupp_secure
-                where
-                        ps_partkey in (
-                                select
-                                        p_partkey
-                                from
-                                        part
-                                where
-                                        p_name like '%ivory%'
-                        )
-                        and ps_availqty > (
-                                select
-                                        0.5 * sum(l_quantity)
-                                from
-                                        lineitem_secure
-                                where
-                                        l_partkey = ps_partkey
-                                        and l_suppkey = ps_suppkey
-                                        and l_shipdate >= date '1995-01-01'
-                                        and l_shipdate < date '1995-01-01' + interval '1' year
-                        )
+SELECT
+    s_name
+FROM supplier
+WHERE s_suppkey IN (
+    SELECT
+        ps_suppkey
+    FROM
+        partsupp_secure      -- use partsupp_secure for the secure view version
+    WHERE
+        ps_partkey IN (
+            SELECT
+                p_partkey
+            FROM
+                part
+            WHERE
+                p_size BETWEEN 10 AND 20
         )
-        and s_nationkey = n_nationkey
-        and n_name = 'FRANCE'
-order by
-        s_name;
+        AND EXISTS (
+            SELECT 1
+            FROM lineitem
+            WHERE
+                l_partkey = ps_partkey
+                AND l_suppkey = ps_suppkey
+                AND l_shipdate >= DATE '1995-01-01'
+        )
+        AND EXISTS (
+            SELECT 1
+            FROM lineitem l2
+            WHERE
+                l2.l_partkey = ps_partkey
+                AND l2.l_suppkey = ps_suppkey
+                AND l2.l_discount > 0.04
+        )
+);
 """
 
 planning_times = []
